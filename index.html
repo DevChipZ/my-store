@@ -9,146 +9,143 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Premium Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     
-    <!-- Custom Configuration & Neon Micro-Interactions -->
+    <!-- Custom Configuration & Light Neon Palette -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { 
                         sans: ['Inter', 'sans-serif'],
-                        display: ['Syncopate', 'sans-serif'] // Wide luxury font
+                        display: ['Syncopate', 'sans-serif']
                     },
                     colors: { 
-                        obsidian: '#050505', 
-                        surface: '#111111',
-                        neonGold: '#FACC15',
-                        neonPurple: '#A855F7'
+                        pureWhite: '#FAFAFA',
+                        darkText: '#0f172a',
+                        neonCyan: '#00F0FF',
+                        neonPurple: '#8A2BE2'
                     }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e5e5e5; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFA; color: #0f172a; }
         h1, h2, .brand-text { font-family: 'Syncopate', sans-serif; }
         
-        /* Dark Glass & Neon Glows */
-        .glass-dark { background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .card-glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); }
+        /* Light Glass & Neon Glows */
+        .glass-light { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .card-glass { background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
         
-        .neon-border { border: 1px solid rgba(250, 204, 21, 0.3); }
+        /* The Neon Hover Effect for White Backgrounds */
+        .hover-neon { transition: all 0.3s ease; }
         .hover-neon:hover { 
-            border-color: #FACC15; 
-            box-shadow: 0 0 20px rgba(250, 204, 21, 0.15), inset 0 0 10px rgba(250, 204, 21, 0.05); 
+            border-color: #00F0FF; 
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15), 0 0 15px rgba(138, 43, 226, 0.1); 
             transform: translateY(-4px);
-            transition: all 0.3s ease;
         }
 
         .neon-btn {
-            background: transparent;
-            color: #FACC15;
-            border: 1px solid #FACC15;
-            box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+            background: #ffffff;
+            color: #0f172a;
+            border: 2px solid #00F0FF;
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
             transition: all 0.3s ease;
         }
         .neon-btn:hover {
-            background: #FACC15;
+            background: #00F0FF;
             color: #000;
-            box-shadow: 0 0 20px rgba(250, 204, 21, 0.6), 0 0 40px rgba(250, 204, 21, 0.2);
+            border-color: #00F0FF;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.5), 0 0 40px rgba(138, 43, 226, 0.2);
         }
-
-        /* Logo Inversion for Dark Theme */
-        .invert-logo { filter: invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.3)); }
         
         .cart-overlay { backdrop-filter: blur(8px); transition: opacity 0.3s ease; }
         .cart-drawer { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #333; }
-        ::-webkit-scrollbar-thumb:hover { background: #FACC15; }
+        ::-webkit-scrollbar-track { background: #FAFAFA; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; }
+        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-neonGold selection:text-black">
+<body class="min-h-screen flex flex-col selection:bg-neonCyan selection:text-black">
 
     <!-- Top Trust Bar -->
-    <div class="bg-neonGold text-black text-[10px] uppercase tracking-[0.3em] py-2 text-center font-bold">
+    <div class="bg-gradient-to-r from-neonCyan to-neonPurple text-white text-[10px] uppercase tracking-[0.3em] py-2.5 text-center font-extrabold shadow-md">
         Complimentary Shipping & Cash on Delivery Across India
     </div>
 
     <!-- Glassmorphic Header -->
-    <header class="glass-dark sticky top-0 z-40">
+    <header class="glass-light sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
             
-            <!-- Dynamic KINGLY Logo -->
+            <!-- Dynamic KINGLY Logo (No Inversion, Black lines on white) -->
             <a href="#" class="flex items-center gap-3 group">
-                <img src="My-Store.png" alt="Kingly Crown Logo" class="h-10 invert-logo group-hover:scale-110 transition-transform duration-500">
-                <span class="brand-text text-xl md:text-2xl font-bold tracking-widest text-white group-hover:text-neonGold transition-colors drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">KINGLY</span>
+                <img src="My-Store.png" alt="Kingly Crown Logo" class="h-10 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
+                <span class="brand-text text-xl md:text-2xl font-bold tracking-widest text-darkText group-hover:text-neonPurple transition-colors">KINGLY</span>
             </a>
             
-            <!-- Neon Search Bar -->
+            <!-- Sleek Search Bar -->
             <div class="hidden md:flex flex-1 max-w-md mx-12 relative group">
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search the vault..." class="w-full bg-white/5 pl-11 pr-4 py-2.5 rounded-none border-b border-white/10 text-sm focus:outline-none focus:border-neonGold focus:bg-white/10 transition-all text-white placeholder:text-gray-500">
-                <i class="fas fa-search absolute left-4 top-3 text-gray-500 group-focus-within:text-neonGold transition-colors"></i>
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search the collection..." class="w-full bg-gray-50 pl-11 pr-4 py-2.5 rounded-full border border-gray-200 text-sm focus:outline-none focus:border-neonCyan focus:ring-2 focus:ring-neonCyan/20 transition-all text-darkText placeholder:text-gray-400">
+                <i class="fas fa-search absolute left-4 top-3 text-gray-400 group-focus-within:text-neonCyan transition-colors"></i>
             </div>
 
             <!-- Cart Trigger -->
             <button onclick="toggleCart()" class="relative flex items-center gap-2 group p-2">
-                <div class="text-white group-hover:text-neonGold transition-colors p-2">
-                    <i class="fas fa-shopping-bag text-xl drop-shadow-[0_0_5px_currentColor]"></i>
+                <div class="text-darkText group-hover:text-neonCyan transition-colors p-2 bg-gray-50 rounded-full group-hover:bg-cyan-50">
+                    <i class="fas fa-shopping-bag text-lg"></i>
                 </div>
-                <span id="cartCount" class="absolute top-0 right-0 bg-neonGold text-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(250,204,21,0.5)]">0</span>
+                <span id="cartCount" class="absolute -top-1 -right-1 bg-neonPurple text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(138,43,226,0.5)]">0</span>
             </button>
         </div>
     </header>
 
-    <!-- Dark Luxury Hero Section -->
-    <section class="relative bg-obsidian text-white overflow-hidden border-b border-white/5">
+    <!-- Pristine White Hero Section -->
+    <section class="relative bg-white overflow-hidden border-b border-gray-100">
         <!-- Abstract Neon Glow Background -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neonGold/5 rounded-full blur-[120px] pointer-events-none"></div>
-        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-neonPurple/5 rounded-full blur-[100px] pointer-events-none"></div>
-        
-        <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=2000&q=80" alt="Dark Luxury Hero" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-neonCyan/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-neonPurple/10 rounded-full blur-[100px] pointer-events-none"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 md:px-8 py-32 md:py-40 text-center flex flex-col items-center">
-            <span class="inline-block py-1 px-4 border border-neonGold/50 text-neonGold text-[10px] font-bold tracking-[0.3em] uppercase mb-8 shadow-[0_0_15px_rgba(250,204,21,0.2)]">Exclusive Access</span>
-            <h1 class="text-3xl md:text-6xl font-bold tracking-widest leading-tight mb-6 uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                Rule Your <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-neonGold to-yellow-200 drop-shadow-[0_0_15px_rgba(250,204,21,0.3)]">Reality.</span>
+            <span class="inline-block py-1 px-4 border border-neonPurple/30 text-neonPurple text-[10px] font-bold tracking-[0.3em] uppercase mb-8 bg-purple-50/50 rounded-full">The New Standard</span>
+            <h1 class="text-4xl md:text-6xl font-bold tracking-widest leading-tight mb-6 uppercase text-darkText">
+                Rule Your <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan to-neonPurple drop-shadow-sm">Reality.</span>
             </h1>
-            <p class="text-gray-400 text-sm md:text-base mb-10 max-w-lg font-light tracking-wide">
+            <p class="text-gray-500 text-sm md:text-base mb-10 max-w-lg font-medium tracking-wide">
                 The apex of modern aesthetics. Premium dropshipping essentials engineered for the elite. 
             </p>
-            <a href="#products" class="neon-btn font-bold px-10 py-4 uppercase text-xs tracking-widest rounded-sm">
-                Enter The Vault
+            <a href="#products" class="neon-btn font-bold px-10 py-4 uppercase text-xs tracking-widest rounded-full">
+                Enter The Collection
             </a>
         </div>
     </section>
 
-    <!-- Trust Indicators (Neon Vibe) -->
-    <div class="bg-surface border-b border-white/5 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-white/5">
+    <!-- Trust Indicators (Light Theme) -->
+    <div class="bg-white border-b border-gray-100 relative z-10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-gray-100">
             <div class="px-2 group">
-                <i class="fas fa-crown text-2xl text-white/40 group-hover:text-neonGold transition-colors duration-500 mb-3 drop-shadow-[0_0_5px_currentColor]"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white mb-1">Premium Tier</h4>
-                <p class="text-[10px] text-gray-500 tracking-wider">Curated Quality</p>
+                <i class="fas fa-crown text-2xl text-gray-300 group-hover:text-neonCyan transition-colors duration-300 mb-3"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText mb-1">Premium Tier</h4>
+                <p class="text-[10px] text-gray-400 tracking-wider">Curated Quality</p>
             </div>
             <div class="px-2 group">
-                <i class="fas fa-box text-2xl text-white/40 group-hover:text-neonGold transition-colors duration-500 mb-3 drop-shadow-[0_0_5px_currentColor]"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white mb-1">Free Shipping</h4>
-                <p class="text-[10px] text-gray-500 tracking-wider">On all VIP orders</p>
+                <i class="fas fa-box text-2xl text-gray-300 group-hover:text-neonPurple transition-colors duration-300 mb-3"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText mb-1">Free Shipping</h4>
+                <p class="text-[10px] text-gray-400 tracking-wider">On all VIP orders</p>
             </div>
             <div class="px-2 group">
-                <i class="fas fa-fingerprint text-2xl text-white/40 group-hover:text-neonGold transition-colors duration-500 mb-3 drop-shadow-[0_0_5px_currentColor]"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white mb-1">Secure Vault</h4>
-                <p class="text-[10px] text-gray-500 tracking-wider">256-bit encryption</p>
+                <i class="fas fa-fingerprint text-2xl text-gray-300 group-hover:text-neonCyan transition-colors duration-300 mb-3"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText mb-1">Secure Checkout</h4>
+                <p class="text-[10px] text-gray-400 tracking-wider">256-bit encryption</p>
             </div>
             <div class="px-2 group">
-                <i class="fas fa-coins text-2xl text-white/40 group-hover:text-neonGold transition-colors duration-500 mb-3 drop-shadow-[0_0_5px_currentColor]"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white mb-1">Pay on Delivery</h4>
-                <p class="text-[10px] text-gray-500 tracking-wider">Inspect, then pay</p>
+                <i class="fas fa-coins text-2xl text-gray-300 group-hover:text-neonPurple transition-colors duration-300 mb-3"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText mb-1">Pay on Delivery</h4>
+                <p class="text-[10px] text-gray-400 tracking-wider">Inspect, then pay</p>
             </div>
         </div>
     </div>
@@ -157,16 +154,16 @@
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-20 flex-1 w-full" id="products">
         
         <div class="flex flex-col md:flex-row items-center justify-between mb-12">
-            <h2 class="text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-white mb-6 md:mb-0">
-                <i class="fas fa-bolt text-neonGold mr-2 drop-shadow-[0_0_8px_currentColor]"></i> Drops
+            <h2 class="text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-darkText mb-6 md:mb-0">
+                <i class="fas fa-bolt text-neonCyan mr-2"></i> Featured
             </h2>
             
-            <!-- Sleek Category Pills -->
+            <!-- Category Pills (Light Mode) -->
             <div class="flex space-x-3 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
-                <button onclick="setCategory('all')" class="cat-btn border-b-2 border-neonGold text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition">All</button>
-                <button onclick="setCategory('electronics')" class="cat-btn border-b-2 border-transparent text-gray-500 hover:text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition">Tech</button>
-                <button onclick="setCategory('fashion')" class="cat-btn border-b-2 border-transparent text-gray-500 hover:text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition">Apparel</button>
-                <button onclick="setCategory('home')" class="cat-btn border-b-2 border-transparent text-gray-500 hover:text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition">Lifestyle</button>
+                <button onclick="setCategory('all')" class="cat-btn bg-darkText text-white px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_10px_rgba(0,0,0,0.2)]">All</button>
+                <button onclick="setCategory('electronics')" class="cat-btn bg-white border border-gray-200 text-gray-600 hover:border-neonCyan hover:text-neonCyan px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition">Tech</button>
+                <button onclick="setCategory('fashion')" class="cat-btn bg-white border border-gray-200 text-gray-600 hover:border-neonCyan hover:text-neonCyan px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition">Apparel</button>
+                <button onclick="setCategory('home')" class="cat-btn bg-white border border-gray-200 text-gray-600 hover:border-neonCyan hover:text-neonCyan px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition">Lifestyle</button>
             </div>
         </div>
 
@@ -178,35 +175,34 @@
 
     <!-- Slide-over Cart Drawer -->
     <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none">
-        <div class="cart-overlay absolute inset-0 bg-black/80 pointer-events-auto" onclick="toggleCart()"></div>
+        <div class="cart-overlay absolute inset-0 bg-white/70 pointer-events-auto" onclick="toggleCart()"></div>
         
-        <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface border-l border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col pointer-events-auto translate-x-full">
+        <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-[-10px_0_40px_rgba(0,0,0,0.1)] flex flex-col pointer-events-auto translate-x-full border-l border-gray-100">
             
-            <div class="px-6 py-6 border-b border-white/5 flex justify-between items-center bg-obsidian">
-                <h2 class="font-bold text-sm uppercase tracking-[0.2em] text-white">Your Vault</h2>
-                <button onclick="toggleCart()" class="text-gray-500 hover:text-neonGold transition w-8 h-8 flex items-center justify-center"><i class="fas fa-times text-xl"></i></button>
+            <div class="px-6 py-6 border-b border-gray-100 flex justify-between items-center bg-white">
+                <h2 class="font-bold text-sm uppercase tracking-[0.2em] text-darkText">Your Bag</h2>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-neonPurple bg-gray-50 hover:bg-purple-50 rounded-full transition w-8 h-8 flex items-center justify-center"><i class="fas fa-times text-lg"></i></button>
             </div>
 
-            <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4 bg-surface">
+            <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50">
                 <!-- Rendered dynamically -->
             </div>
 
-            <!-- Dark Checkout Footer -->
-            <div class="p-6 border-t border-white/5 bg-obsidian relative">
-                <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neonGold/30 to-transparent"></div>
+            <!-- Light Checkout Footer -->
+            <div class="p-6 border-t border-gray-100 bg-white shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
                 
                 <div class="flex justify-between font-bold text-lg mb-6 uppercase tracking-widest">
-                    <span class="text-gray-400 text-xs mt-1">Subtotal</span>
-                    <span id="cartTotal" class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">₹0</span>
+                    <span class="text-gray-500 text-xs mt-1">Subtotal</span>
+                    <span id="cartTotal" class="text-darkText">₹0</span>
                 </div>
 
                 <div id="checkoutForm" class="space-y-4">
-                    <input type="text" id="custName" placeholder="NAME" class="w-full bg-white/5 border border-white/10 p-3 text-xs tracking-widest text-white placeholder-gray-600 focus:outline-none focus:border-neonGold transition uppercase">
-                    <input type="tel" id="custPhone" placeholder="PHONE" class="w-full bg-white/5 border border-white/10 p-3 text-xs tracking-widest text-white placeholder-gray-600 focus:outline-none focus:border-neonGold transition uppercase">
-                    <textarea id="custAddress" placeholder="SHIPPING ADDRESS" rows="3" class="w-full bg-white/5 border border-white/10 p-3 text-xs tracking-widest text-white placeholder-gray-600 focus:outline-none focus:border-neonGold transition uppercase resize-none"></textarea>
+                    <input type="text" id="custName" placeholder="FULL NAME" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs tracking-widest text-darkText placeholder-gray-400 focus:outline-none focus:border-neonCyan focus:ring-2 focus:ring-neonCyan/20 transition uppercase">
+                    <input type="tel" id="custPhone" placeholder="MOBILE NUMBER" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs tracking-widest text-darkText placeholder-gray-400 focus:outline-none focus:border-neonCyan focus:ring-2 focus:ring-neonCyan/20 transition uppercase">
+                    <textarea id="custAddress" placeholder="SHIPPING ADDRESS" rows="3" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs tracking-widest text-darkText placeholder-gray-400 focus:outline-none focus:border-neonCyan focus:ring-2 focus:ring-neonCyan/20 transition uppercase resize-none"></textarea>
                     
-                    <button onclick="submitOrder()" class="neon-btn w-full font-bold tracking-[0.2em] py-4 text-xs uppercase mt-4">
-                        Secure Checkout <i class="fas fa-lock ml-2"></i>
+                    <button onclick="submitOrder()" class="neon-btn w-full font-bold tracking-[0.2em] py-4 text-xs uppercase mt-2 rounded-lg">
+                        Confirm Order <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                 </div>
             </div>
@@ -216,12 +212,12 @@
     <!-- Store Logic Script -->
     <script>
         const products = [
-            { id: 1, name: "Obsidian Chrono", category: "electronics", price: 2499, originalPrice: 5999, badge: "Limited", image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80" },
-            { id: 2, name: "Phantom ANC Pods", category: "electronics", price: 1899, originalPrice: 3499, badge: "Hot", image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=600&q=80" },
-            { id: 3, name: "Oversized Stealth Hoodie", category: "fashion", price: 1299, originalPrice: 2499, badge: "", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
-            { id: 4, name: "Carbon Pour-over Set", category: "home", price: 999, originalPrice: 1899, badge: "Restocked", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" },
-            { id: 5, name: "Neon Matrix Keyboard", category: "electronics", price: 3499, originalPrice: 6999, badge: "", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=600&q=80" },
-            { id: 6, name: "Matte Black Duffle", category: "fashion", price: 1599, originalPrice: 2999, badge: "", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" }
+            { id: 1, name: "Arctic Chrono Watch", category: "electronics", price: 2499, originalPrice: 5999, badge: "Trending", image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, name: "Prism ANC Pods", category: "electronics", price: 1899, originalPrice: 3499, badge: "New", image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=600&q=80" },
+            { id: 3, name: "Oversized Minimal Hoodie", category: "fashion", price: 1299, originalPrice: 2499, badge: "", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
+            { id: 4, name: "Ceramic Pour-over Set", category: "home", price: 999, originalPrice: 1899, badge: "Restocked", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" },
+            { id: 5, name: "Cyber Mechanical Keyboard", category: "electronics", price: 3499, originalPrice: 6999, badge: "", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=600&q=80" },
+            { id: 6, name: "Ivory Duffle Bag", category: "fashion", price: 1599, originalPrice: 2999, badge: "", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" }
         ];
 
         let cart = [];
@@ -238,22 +234,21 @@
             });
 
             grid.innerHTML = filtered.map(p => `
-                <div class="card-glass hover-neon flex flex-col relative group overflow-hidden">
-                    ${p.badge ? `<div class="absolute top-3 left-3 bg-neonGold text-black px-2 py-1 text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-[0_0_10px_rgba(250,204,21,0.5)]">${p.badge}</div>` : ''}
-                    <div class="relative overflow-hidden aspect-[4/5] bg-black">
-                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent z-0 opacity-80"></div>
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition-all duration-700 ease-out grayscale group-hover:grayscale-0">
+                <div class="card-glass hover-neon rounded-2xl flex flex-col relative group overflow-hidden">
+                    ${p.badge ? `<div class="absolute top-3 left-3 bg-gradient-to-r from-neonCyan to-cyan-500 text-darkText px-2.5 py-1 rounded text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-sm">${p.badge}</div>` : ''}
+                    <div class="relative overflow-hidden aspect-[4/5] bg-gray-50">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
-                    <div class="p-4 md:p-5 flex-1 flex flex-col justify-between relative z-10 bg-obsidian">
+                    <div class="p-4 md:p-5 flex-1 flex flex-col justify-between relative z-10 bg-white">
                         <div class="mb-4">
-                            <h3 class="font-medium text-xs md:text-sm text-gray-200 uppercase tracking-widest line-clamp-2">${p.name}</h3>
+                            <h3 class="font-bold text-xs md:text-sm text-darkText uppercase tracking-widest line-clamp-2">${p.name}</h3>
                             <div class="flex items-baseline gap-2 mt-2">
-                                <span class="font-bold text-base text-white">₹${p.price}</span>
-                                <span class="text-[10px] line-through text-gray-600">₹${p.originalPrice}</span>
+                                <span class="font-extrabold text-base text-darkText">₹${p.price}</span>
+                                <span class="text-[10px] font-semibold line-through text-gray-400">₹${p.originalPrice}</span>
                             </div>
                         </div>
-                        <button onclick="addToCart(${p.id})" class="w-full bg-white/5 border border-white/10 text-white text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonGold group-hover:border-neonGold group-hover:text-black group-hover:shadow-[0_0_15px_rgba(250,204,21,0.4)] transition-all duration-300">
-                            Add to Vault
+                        <button onclick="addToCart(${p.id})" class="w-full bg-gray-50 border border-gray-200 text-darkText rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition-colors duration-300">
+                            Add to Bag
                         </button>
                     </div>
                 </div>
@@ -264,9 +259,9 @@
             currentCategory = cat;
             
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn border-b-2 border-transparent text-gray-500 hover:text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition";
+                btn.className = "cat-btn bg-white border border-gray-200 text-gray-600 hover:border-neonCyan hover:text-neonCyan px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition";
             });
-            event.target.className = "cat-btn border-b-2 border-neonGold text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]";
+            event.target.className = "cat-btn bg-darkText text-white px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_10px_rgba(0,0,0,0.2)]";
             
             renderProducts();
         }
@@ -294,25 +289,25 @@
             totalEl.innerText = `₹${totalPrice}`;
 
             if(cart.length === 0) {
-                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-gray-600"><i class="fas fa-box-open text-3xl mb-3 opacity-20"></i><p class="text-[10px] uppercase tracking-[0.2em]">Vault is empty</p></div>`;
+                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-gray-400"><i class="fas fa-shopping-bag text-3xl mb-3 opacity-30"></i><p class="text-[10px] uppercase tracking-[0.2em] font-bold">Bag is empty</p></div>`;
                 return;
             }
 
             container.innerHTML = cart.map(item => `
-                <div class="flex items-center gap-4 bg-obsidian p-3 border border-white/5">
-                    <img src="${item.image}" class="w-16 h-16 object-cover grayscale opacity-80">
+                <div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
+                    <img src="${item.image}" class="w-16 h-16 rounded-md object-cover">
                     <div class="flex-1">
-                        <h4 class="font-bold text-[10px] text-white uppercase tracking-wider line-clamp-1">${item.name}</h4>
-                        <p class="text-[10px] text-neonGold mt-1">₹${item.price}</p>
+                        <h4 class="font-bold text-[10px] text-darkText uppercase tracking-wider line-clamp-1">${item.name}</h4>
+                        <p class="text-[10px] font-bold text-gray-500 mt-1">₹${item.price}</p>
                         <div class="flex items-center gap-3 mt-2">
-                            <div class="flex items-center border border-white/10 bg-white/5">
-                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white"><i class="fas fa-minus text-[8px]"></i></button>
-                                <span class="text-[10px] font-bold w-6 text-center text-white">${item.qty}</span>
-                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white"><i class="fas fa-plus text-[8px]"></i></button>
+                            <div class="flex items-center border border-gray-200 rounded bg-gray-50">
+                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan"><i class="fas fa-minus text-[8px]"></i></button>
+                                <span class="text-[10px] font-bold w-6 text-center text-darkText">${item.qty}</span>
+                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan"><i class="fas fa-plus text-[8px]"></i></button>
                             </div>
                         </div>
                     </div>
-                    <div class="font-bold text-xs text-white">₹${item.price * item.qty}</div>
+                    <div class="font-extrabold text-xs text-darkText">₹${item.price * item.qty}</div>
                 </div>
             `).join('');
         }
@@ -345,7 +340,7 @@
             const address = document.getElementById('custAddress').value.trim();
 
             if(!name || !phone || !address) {
-                alert("ACCESS DENIED: Complete all credentials.");
+                alert("Please complete all shipping details.");
                 return;
             }
             if(cart.length === 0) return;
@@ -364,18 +359,18 @@
             };
 
             const btn = event.target.closest('button');
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ENCRYPTING...`;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processing...`;
             
             setTimeout(() => {
                 cart = [];
                 updateCart();
                 document.getElementById('checkoutForm').innerHTML = `
                     <div class="text-center py-8">
-                        <div class="w-12 h-12 border border-neonGold rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
-                            <i class="fas fa-check text-neonGold text-xl"></i>
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-check text-green-500 text-xl"></i>
                         </div>
-                        <h3 class="font-bold text-sm text-white uppercase tracking-[0.2em] mb-1">Vault Secured</h3>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">Clearance ID: ${orderPayload.order_id}</p>
+                        <h3 class="font-bold text-sm text-darkText uppercase tracking-[0.2em] mb-1">Order Confirmed</h3>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Order ID: ${orderPayload.order_id}</p>
                     </div>`;
             }, 1000);
         }
