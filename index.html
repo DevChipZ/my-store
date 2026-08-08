@@ -3,173 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMINA | Premium Essentials</title>
+    <title>KINGLY | Luxury Essentials</title>
     
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <!-- Premium Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Custom Configuration & Micro-Interactions -->
+    <!-- Custom Configuration & Neon Micro-Interactions -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: { brand: '#0f172a', accent: '#10b981', surface: '#f8fafc' }
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Syncopate', 'sans-serif'] // Wide luxury font
+                    },
+                    colors: { 
+                        obsidian: '#050505', 
+                        surface: '#111111',
+                        neonGold: '#FACC15',
+                        neonPurple: '#A855F7'
+                    }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .glass-header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .hover-lift { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02); }
-        .cart-overlay { backdrop-filter: blur(4px); transition: opacity 0.3s ease; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e5e5e5; }
+        h1, h2, .brand-text { font-family: 'Syncopate', sans-serif; }
+        
+        /* Dark Glass & Neon Glows */
+        .glass-dark { background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .card-glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        .neon-border { border: 1px solid rgba(250, 204, 21, 0.3); }
+        .hover-neon:hover { 
+            border-color: #FACC15; 
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.15), inset 0 0 10px rgba(250, 204, 21, 0.05); 
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+
+        .neon-btn {
+            background: transparent;
+            color: #FACC15;
+            border: 1px solid #FACC15;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+            transition: all 0.3s ease;
+        }
+        .neon-btn:hover {
+            background: #FACC15;
+            color: #000;
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.6), 0 0 40px rgba(250, 204, 21, 0.2);
+        }
+
+        /* Logo Inversion for Dark Theme */
+        .invert-logo { filter: invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.3)); }
+        
+        .cart-overlay { backdrop-filter: blur(8px); transition: opacity 0.3s ease; }
         .cart-drawer { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         
-        /* Premium custom scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+        ::-webkit-scrollbar-thumb:hover { background: #FACC15; }
     </style>
 </head>
-<body class="text-slate-900 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col selection:bg-neonGold selection:text-black">
 
     <!-- Top Trust Bar -->
-    <div class="bg-brand text-white text-[11px] uppercase tracking-[0.2em] py-2.5 text-center font-medium">
+    <div class="bg-neonGold text-black text-[10px] uppercase tracking-[0.3em] py-2 text-center font-bold">
         Complimentary Shipping & Cash on Delivery Across India
     </div>
 
     <!-- Glassmorphic Header -->
-    <header class="glass-header sticky top-0 z-40">
+    <header class="glass-dark sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-            <a href="#" class="text-2xl font-extrabold tracking-tight text-brand">LUMINA<span class="text-accent">.</span></a>
             
-            <div class="hidden md:flex flex-1 max-w-lg mx-12 relative group">
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search premium collections..." class="w-full bg-slate-100/50 pl-11 pr-4 py-2.5 rounded-full text-sm border border-transparent focus:bg-white focus:border-slate-300 focus:ring-4 focus:ring-slate-100 transition-all outline-none placeholder:text-slate-400">
-                <i class="fas fa-search absolute left-4 top-3 text-slate-400 group-focus-within:text-brand transition-colors"></i>
+            <!-- Dynamic KINGLY Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="My-Store.png" alt="Kingly Crown Logo" class="h-10 invert-logo group-hover:scale-110 transition-transform duration-500">
+                <span class="brand-text text-xl md:text-2xl font-bold tracking-widest text-white group-hover:text-neonGold transition-colors drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">KINGLY</span>
+            </a>
+            
+            <!-- Neon Search Bar -->
+            <div class="hidden md:flex flex-1 max-w-md mx-12 relative group">
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search the vault..." class="w-full bg-white/5 pl-11 pr-4 py-2.5 rounded-none border-b border-white/10 text-sm focus:outline-none focus:border-neonGold focus:bg-white/10 transition-all text-white placeholder:text-gray-500">
+                <i class="fas fa-search absolute left-4 top-3 text-gray-500 group-focus-within:text-neonGold transition-colors"></i>
             </div>
 
+            <!-- Cart Trigger -->
             <button onclick="toggleCart()" class="relative flex items-center gap-2 group p-2">
-                <div class="bg-slate-100 group-hover:bg-slate-200 transition-colors rounded-full p-2.5">
-                    <i class="fas fa-shopping-bag text-brand text-lg"></i>
+                <div class="text-white group-hover:text-neonGold transition-colors p-2">
+                    <i class="fas fa-shopping-bag text-xl drop-shadow-[0_0_5px_currentColor]"></i>
                 </div>
-                <span id="cartCount" class="absolute top-0 right-0 bg-accent text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">0</span>
+                <span id="cartCount" class="absolute top-0 right-0 bg-neonGold text-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(250,204,21,0.5)]">0</span>
             </button>
         </div>
     </header>
 
-    <!-- Luxury Hero Section -->
-    <section class="relative bg-slate-900 text-white overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=80" alt="Fashion Hero" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
-        <div class="relative max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 text-center md:text-left flex flex-col md:items-start items-center">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold tracking-widest uppercase mb-6">The 2026 Collection</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight mb-4 max-w-2xl">
-                Elevate your everyday <br/>with curated essentials.
+    <!-- Dark Luxury Hero Section -->
+    <section class="relative bg-obsidian text-white overflow-hidden border-b border-white/5">
+        <!-- Abstract Neon Glow Background -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neonGold/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-neonPurple/5 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=2000&q=80" alt="Dark Luxury Hero" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity">
+        
+        <div class="relative max-w-7xl mx-auto px-4 md:px-8 py-32 md:py-40 text-center flex flex-col items-center">
+            <span class="inline-block py-1 px-4 border border-neonGold/50 text-neonGold text-[10px] font-bold tracking-[0.3em] uppercase mb-8 shadow-[0_0_15px_rgba(250,204,21,0.2)]">Exclusive Access</span>
+            <h1 class="text-3xl md:text-6xl font-bold tracking-widest leading-tight mb-6 uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                Rule Your <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-neonGold to-yellow-200 drop-shadow-[0_0_15px_rgba(250,204,21,0.3)]">Reality.</span>
             </h1>
-            <p class="text-slate-300 text-base md:text-lg mb-8 max-w-xl font-light">
-                Discover our new arrivals featuring unmatched quality and minimalist design. Verified by over 50,000 customers.
+            <p class="text-gray-400 text-sm md:text-base mb-10 max-w-lg font-light tracking-wide">
+                The apex of modern aesthetics. Premium dropshipping essentials engineered for the elite. 
             </p>
-            <a href="#products" class="bg-white text-brand font-semibold px-8 py-3.5 rounded-full text-sm hover:scale-105 hover:shadow-xl transition-all duration-300 ease-out">
-                Explore Collection
+            <a href="#products" class="neon-btn font-bold px-10 py-4 uppercase text-xs tracking-widest rounded-sm">
+                Enter The Vault
             </a>
         </div>
     </section>
 
-    <!-- Trust Indicators -->
-    <div class="bg-white border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-slate-100">
-            <div class="px-2">
-                <i class="fas fa-box text-xl text-accent mb-3"></i>
-                <h4 class="text-xs font-bold uppercase tracking-wider text-brand mb-1">Free Shipping</h4>
-                <p class="text-xs text-slate-500">On all orders over ₹999</p>
+    <!-- Trust Indicators (Neon Vibe) -->
+    <div class="bg-surface border-b border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-white/5">
+            <div class="px-2 group">
+                <i class="fas fa-crown text-2xl text-white/40 group-hover:text-neonGold transition-colors duration-500 mb-3 drop-shadow-[0_0_5px_currentColor]"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white mb-1">Premium Tier</h4>
+                <p class="text-[10px] text-gray-500 tracking-wider">Curated Quality</p>
             </div>
-            <div class="px-2">
-                <i class="fas fa-undo text-xl text-accent mb-3"></i>
-                <h4 class="text-xs font-bold uppercase tracking-wider text-brand mb-1">Easy Returns</h4>
-                <p class="text-xs text-slate-500">7-day return policy</p>
+            <div class="px-2 group">
+                <i class="fas fa-box text-2xl text-white/40 group-hover:text-neonGold transition-colors duration-500 mb-3 drop-shadow-[0_0_5px_currentColor]"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white mb-1">Free Shipping</h4>
+                <p class="text-[10px] text-gray-500 tracking-wider">On all VIP orders</p>
             </div>
-            <div class="px-2">
-                <i class="fas fa-lock text-xl text-accent mb-3"></i>
-                <h4 class="text-xs font-bold uppercase tracking-wider text-brand mb-1">Secure Checkout</h4>
-                <p class="text-xs text-slate-500">256-bit encryption</p>
+            <div class="px-2 group">
+                <i class="fas fa-fingerprint text-2xl text-white/40 group-hover:text-neonGold transition-colors duration-500 mb-3 drop-shadow-[0_0_5px_currentColor]"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white mb-1">Secure Vault</h4>
+                <p class="text-[10px] text-gray-500 tracking-wider">256-bit encryption</p>
             </div>
-            <div class="px-2">
-                <i class="fas fa-headset text-xl text-accent mb-3"></i>
-                <h4 class="text-xs font-bold uppercase tracking-wider text-brand mb-1">24/7 Support</h4>
-                <p class="text-xs text-slate-500">Dedicated assistance</p>
+            <div class="px-2 group">
+                <i class="fas fa-coins text-2xl text-white/40 group-hover:text-neonGold transition-colors duration-500 mb-3 drop-shadow-[0_0_5px_currentColor]"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white mb-1">Pay on Delivery</h4>
+                <p class="text-[10px] text-gray-500 tracking-wider">Inspect, then pay</p>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 md:px-8 py-16 flex-1 w-full" id="products">
+    <main class="max-w-7xl mx-auto px-4 md:px-8 py-20 flex-1 w-full" id="products">
         
-        <div class="flex flex-col md:flex-row items-center justify-between mb-10">
-            <h2 class="text-2xl font-bold tracking-tight text-brand mb-4 md:mb-0">Trending Now</h2>
+        <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+            <h2 class="text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-white mb-6 md:mb-0">
+                <i class="fas fa-bolt text-neonGold mr-2 drop-shadow-[0_0_8px_currentColor]"></i> Drops
+            </h2>
             
             <!-- Sleek Category Pills -->
-            <div class="flex space-x-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
-                <button onclick="setCategory('all')" class="cat-btn bg-brand text-white px-5 py-2 rounded-full text-xs font-semibold shadow-md hover:bg-slate-800 transition">All Items</button>
-                <button onclick="setCategory('electronics')" class="cat-btn bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-xs font-medium hover:border-slate-300 hover:text-brand transition">Tech</button>
-                <button onclick="setCategory('fashion')" class="cat-btn bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-xs font-medium hover:border-slate-300 hover:text-brand transition">Apparel</button>
-                <button onclick="setCategory('home')" class="cat-btn bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-xs font-medium hover:border-slate-300 hover:text-brand transition">Home</button>
+            <div class="flex space-x-3 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
+                <button onclick="setCategory('all')" class="cat-btn border-b-2 border-neonGold text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition">All</button>
+                <button onclick="setCategory('electronics')" class="cat-btn border-b-2 border-transparent text-gray-500 hover:text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition">Tech</button>
+                <button onclick="setCategory('fashion')" class="cat-btn border-b-2 border-transparent text-gray-500 hover:text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition">Apparel</button>
+                <button onclick="setCategory('home')" class="cat-btn border-b-2 border-transparent text-gray-500 hover:text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition">Lifestyle</button>
             </div>
         </div>
 
         <!-- Premium Product Grid -->
-        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
             <!-- Dynamic JavaScript Rendering -->
         </div>
     </main>
 
     <!-- Slide-over Cart Drawer -->
     <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none">
-        <!-- Backdrop -->
-        <div class="cart-overlay absolute inset-0 bg-brand/40 pointer-events-auto" onclick="toggleCart()"></div>
+        <div class="cart-overlay absolute inset-0 bg-black/80 pointer-events-auto" onclick="toggleCart()"></div>
         
-        <!-- Drawer Panel -->
-        <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto translate-x-full">
+        <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface border-l border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col pointer-events-auto translate-x-full">
             
-            <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-white">
-                <h2 class="font-bold text-lg tracking-tight">Your Bag</h2>
-                <button onclick="toggleCart()" class="text-slate-400 hover:text-brand transition bg-slate-50 hover:bg-slate-100 rounded-full w-8 h-8 flex items-center justify-center"><i class="fas fa-times"></i></button>
+            <div class="px-6 py-6 border-b border-white/5 flex justify-between items-center bg-obsidian">
+                <h2 class="font-bold text-sm uppercase tracking-[0.2em] text-white">Your Vault</h2>
+                <button onclick="toggleCart()" class="text-gray-500 hover:text-neonGold transition w-8 h-8 flex items-center justify-center"><i class="fas fa-times text-xl"></i></button>
             </div>
 
-            <!-- Cart Items -->
-            <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50/50">
+            <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4 bg-surface">
                 <!-- Rendered dynamically -->
             </div>
 
-            <!-- Sleek Checkout Footer -->
-            <div class="p-6 border-t border-slate-100 bg-white shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.05)]">
-                <div class="flex justify-between font-bold text-lg mb-4">
-                    <span class="text-slate-600">Subtotal</span>
-                    <span id="cartTotal" class="text-brand">₹0</span>
+            <!-- Dark Checkout Footer -->
+            <div class="p-6 border-t border-white/5 bg-obsidian relative">
+                <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neonGold/30 to-transparent"></div>
+                
+                <div class="flex justify-between font-bold text-lg mb-6 uppercase tracking-widest">
+                    <span class="text-gray-400 text-xs mt-1">Subtotal</span>
+                    <span id="cartTotal" class="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">₹0</span>
                 </div>
 
-                <div id="checkoutForm" class="space-y-3">
-                    <div class="relative">
-                        <i class="fas fa-user absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-                        <input type="text" id="custName" placeholder="Full Name" class="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand bg-slate-50 focus:bg-white transition">
-                    </div>
-                    <div class="relative">
-                        <i class="fas fa-phone absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-                        <input type="tel" id="custPhone" placeholder="Mobile Number" class="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand bg-slate-50 focus:bg-white transition">
-                    </div>
-                    <textarea id="custAddress" placeholder="Complete Shipping Address (House no, Street, PIN Code)" rows="3" class="w-full p-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand bg-slate-50 focus:bg-white transition resize-none"></textarea>
+                <div id="checkoutForm" class="space-y-4">
+                    <input type="text" id="custName" placeholder="NAME" class="w-full bg-white/5 border border-white/10 p-3 text-xs tracking-widest text-white placeholder-gray-600 focus:outline-none focus:border-neonGold transition uppercase">
+                    <input type="tel" id="custPhone" placeholder="PHONE" class="w-full bg-white/5 border border-white/10 p-3 text-xs tracking-widest text-white placeholder-gray-600 focus:outline-none focus:border-neonGold transition uppercase">
+                    <textarea id="custAddress" placeholder="SHIPPING ADDRESS" rows="3" class="w-full bg-white/5 border border-white/10 p-3 text-xs tracking-widest text-white placeholder-gray-600 focus:outline-none focus:border-neonGold transition uppercase resize-none"></textarea>
                     
-                    <button onclick="submitOrder()" class="w-full bg-brand text-white font-semibold tracking-wide py-3.5 rounded-xl text-sm hover:bg-slate-800 transition shadow-lg shadow-brand/20 flex justify-center items-center gap-2 mt-2">
-                        Complete Order via COD <i class="fas fa-arrow-right text-xs"></i>
+                    <button onclick="submitOrder()" class="neon-btn w-full font-bold tracking-[0.2em] py-4 text-xs uppercase mt-4">
+                        Secure Checkout <i class="fas fa-lock ml-2"></i>
                     </button>
-                    <div class="text-center mt-3 text-[10px] text-slate-400 flex items-center justify-center gap-1.5 uppercase tracking-wider font-semibold">
-                        <i class="fas fa-lock text-slate-300"></i> Secure 256-bit SSL Checkout
-                    </div>
                 </div>
             </div>
         </div>
@@ -178,12 +216,12 @@
     <!-- Store Logic Script -->
     <script>
         const products = [
-            { id: 1, name: "Series X Chronograph Watch", category: "electronics", price: 2499, originalPrice: 5999, badge: "Bestseller", image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80" },
-            { id: 2, name: "Acoustic ANC Studio Pods", category: "electronics", price: 1899, originalPrice: 3499, badge: "New", image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=600&q=80" },
-            { id: 3, name: "Heavyweight Box Fit Hoodie", category: "fashion", price: 1299, originalPrice: 2499, badge: "", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
-            { id: 4, name: "Matte Ceramic Pour-over Set", category: "home", price: 999, originalPrice: 1899, badge: "Limited", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" },
-            { id: 5, name: "Ergonomic Mechanical Keyboard", category: "electronics", price: 3499, originalPrice: 6999, badge: "", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=600&q=80" },
-            { id: 6, name: "Textured Weekender Duffle", category: "fashion", price: 1599, originalPrice: 2999, badge: "", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" }
+            { id: 1, name: "Obsidian Chrono", category: "electronics", price: 2499, originalPrice: 5999, badge: "Limited", image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, name: "Phantom ANC Pods", category: "electronics", price: 1899, originalPrice: 3499, badge: "Hot", image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=600&q=80" },
+            { id: 3, name: "Oversized Stealth Hoodie", category: "fashion", price: 1299, originalPrice: 2499, badge: "", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
+            { id: 4, name: "Carbon Pour-over Set", category: "home", price: 999, originalPrice: 1899, badge: "Restocked", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" },
+            { id: 5, name: "Neon Matrix Keyboard", category: "electronics", price: 3499, originalPrice: 6999, badge: "", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=600&q=80" },
+            { id: 6, name: "Matte Black Duffle", category: "fashion", price: 1599, originalPrice: 2999, badge: "", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" }
         ];
 
         let cart = [];
@@ -200,29 +238,22 @@
             });
 
             grid.innerHTML = filtered.map(p => `
-                <div class="hover-lift bg-white rounded-2xl border border-slate-100 overflow-hidden flex flex-col relative group">
-                    ${p.badge ? `<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md z-10 text-brand shadow-sm border border-slate-100">${p.badge}</div>` : ''}
-                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-50">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="card-glass hover-neon flex flex-col relative group overflow-hidden">
+                    ${p.badge ? `<div class="absolute top-3 left-3 bg-neonGold text-black px-2 py-1 text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-[0_0_10px_rgba(250,204,21,0.5)]">${p.badge}</div>` : ''}
+                    <div class="relative overflow-hidden aspect-[4/5] bg-black">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent z-0 opacity-80"></div>
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition-all duration-700 ease-out grayscale group-hover:grayscale-0">
                     </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center space-x-1 mb-1">
-                                <i class="fas fa-star text-accent text-[10px]"></i>
-                                <i class="fas fa-star text-accent text-[10px]"></i>
-                                <i class="fas fa-star text-accent text-[10px]"></i>
-                                <i class="fas fa-star text-accent text-[10px]"></i>
-                                <i class="fas fa-star text-accent text-[10px]"></i>
-                                <span class="text-[10px] text-slate-400 ml-1">(120+)</span>
-                            </div>
-                            <h3 class="font-semibold text-sm text-brand line-clamp-2 leading-tight">${p.name}</h3>
-                            <div class="flex items-center gap-2 mt-2 mb-4">
-                                <span class="font-bold text-base text-brand">₹${p.price}</span>
-                                <span class="text-xs line-through text-slate-400">₹${p.originalPrice}</span>
+                    <div class="p-4 md:p-5 flex-1 flex flex-col justify-between relative z-10 bg-obsidian">
+                        <div class="mb-4">
+                            <h3 class="font-medium text-xs md:text-sm text-gray-200 uppercase tracking-widest line-clamp-2">${p.name}</h3>
+                            <div class="flex items-baseline gap-2 mt-2">
+                                <span class="font-bold text-base text-white">₹${p.price}</span>
+                                <span class="text-[10px] line-through text-gray-600">₹${p.originalPrice}</span>
                             </div>
                         </div>
-                        <button onclick="addToCart(${p.id})" class="w-full bg-slate-50 text-brand border border-slate-200 text-xs font-semibold py-2.5 rounded-xl group-hover:bg-brand group-hover:text-white group-hover:border-brand transition-colors duration-300">
-                            Add to Bag
+                        <button onclick="addToCart(${p.id})" class="w-full bg-white/5 border border-white/10 text-white text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonGold group-hover:border-neonGold group-hover:text-black group-hover:shadow-[0_0_15px_rgba(250,204,21,0.4)] transition-all duration-300">
+                            Add to Vault
                         </button>
                     </div>
                 </div>
@@ -232,11 +263,10 @@
         function setCategory(cat) {
             currentCategory = cat;
             
-            // UI Button Logic Update
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-xs font-medium hover:border-slate-300 hover:text-brand transition";
+                btn.className = "cat-btn border-b-2 border-transparent text-gray-500 hover:text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition";
             });
-            event.target.className = "cat-btn bg-brand text-white px-5 py-2 rounded-full text-xs font-semibold shadow-md transition";
+            event.target.className = "cat-btn border-b-2 border-neonGold text-white px-4 py-2 text-xs font-bold uppercase tracking-widest transition drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]";
             
             renderProducts();
         }
@@ -264,25 +294,25 @@
             totalEl.innerText = `₹${totalPrice}`;
 
             if(cart.length === 0) {
-                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-slate-400"><i class="fas fa-shopping-bag text-3xl mb-3 opacity-50"></i><p class="text-sm font-medium">Your bag is empty.</p></div>`;
+                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-gray-600"><i class="fas fa-box-open text-3xl mb-3 opacity-20"></i><p class="text-[10px] uppercase tracking-[0.2em]">Vault is empty</p></div>`;
                 return;
             }
 
             container.innerHTML = cart.map(item => `
-                <div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
-                    <img src="${item.image}" class="w-16 h-16 rounded-lg object-cover">
+                <div class="flex items-center gap-4 bg-obsidian p-3 border border-white/5">
+                    <img src="${item.image}" class="w-16 h-16 object-cover grayscale opacity-80">
                     <div class="flex-1">
-                        <h4 class="font-semibold text-xs text-brand line-clamp-1">${item.name}</h4>
-                        <p class="text-[11px] text-slate-500 mt-0.5">₹${item.price} each</p>
+                        <h4 class="font-bold text-[10px] text-white uppercase tracking-wider line-clamp-1">${item.name}</h4>
+                        <p class="text-[10px] text-neonGold mt-1">₹${item.price}</p>
                         <div class="flex items-center gap-3 mt-2">
-                            <div class="flex items-center border border-slate-200 rounded-md bg-slate-50">
-                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center text-slate-500 hover:text-brand transition"><i class="fas fa-minus text-[8px]"></i></button>
-                                <span class="text-xs font-semibold w-6 text-center">${item.qty}</span>
-                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center text-slate-500 hover:text-brand transition"><i class="fas fa-plus text-[8px]"></i></button>
+                            <div class="flex items-center border border-white/10 bg-white/5">
+                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white"><i class="fas fa-minus text-[8px]"></i></button>
+                                <span class="text-[10px] font-bold w-6 text-center text-white">${item.qty}</span>
+                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white"><i class="fas fa-plus text-[8px]"></i></button>
                             </div>
                         </div>
                     </div>
-                    <div class="font-bold text-sm text-brand">₹${item.price * item.qty}</div>
+                    <div class="font-bold text-xs text-white">₹${item.price * item.qty}</div>
                 </div>
             `).join('');
         }
@@ -305,7 +335,7 @@
                 setTimeout(() => drawer.classList.remove('translate-x-full'), 10);
             } else {
                 drawer.classList.add('translate-x-full');
-                setTimeout(() => modal.classList.add('hidden'), 400); // Wait for transition
+                setTimeout(() => modal.classList.add('hidden'), 400);
             }
         }
 
@@ -315,19 +345,15 @@
             const address = document.getElementById('custAddress').value.trim();
 
             if(!name || !phone || !address) {
-                alert("Please fill in your complete delivery details.");
+                alert("ACCESS DENIED: Complete all credentials.");
                 return;
             }
-
-            if(cart.length === 0) {
-                alert("Your bag is empty!");
-                return;
-            }
+            if(cart.length === 0) return;
 
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
             const orderPayload = {
-                order_id: "LUMINA-" + Math.floor(100000 + Math.random() * 900000),
+                order_id: "KNG-" + Math.floor(100000 + Math.random() * 900000),
                 customer_name: name,
                 customer_phone: phone,
                 shipping_address: address,
@@ -337,42 +363,23 @@
                 created_at: new Date().toISOString()
             };
 
-            const N8N_WEBHOOK_URL = "YOUR_N8N_WEBHOOK_URL_HERE";
-
-            try {
-                // UI Loading State
-                const btn = event.target.closest('button');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processing...`;
-                
-                // UNCOMMENT TO ENABLE n8n HOOK
-                /*
-                await fetch(N8N_WEBHOOK_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(orderPayload)
-                });
-                */
-                console.log("Payload sent:", orderPayload);
-
-                setTimeout(() => {
-                    cart = [];
-                    updateCart();
-                    document.getElementById('checkoutForm').innerHTML = `
-                        <div class="text-center py-8">
-                            <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-check text-accent text-xl"></i>
-                            </div>
-                            <h3 class="font-bold text-lg text-brand mb-1">Order Confirmed</h3>
-                            <p class="text-xs text-slate-500">Your COD order ${orderPayload.order_id} has been placed. You will receive a WhatsApp confirmation shortly.</p>
-                        </div>`;
-                }, 800); // Simulated delay
-            } catch (err) {
-                alert("Connection error. Please try again.");
-            }
+            const btn = event.target.closest('button');
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ENCRYPTING...`;
+            
+            setTimeout(() => {
+                cart = [];
+                updateCart();
+                document.getElementById('checkoutForm').innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="w-12 h-12 border border-neonGold rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
+                            <i class="fas fa-check text-neonGold text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-sm text-white uppercase tracking-[0.2em] mb-1">Vault Secured</h3>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">Clearance ID: ${orderPayload.order_id}</p>
+                    </div>`;
+            }, 1000);
         }
 
-        // Initialize
         renderProducts();
     </script>
 </body>
