@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KINGLY | Luxury Essentials</title>
     
-    <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Premium Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     
-    <!-- Custom Configuration & Light Neon Palette -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: { 
@@ -22,186 +19,223 @@
                         display: ['Syncopate', 'sans-serif']
                     },
                     colors: { 
-                        pureWhite: '#FAFAFA',
+                        darkBg: '#050505',
+                        darkSurface: '#111111',
                         darkText: '#0f172a',
                         neonCyan: '#00F0FF',
                         neonPurple: '#8A2BE2'
+                    },
+                    animation: {
+                        'slide-infinite': 'slide 40s linear infinite',
+                    },
+                    keyframes: {
+                        slide: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' } // Moves half the width to loop perfectly
+                        }
                     }
                 }
             }
         }
+
+        // Initialize Theme from LocalStorage
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #FAFAFA; color: #0f172a; }
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         h1, h2, .brand-text { font-family: 'Syncopate', sans-serif; }
         
-        /* Light Glass & Neon Glows */
-        .glass-light { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .card-glass { background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        
-        /* The Neon Hover Effect for White Backgrounds */
-        .hover-neon { transition: all 0.3s ease; }
-        .hover-neon:hover { 
-            border-color: #00F0FF; 
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15), 0 0 15px rgba(138, 43, 226, 0.1); 
-            transform: translateY(-4px);
+        /* Glassmorphism Adapting */
+        .glass-header { 
+            backdrop-filter: blur(16px); 
+            transition: all 0.4s ease;
         }
+        
+        /* Smooth Interactive Physics */
+        .hover-physics { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .hover-physics:hover { transform: translateY(-8px) scale(1.02); }
 
         .neon-btn {
-            background: #ffffff;
-            color: #0f172a;
-            border: 2px solid #00F0FF;
-            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
         }
+        .neon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        .neon-btn:hover::before { left: 100%; }
         .neon-btn:hover {
-            background: #00F0FF;
-            color: #000;
-            border-color: #00F0FF;
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.5), 0 0 40px rgba(138, 43, 226, 0.2);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6), 0 0 40px rgba(138, 43, 226, 0.4);
+            transform: scale(1.05);
         }
         
-        .cart-overlay { backdrop-filter: blur(8px); transition: opacity 0.3s ease; }
-        .cart-drawer { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        
+        /* Mask for background slider fading edges */
+        .slider-mask {
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #FAFAFA; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; }
-        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #00F0FF; border-radius: 10px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-neonCyan selection:text-black">
+<body class="bg-gray-50 dark:bg-darkBg text-darkText dark:text-gray-100 min-h-screen flex flex-col selection:bg-neonCyan selection:text-black overflow-x-hidden">
 
     <!-- Top Trust Bar -->
-    <div class="bg-gradient-to-r from-neonCyan to-neonPurple text-white text-[10px] uppercase tracking-[0.3em] py-2.5 text-center font-extrabold shadow-md">
+    <div class="bg-gradient-to-r from-neonCyan to-neonPurple text-white text-[10px] uppercase tracking-[0.3em] py-2.5 text-center font-extrabold shadow-md z-50 relative">
         Complimentary Shipping & Cash on Delivery Across India
     </div>
 
     <!-- Glassmorphic Header -->
-    <header class="glass-light sticky top-0 z-40">
+    <header class="glass-header bg-white/80 dark:bg-darkBg/80 border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
             
-            <!-- Dynamic KINGLY Logo (No Inversion, Black lines on white) -->
+            <!-- Logo -->
             <a href="#" class="flex items-center gap-3 group">
-                <img src="My-Store.png" alt="Kingly Crown Logo" class="h-10 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
-                <span class="brand-text text-xl md:text-2xl font-bold tracking-widest text-darkText group-hover:text-neonPurple transition-colors">KINGLY</span>
+                <!-- If logo.png breaks, it will show a crown icon automatically -->
+                <img src="logo.png" onerror="this.style.display='none'; document.getElementById('backup-icon').style.display='block';" alt="Kingly Logo" class="h-10 dark:invert drop-shadow-[0_0_8px_rgba(0,240,255,0.4)] transition-transform duration-500 group-hover:scale-110">
+                <i id="backup-icon" class="fas fa-crown text-3xl text-darkText dark:text-white hidden drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]"></i>
+                <span class="brand-text text-xl md:text-2xl font-bold tracking-widest text-darkText dark:text-white group-hover:text-neonCyan transition-colors">KINGLY</span>
             </a>
             
-            <!-- Sleek Search Bar -->
-            <div class="hidden md:flex flex-1 max-w-md mx-12 relative group">
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search the collection..." class="w-full bg-gray-50 pl-11 pr-4 py-2.5 rounded-full border border-gray-200 text-sm focus:outline-none focus:border-neonCyan focus:ring-2 focus:ring-neonCyan/20 transition-all text-darkText placeholder:text-gray-400">
-                <i class="fas fa-search absolute left-4 top-3 text-gray-400 group-focus-within:text-neonCyan transition-colors"></i>
-            </div>
+            <div class="flex items-center gap-6">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="text-gray-500 hover:text-neonCyan dark:text-gray-400 dark:hover:text-neonCyan transition-colors text-lg" title="Toggle Dark/Light Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
 
-            <!-- Cart Trigger -->
-            <button onclick="toggleCart()" class="relative flex items-center gap-2 group p-2">
-                <div class="text-darkText group-hover:text-neonCyan transition-colors p-2 bg-gray-50 rounded-full group-hover:bg-cyan-50">
-                    <i class="fas fa-shopping-bag text-lg"></i>
-                </div>
-                <span id="cartCount" class="absolute -top-1 -right-1 bg-neonPurple text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(138,43,226,0.5)]">0</span>
-            </button>
+                <!-- Cart Trigger -->
+                <button onclick="toggleCart()" class="relative flex items-center gap-2 group p-2">
+                    <div class="text-darkText dark:text-white group-hover:text-neonCyan transition-colors p-2 bg-gray-100 dark:bg-white/5 rounded-full group-hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+                        <i class="fas fa-shopping-bag text-lg"></i>
+                    </div>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-neonPurple text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(138,43,226,0.5)]">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Pristine White Hero Section -->
-    <section class="relative bg-white overflow-hidden border-b border-gray-100">
-        <!-- Abstract Neon Glow Background -->
-        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-neonCyan/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-neonPurple/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <!-- Interactive Hero Section -->
+    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-gray-200 dark:border-white/10">
         
-        <div class="relative max-w-7xl mx-auto px-4 md:px-8 py-32 md:py-40 text-center flex flex-col items-center">
-            <span class="inline-block py-1 px-4 border border-neonPurple/30 text-neonPurple text-[10px] font-bold tracking-[0.3em] uppercase mb-8 bg-purple-50/50 rounded-full">The New Standard</span>
-            <h1 class="text-4xl md:text-6xl font-bold tracking-widest leading-tight mb-6 uppercase text-darkText">
+        <!-- Background Slider (Low Transparency Products) -->
+        <div class="absolute inset-0 z-0 slider-mask pointer-events-none opacity-[0.07] dark:opacity-[0.15] mix-blend-luminosity flex items-center">
+            <!-- W-[200%] to allow seamless sliding -->
+            <div class="flex gap-8 w-[200%] animate-slide-infinite">
+                <!-- Repeating images for the continuous loop -->
+                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
+                
+                <!-- Duplicate set to make the loop invisible -->
+                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
+            </div>
+        </div>
+
+        <!-- Abstract Neon Glows (Foreground) -->
+        <div class="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-neonCyan/10 dark:bg-neonCyan/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-neonPurple/10 dark:bg-neonPurple/20 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <!-- Hero Text content -->
+        <div class="relative z-10 text-center px-4">
+            <span class="inline-block py-1.5 px-5 border border-neonPurple/30 text-neonPurple dark:text-neonCyan text-[10px] font-bold tracking-[0.3em] uppercase mb-8 bg-purple-50/50 dark:bg-white/5 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(138,43,226,0.2)]">The New Standard</span>
+            <h1 class="text-5xl md:text-7xl font-black tracking-widest leading-tight mb-6 uppercase text-darkText dark:text-white drop-shadow-lg">
                 Rule Your <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan to-neonPurple drop-shadow-sm">Reality.</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan to-neonPurple">Reality.</span>
             </h1>
-            <p class="text-gray-500 text-sm md:text-base mb-10 max-w-lg font-medium tracking-wide">
+            <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base mb-10 max-w-lg mx-auto font-medium tracking-wide">
                 The apex of modern aesthetics. Premium dropshipping essentials engineered for the elite. 
             </p>
-            <a href="#products" class="neon-btn font-bold px-10 py-4 uppercase text-xs tracking-widest rounded-full">
+            <button onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})" class="neon-btn bg-white dark:bg-darkBg text-darkText dark:text-white border-2 border-neonCyan font-bold px-12 py-4 uppercase text-xs tracking-widest rounded-full cursor-pointer">
                 Enter The Collection
-            </a>
+            </button>
         </div>
     </section>
 
-    <!-- Trust Indicators (Light Theme) -->
-    <div class="bg-white border-b border-gray-100 relative z-10 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-gray-100">
-            <div class="px-2 group">
-                <i class="fas fa-crown text-2xl text-gray-300 group-hover:text-neonCyan transition-colors duration-300 mb-3"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText mb-1">Premium Tier</h4>
-                <p class="text-[10px] text-gray-400 tracking-wider">Curated Quality</p>
+    <!-- Trust Indicators -->
+    <div class="bg-white dark:bg-darkSurface border-b border-gray-100 dark:border-white/5 relative z-10 shadow-sm transition-colors duration-400">
+        <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100 dark:divide-white/5">
+            <div class="px-2 group cursor-default">
+                <i class="fas fa-crown text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Premium Tier</h4>
             </div>
-            <div class="px-2 group">
-                <i class="fas fa-box text-2xl text-gray-300 group-hover:text-neonPurple transition-colors duration-300 mb-3"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText mb-1">Free Shipping</h4>
-                <p class="text-[10px] text-gray-400 tracking-wider">On all VIP orders</p>
+            <div class="px-2 group cursor-default">
+                <i class="fas fa-box text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Free Shipping</h4>
             </div>
-            <div class="px-2 group">
-                <i class="fas fa-fingerprint text-2xl text-gray-300 group-hover:text-neonCyan transition-colors duration-300 mb-3"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText mb-1">Secure Checkout</h4>
-                <p class="text-[10px] text-gray-400 tracking-wider">256-bit encryption</p>
+            <div class="px-2 group cursor-default">
+                <i class="fas fa-fingerprint text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Secure Checkout</h4>
             </div>
-            <div class="px-2 group">
-                <i class="fas fa-coins text-2xl text-gray-300 group-hover:text-neonPurple transition-colors duration-300 mb-3"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText mb-1">Pay on Delivery</h4>
-                <p class="text-[10px] text-gray-400 tracking-wider">Inspect, then pay</p>
+            <div class="px-2 group cursor-default">
+                <i class="fas fa-coins text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Pay on Delivery</h4>
             </div>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 md:px-8 py-20 flex-1 w-full" id="products">
+    <!-- Main Product Content -->
+    <main class="max-w-7xl mx-auto px-4 md:px-8 py-24 flex-1 w-full" id="products">
         
-        <div class="flex flex-col md:flex-row items-center justify-between mb-12">
-            <h2 class="text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-darkText mb-6 md:mb-0">
-                <i class="fas fa-bolt text-neonCyan mr-2"></i> Featured
+        <div class="flex flex-col md:flex-row items-center justify-between mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white mb-6 md:mb-0 drop-shadow-sm">
+                <i class="fas fa-bolt text-neonCyan mr-3"></i> Featured Drops
             </h2>
             
-            <!-- Category Pills (Light Mode) -->
+            <!-- Category Pills -->
             <div class="flex space-x-3 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
-                <button onclick="setCategory('all')" class="cat-btn bg-darkText text-white px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_10px_rgba(0,0,0,0.2)]">All</button>
-                <button onclick="setCategory('electronics')" class="cat-btn bg-white border border-gray-200 text-gray-600 hover:border-neonCyan hover:text-neonCyan px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition">Tech</button>
-                <button onclick="setCategory('fashion')" class="cat-btn bg-white border border-gray-200 text-gray-600 hover:border-neonCyan hover:text-neonCyan px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition">Apparel</button>
-                <button onclick="setCategory('home')" class="cat-btn bg-white border border-gray-200 text-gray-600 hover:border-neonCyan hover:text-neonCyan px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition">Lifestyle</button>
+                <button onclick="setCategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg">All</button>
+                <button onclick="setCategory('electronics')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Tech</button>
+                <button onclick="setCategory('fashion')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Apparel</button>
+                <button onclick="setCategory('home')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Lifestyle</button>
             </div>
         </div>
 
-        <!-- Premium Product Grid -->
-        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
-            <!-- Dynamic JavaScript Rendering -->
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            <!-- Rendered by JS -->
         </div>
     </main>
 
-    <!-- Slide-over Cart Drawer -->
+    <!-- Cart Drawer -->
     <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none">
-        <div class="cart-overlay absolute inset-0 bg-white/70 pointer-events-auto" onclick="toggleCart()"></div>
+        <div class="backdrop-blur-sm absolute inset-0 bg-darkBg/60 pointer-events-auto transition-opacity" onclick="toggleCart()"></div>
         
-        <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-[-10px_0_40px_rgba(0,0,0,0.1)] flex flex-col pointer-events-auto translate-x-full border-l border-gray-100">
+        <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-white dark:bg-darkSurface shadow-2xl flex flex-col pointer-events-auto translate-x-full border-l border-gray-100 dark:border-white/5 transition-transform duration-500 ease-in-out">
             
-            <div class="px-6 py-6 border-b border-gray-100 flex justify-between items-center bg-white">
-                <h2 class="font-bold text-sm uppercase tracking-[0.2em] text-darkText">Your Bag</h2>
-                <button onclick="toggleCart()" class="text-gray-400 hover:text-neonPurple bg-gray-50 hover:bg-purple-50 rounded-full transition w-8 h-8 flex items-center justify-center"><i class="fas fa-times text-lg"></i></button>
+            <div class="px-6 py-6 border-b border-gray-100 dark:border-white/10 flex justify-between items-center bg-white dark:bg-darkBg">
+                <h2 class="font-bold text-sm uppercase tracking-[0.2em] text-darkText dark:text-white">Your Vault</h2>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-neonCyan bg-gray-50 dark:bg-white/5 rounded-full transition w-8 h-8 flex items-center justify-center hover:shadow-[0_0_10px_rgba(0,240,255,0.3)]"><i class="fas fa-times text-lg"></i></button>
             </div>
 
-            <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50">
-                <!-- Rendered dynamically -->
-            </div>
+            <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50 dark:bg-darkSurface"></div>
 
-            <!-- Light Checkout Footer -->
-            <div class="p-6 border-t border-gray-100 bg-white shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
-                
+            <div class="p-6 border-t border-gray-100 dark:border-white/10 bg-white dark:bg-darkBg shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
                 <div class="flex justify-between font-bold text-lg mb-6 uppercase tracking-widest">
-                    <span class="text-gray-500 text-xs mt-1">Subtotal</span>
-                    <span id="cartTotal" class="text-darkText">₹0</span>
+                    <span class="text-gray-500 dark:text-gray-400 text-xs mt-1">Subtotal</span>
+                    <span id="cartTotal" class="text-darkText dark:text-white drop-shadow-[0_0_8px_rgba(0,240,255,0.3)]">₹0</span>
                 </div>
 
                 <div id="checkoutForm" class="space-y-4">
-                    <input type="text" id="custName" placeholder="FULL NAME" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs tracking-widest text-darkText placeholder-gray-400 focus:outline-none focus:border-neonCyan focus:ring-2 focus:ring-neonCyan/20 transition uppercase">
-                    <input type="tel" id="custPhone" placeholder="MOBILE NUMBER" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs tracking-widest text-darkText placeholder-gray-400 focus:outline-none focus:border-neonCyan focus:ring-2 focus:ring-neonCyan/20 transition uppercase">
-                    <textarea id="custAddress" placeholder="SHIPPING ADDRESS" rows="3" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs tracking-widest text-darkText placeholder-gray-400 focus:outline-none focus:border-neonCyan focus:ring-2 focus:ring-neonCyan/20 transition uppercase resize-none"></textarea>
+                    <input type="text" id="custName" placeholder="FULL NAME" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-3 text-xs tracking-widest text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
+                    <input type="tel" id="custPhone" placeholder="MOBILE NUMBER" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-3 text-xs tracking-widest text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
+                    <textarea id="custAddress" placeholder="SHIPPING ADDRESS" rows="2" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-3 text-xs tracking-widest text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase resize-none"></textarea>
                     
-                    <button onclick="submitOrder()" class="neon-btn w-full font-bold tracking-[0.2em] py-4 text-xs uppercase mt-2 rounded-lg">
+                    <button onclick="submitOrder()" class="neon-btn w-full bg-darkText dark:bg-white text-white dark:text-darkBg font-bold tracking-[0.2em] py-4 text-xs uppercase mt-2 rounded-lg border-none hover:bg-neonCyan dark:hover:bg-neonCyan hover:text-black">
                         Confirm Order <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                 </div>
@@ -223,31 +257,50 @@
         let cart = [];
         let currentCategory = 'all';
 
+        // Dark Mode Logic
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcon(isDark);
+        }
+
+        function updateThemeIcon(isDark) {
+            const icon = document.getElementById('theme-icon');
+            if(isDark) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+        
+        // Run on load to set correct icon
+        updateThemeIcon(document.documentElement.classList.contains('dark'));
+
+        // Render Logic
         function renderProducts() {
             const grid = document.getElementById('productGrid');
-            const searchVal = document.getElementById('searchInput').value.toLowerCase();
             
-            const filtered = products.filter(p => {
-                const matchCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchSearch = p.name.toLowerCase().includes(searchVal);
-                return matchCat && matchSearch;
-            });
+            const filtered = products.filter(p => currentCategory === 'all' || p.category === currentCategory);
 
             grid.innerHTML = filtered.map(p => `
-                <div class="card-glass hover-neon rounded-2xl flex flex-col relative group overflow-hidden">
-                    ${p.badge ? `<div class="absolute top-3 left-3 bg-gradient-to-r from-neonCyan to-cyan-500 text-darkText px-2.5 py-1 rounded text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-sm">${p.badge}</div>` : ''}
-                    <div class="relative overflow-hidden aspect-[4/5] bg-gray-50">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <div class="hover-physics bg-white dark:bg-darkSurface border border-gray-100 dark:border-white/5 rounded-2xl flex flex-col relative group overflow-hidden shadow-sm hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,240,255,0.1)] hover:border-neonCyan transition-all duration-300">
+                    ${p.badge ? `<div class="absolute top-4 left-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white px-3 py-1.5 rounded text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-lg">${p.badge}</div>` : ''}
+                    <div class="relative overflow-hidden aspect-[4/5] bg-gray-50 dark:bg-black">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-80 transition-all duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                    <div class="p-4 md:p-5 flex-1 flex flex-col justify-between relative z-10 bg-white">
+                    <div class="p-5 flex-1 flex flex-col justify-between relative z-10">
                         <div class="mb-4">
-                            <h3 class="font-bold text-xs md:text-sm text-darkText uppercase tracking-widest line-clamp-2">${p.name}</h3>
+                            <h3 class="font-bold text-xs md:text-sm text-darkText dark:text-gray-100 uppercase tracking-widest line-clamp-2">${p.name}</h3>
                             <div class="flex items-baseline gap-2 mt-2">
-                                <span class="font-extrabold text-base text-darkText">₹${p.price}</span>
+                                <span class="font-extrabold text-lg text-darkText dark:text-white">₹${p.price}</span>
                                 <span class="text-[10px] font-semibold line-through text-gray-400">₹${p.originalPrice}</span>
                             </div>
                         </div>
-                        <button onclick="addToCart(${p.id})" class="w-full bg-gray-50 border border-gray-200 text-darkText rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition-colors duration-300">
+                        <button onclick="addToCart(${p.id})" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-darkText dark:text-white rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition-all duration-300 shadow-sm">
                             Add to Bag
                         </button>
                     </div>
@@ -259,14 +312,12 @@
             currentCategory = cat;
             
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn bg-white border border-gray-200 text-gray-600 hover:border-neonCyan hover:text-neonCyan px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition";
+                btn.className = "cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]";
             });
-            event.target.className = "cat-btn bg-darkText text-white px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_10px_rgba(0,0,0,0.2)]";
+            event.target.className = "cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_15px_rgba(0,240,255,0.3)]";
             
             renderProducts();
         }
-
-        function filterProducts() { renderProducts(); }
 
         function addToCart(id) {
             const item = products.find(p => p.id === id);
@@ -289,25 +340,25 @@
             totalEl.innerText = `₹${totalPrice}`;
 
             if(cart.length === 0) {
-                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-gray-400"><i class="fas fa-shopping-bag text-3xl mb-3 opacity-30"></i><p class="text-[10px] uppercase tracking-[0.2em] font-bold">Bag is empty</p></div>`;
+                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-gray-400 dark:text-gray-600"><i class="fas fa-box-open text-4xl mb-4 opacity-50"></i><p class="text-[10px] uppercase tracking-[0.2em] font-bold">Vault is empty</p></div>`;
                 return;
             }
 
             container.innerHTML = cart.map(item => `
-                <div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
-                    <img src="${item.image}" class="w-16 h-16 rounded-md object-cover">
+                <div class="flex items-center gap-4 bg-white dark:bg-darkBg p-3 rounded-xl border border-gray-100 dark:border-white/5 shadow-sm">
+                    <img src="${item.image}" class="w-16 h-16 rounded-md object-cover dark:opacity-80">
                     <div class="flex-1">
-                        <h4 class="font-bold text-[10px] text-darkText uppercase tracking-wider line-clamp-1">${item.name}</h4>
-                        <p class="text-[10px] font-bold text-gray-500 mt-1">₹${item.price}</p>
+                        <h4 class="font-bold text-[10px] text-darkText dark:text-white uppercase tracking-wider line-clamp-1">${item.name}</h4>
+                        <p class="text-[10px] font-bold text-gray-500 dark:text-neonCyan mt-1">₹${item.price}</p>
                         <div class="flex items-center gap-3 mt-2">
-                            <div class="flex items-center border border-gray-200 rounded bg-gray-50">
-                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan"><i class="fas fa-minus text-[8px]"></i></button>
-                                <span class="text-[10px] font-bold w-6 text-center text-darkText">${item.qty}</span>
-                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan"><i class="fas fa-plus text-[8px]"></i></button>
+                            <div class="flex items-center border border-gray-200 dark:border-white/10 rounded bg-gray-50 dark:bg-white/5">
+                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan transition-colors"><i class="fas fa-minus text-[8px]"></i></button>
+                                <span class="text-[10px] font-bold w-6 text-center text-darkText dark:text-white">${item.qty}</span>
+                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan transition-colors"><i class="fas fa-plus text-[8px]"></i></button>
                             </div>
                         </div>
                     </div>
-                    <div class="font-extrabold text-xs text-darkText">₹${item.price * item.qty}</div>
+                    <div class="font-extrabold text-xs text-darkText dark:text-white">₹${item.price * item.qty}</div>
                 </div>
             `).join('');
         }
@@ -340,39 +391,27 @@
             const address = document.getElementById('custAddress').value.trim();
 
             if(!name || !phone || !address) {
-                alert("Please complete all shipping details.");
+                alert("ACCESS DENIED: Complete all shipping credentials.");
                 return;
             }
             if(cart.length === 0) return;
 
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-            const orderPayload = {
-                order_id: "KNG-" + Math.floor(100000 + Math.random() * 900000),
-                customer_name: name,
-                customer_phone: phone,
-                shipping_address: address,
-                payment_mode: "COD",
-                items: cart,
-                total_amount: totalPrice,
-                created_at: new Date().toISOString()
-            };
-
+            const orderId = "KNG-" + Math.floor(100000 + Math.random() * 900000);
             const btn = event.target.closest('button');
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processing...`;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ENCRYPTING...`;
             
             setTimeout(() => {
                 cart = [];
                 updateCart();
                 document.getElementById('checkoutForm').innerHTML = `
                     <div class="text-center py-8">
-                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-check text-green-500 text-xl"></i>
+                        <div class="w-14 h-14 bg-green-100 dark:bg-neonCyan/10 border border-green-500 dark:border-neonCyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(0,240,255,0.2)]">
+                            <i class="fas fa-check text-green-500 dark:text-neonCyan text-2xl"></i>
                         </div>
-                        <h3 class="font-bold text-sm text-darkText uppercase tracking-[0.2em] mb-1">Order Confirmed</h3>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Order ID: ${orderPayload.order_id}</p>
+                        <h3 class="font-bold text-sm text-darkText dark:text-white uppercase tracking-[0.2em] mb-1">Vault Secured</h3>
+                        <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest">Clearance ID: ${orderId}</p>
                     </div>`;
-            }, 1000);
+            }, 1200);
         }
 
         renderProducts();
