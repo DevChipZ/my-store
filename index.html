@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Smartwatch | YourStore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Smooth micro-interactions */
+        .btn-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .btn-hover:hover { transform: scale(1.02); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 pb-24">
+
+    <!-- Navbar -->
+    <nav class="bg-white p-4 shadow-sm text-center font-bold text-xl tracking-wider uppercase">
+        TRENDZ INDIA
+    </nav>
+
+    <!-- Product Section -->
+    <main class="max-w-md mx-auto bg-white min-h-screen">
+        <!-- Image Carousel Placeholder -->
+        <div class="relative bg-gray-200 aspect-square flex items-center justify-center">
+            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600" alt="Product Image" class="object-cover w-full h-full">
+            <div class="absolute bottom-2 right-2 bg-white/80 px-2 py-1 rounded text-xs font-bold">
+                <i class="fas fa-video text-gray-800"></i> 360° View
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="p-5">
+            <div class="flex items-center space-x-1 text-yellow-400 text-sm mb-2">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                <span class="text-gray-500 font-medium ml-1">4.9/5 (1,284 Reviews)</span>
+            </div>
+            
+            <h1 class="text-2xl font-bold leading-tight mb-2">Ultra-Pro Smartwatch Series 9</h1>
+            
+            <div class="flex items-baseline space-x-2 mb-4">
+                <span class="text-3xl font-extrabold text-black">₹1,499</span>
+                <span class="text-lg line-through text-gray-400">₹3,999</span>
+                <span class="text-sm font-bold text-green-600">62% OFF</span>
+            </div>
+
+            <div class="flex items-center text-red-500 text-sm font-bold mb-6 animate-pulse">
+                <i class="fas fa-fire mr-1"></i> 15 people are viewing this right now
+            </div>
+
+            <hr class="border-gray-200 mb-6">
+
+            <!-- Trust Badges -->
+            <div class="grid grid-cols-3 gap-2 text-center mb-6">
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-truck text-xl text-gray-600 mb-1"></i>
+                    <span class="text-xs font-medium text-gray-500">Free Shipping</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-hand-holding-usd text-xl text-gray-600 mb-1"></i>
+                    <span class="text-xs font-medium text-gray-500">Cash on Delivery</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-shield-alt text-xl text-gray-600 mb-1"></i>
+                    <span class="text-xs font-medium text-gray-500">Secure Checkout</span>
+                </div>
+            </div>
+            
+            <!-- Hidden Checkout Form (Revealed on click) -->
+            <div id="checkout-form" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
+                <h3 class="font-bold mb-3">Delivery Details</h3>
+                <input type="text" id="cust-name" placeholder="Full Name" class="w-full mb-3 p-3 border rounded focus:outline-black" required>
+                <input type="tel" id="cust-phone" placeholder="Phone Number" class="w-full mb-3 p-3 border rounded focus:outline-black" required>
+                <textarea id="cust-address" placeholder="Full Delivery Address" class="w-full mb-3 p-3 border rounded focus:outline-black" rows="2" required></textarea>
+                <button onclick="submitOrder()" class="w-full bg-green-600 text-white font-bold py-4 rounded btn-hover">Confirm COD Order</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50">
+        <div class="max-w-md mx-auto">
+            <button onclick="showCheckout()" class="w-full bg-black text-white font-extrabold py-4 rounded text-lg btn-hover">
+                BUY NOW - CASH ON DELIVERY
+            </button>
+        </div>
+    </div>
+
+    <!-- The Automation Script -->
+    <script>
+        function showCheckout() {
+            document.getElementById('checkout-form').classList.remove('hidden');
+            document.getElementById('sticky-cta').classList.add('hidden');
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        async function submitOrder() {
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+
+            if(!name || !phone || !address) {
+                alert("Please fill all details.");
+                return;
+            }
+
+            // 1. Structure the JSON Payload
+            const orderData = {
+                product_name: "Ultra-Pro Smartwatch Series 9",
+                price: 1499,
+                customer_name: name,
+                customer_phone: phone,
+                customer_address: address,
+                payment_method: "COD"
+            };
+
+            // 2. Change this URL to your n8n Production Webhook URL
+            const N8N_WEBHOOK_URL = "YOUR_N8N_WEBHOOK_URL_HERE";
+
+            try {
+                // 3. Fire the payload to n8n
+                alert("Processing order..."); 
+                // Uncomment the fetch block below once you add your real n8n URL
+                /*
+                await fetch(N8N_WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(orderData)
+                });
+                */
+                
+                console.log("Payload sent to n8n:", orderData);
+                document.getElementById('checkout-form').innerHTML = `
+                    <div class="text-center text-green-600 py-6">
+                        <i class="fas fa-check-circle text-5xl mb-3"></i>
+                        <h2 class="text-2xl font-bold">Order Confirmed!</h2>
+                        <p class="text-gray-600 mt-2">You will receive a WhatsApp message shortly.</p>
+                    </div>`;
+            } catch (error) {
+                alert("Connection error. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>
