@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <!-- PapaParse Library for reading Google Sheets -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -88,7 +90,7 @@
         Complimentary Shipping & Cash on Delivery Across India
     </div>
 
-    <!-- Header Fix Included -->
+    <!-- Header with Auto-Inverting Logo & Mobile Optimization -->
     <header class="glass-header bg-white/80 dark:bg-darkBg/80 border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-4 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 md:gap-3 group">
@@ -180,6 +182,7 @@
             </div>
         </div>
 
+        <!-- Dynamic Product Grid -->
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"></div>
     </main>
 
@@ -214,18 +217,28 @@
     </div>
 
     <script>
-        const products = [
-            { id: 1, name: "Arctic Chrono Watch", category: "electronics", price: 2499, originalPrice: 5999, badge: "Trending", image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80" },
-            { id: 2, name: "Prism ANC Pods", category: "electronics", price: 1899, originalPrice: 3499, badge: "New", image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=600&q=80" },
-            { id: 3, name: "Oversized Minimal Hoodie", category: "fashion", price: 1299, originalPrice: 2499, badge: "", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
-            { id: 4, name: "Ceramic Pour-over Set", category: "home", price: 999, originalPrice: 1899, badge: "Restocked", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" },
-            { id: 5, name: "Cyber Mechanical Keyboard", category: "electronics", price: 3499, originalPrice: 6999, badge: "", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=600&q=80" },
-            { id: 6, name: "Ivory Duffle Bag", category: "fashion", price: 1599, originalPrice: 2999, badge: "", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" }
-        ];
-
+        let products = [];
         let cart = [];
         let currentCategory = 'all';
 
+        // LIVE INVENTORY DB: Pulls data from your published Google Sheet
+        const INVENTORY_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vROK0zqCUUDJluKB8BsGeWO5lACQWi-_UKCmlUk4nO_S6cfxKGaJXvHN4otjG-Qc_oZLcPUD0EPV-7k/pub?output=csv";
+
+        Papa.parse(INVENTORY_SHEET_URL, {
+            download: true,
+            header: true,
+            dynamicTyping: true,
+            complete: function(results) {
+                // Ignore blank rows from Google Sheets
+                products = results.data.filter(p => p.name); 
+                renderProducts();
+            },
+            error: function(error) {
+                console.error("Database sync failed:", error);
+            }
+        });
+
+        // Theme Toggle Logic
         function toggleTheme() {
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
@@ -246,6 +259,7 @@
         
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
+        // Render Dynamic Products
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const filtered = products.filter(p => currentCategory === 'all' || p.category === currentCategory);
@@ -282,6 +296,7 @@
             renderProducts();
         }
 
+        // Cart Logic
         function addToCart(id) {
             const item = products.find(p => p.id === id);
             const existing = cart.find(c => c.id === id);
@@ -348,7 +363,7 @@
             }
         }
 
-        // Webhook Integration & Submission Logic
+        // Webhook Submission Logic
         async function submitOrder() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
@@ -365,7 +380,6 @@
             const originalText = btn.innerHTML;
             btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ENCRYPTING...`;
 
-            // Prepare Data Payload for n8n
             const orderPayload = {
                 order_id: orderId,
                 customer_name: name,
@@ -377,18 +391,16 @@
                 created_at: new Date().toISOString()
             };
 
-            // n8n Webhook Connection
+            // Using the n8n localhost link as previously tested
             const N8N_WEBHOOK_URL = "http://localhost:5678/webhook-test/kingly-new-order";
 
             try {
-                // Firing the payload to n8n
                 await fetch(N8N_WEBHOOK_URL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(orderPayload)
                 });
                 
-                // UI Update on Success
                 cart = [];
                 updateCart();
                 document.getElementById('checkoutForm').innerHTML = `
@@ -404,8 +416,6 @@
                 btn.innerHTML = originalText;
             }
         }
-
-        renderProducts();
     </script>
 </body>
 </html>
