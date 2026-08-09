@@ -31,14 +31,13 @@
                     keyframes: {
                         slide: {
                             '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' } // Moves half the width to loop perfectly
+                            '100%': { transform: 'translateX(-50%)' }
                         }
                     }
                 }
             }
         }
 
-        // Initialize Theme from LocalStorage
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -49,13 +48,8 @@
         body { font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         h1, h2, .brand-text { font-family: 'Syncopate', sans-serif; }
         
-        /* Glassmorphism Adapting */
-        .glass-header { 
-            backdrop-filter: blur(16px); 
-            transition: all 0.4s ease;
-        }
+        .glass-header { backdrop-filter: blur(16px); transition: all 0.4s ease; }
         
-        /* Smooth Interactive Physics */
         .hover-physics { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .hover-physics:hover { transform: translateY(-8px) scale(1.02); }
 
@@ -78,7 +72,6 @@
             transform: scale(1.05);
         }
         
-        /* Mask for background slider fading edges */
         .slider-mask {
             mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -91,30 +84,24 @@
 </head>
 <body class="bg-gray-50 dark:bg-darkBg text-darkText dark:text-gray-100 min-h-screen flex flex-col selection:bg-neonCyan selection:text-black overflow-x-hidden">
 
-    <!-- Top Trust Bar -->
     <div class="bg-gradient-to-r from-neonCyan to-neonPurple text-white text-[10px] uppercase tracking-[0.3em] py-2.5 text-center font-extrabold shadow-md z-50 relative">
         Complimentary Shipping & Cash on Delivery Across India
     </div>
 
-    <!-- Glassmorphic Header -->
+    <!-- Header Fix Included -->
     <header class="glass-header bg-white/80 dark:bg-darkBg/80 border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-4 flex items-center justify-between">
-            
-            <!-- Logo (Auto-Invert Fix for White Logos) -->
             <a href="#" class="flex items-center gap-2 md:gap-3 group">
                 <img src="logo.png" onerror="this.style.display='none'; document.getElementById('backup-icon').style.display='block';" alt="Kingly Logo" class="h-6 md:h-10 invert dark:invert-0 drop-shadow-md transition-transform duration-500 group-hover:scale-110">
                 <i id="backup-icon" class="fas fa-crown text-xl md:text-3xl text-darkText dark:text-white hidden"></i>
                 <span class="brand-text text-base md:text-2xl font-bold tracking-widest text-darkText dark:text-white group-hover:text-neonCyan transition-colors">KINGLY</span>
             </a>
             
-            <!-- Actions -->
             <div class="flex items-center gap-3 md:gap-6">
-                <!-- Theme Toggle Button -->
-                <button onclick="toggleTheme()" class="text-gray-500 hover:text-neonCyan dark:text-gray-400 dark:hover:text-neonCyan transition-colors text-base md:text-lg p-1" title="Toggle Dark/Light Mode">
+                <button onclick="toggleTheme()" class="text-gray-500 hover:text-neonCyan dark:text-gray-400 dark:hover:text-neonCyan transition-colors text-base md:text-lg p-1">
                     <i id="theme-icon" class="fas fa-moon"></i>
                 </button>
 
-                <!-- Cart Trigger -->
                 <button onclick="toggleCart()" class="relative flex items-center gap-2 group p-1 md:p-2">
                     <div class="text-darkText dark:text-white group-hover:text-neonCyan transition-colors p-1.5 md:p-2 bg-gray-100 dark:bg-white/5 rounded-full group-hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]">
                         <i class="fas fa-shopping-bag text-base md:text-lg"></i>
@@ -124,20 +111,15 @@
             </div>
         </div>
     </header>
-    <!-- Interactive Hero Section -->
+
     <section class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-gray-200 dark:border-white/10">
-        
-        <!-- Background Slider (Low Transparency Products) -->
         <div class="absolute inset-0 z-0 slider-mask pointer-events-none opacity-[0.07] dark:opacity-[0.15] mix-blend-luminosity flex items-center">
-            <!-- W-[200%] to allow seamless sliding -->
             <div class="flex gap-8 w-[200%] animate-slide-infinite">
-                <!-- Repeating images for the continuous loop -->
                 <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 
-                <!-- Duplicate set to make the loop invisible -->
                 <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
@@ -145,11 +127,9 @@
             </div>
         </div>
 
-        <!-- Abstract Neon Glows (Foreground) -->
         <div class="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-neonCyan/10 dark:bg-neonCyan/20 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-neonPurple/10 dark:bg-neonPurple/20 rounded-full blur-[100px] pointer-events-none"></div>
         
-        <!-- Hero Text content -->
         <div class="relative z-10 text-center px-4">
             <span class="inline-block py-1.5 px-5 border border-neonPurple/30 text-neonPurple dark:text-neonCyan text-[10px] font-bold tracking-[0.3em] uppercase mb-8 bg-purple-50/50 dark:bg-white/5 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(138,43,226,0.2)]">The New Standard</span>
             <h1 class="text-5xl md:text-7xl font-black tracking-widest leading-tight mb-6 uppercase text-darkText dark:text-white drop-shadow-lg">
@@ -165,7 +145,6 @@
         </div>
     </section>
 
-    <!-- Trust Indicators -->
     <div class="bg-white dark:bg-darkSurface border-b border-gray-100 dark:border-white/5 relative z-10 shadow-sm transition-colors duration-400">
         <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100 dark:divide-white/5">
             <div class="px-2 group cursor-default">
@@ -187,15 +166,12 @@
         </div>
     </div>
 
-    <!-- Main Product Content -->
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-24 flex-1 w-full" id="products">
-        
         <div class="flex flex-col md:flex-row items-center justify-between mb-16">
             <h2 class="text-2xl md:text-3xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white mb-6 md:mb-0 drop-shadow-sm">
                 <i class="fas fa-bolt text-neonCyan mr-3"></i> Featured Drops
             </h2>
             
-            <!-- Category Pills -->
             <div class="flex space-x-3 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
                 <button onclick="setCategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg">All</button>
                 <button onclick="setCategory('electronics')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Tech</button>
@@ -204,18 +180,13 @@
             </div>
         </div>
 
-        <!-- Product Grid -->
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-            <!-- Rendered by JS -->
-        </div>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"></div>
     </main>
 
-    <!-- Cart Drawer -->
     <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none">
         <div class="backdrop-blur-sm absolute inset-0 bg-darkBg/60 pointer-events-auto transition-opacity" onclick="toggleCart()"></div>
         
         <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-white dark:bg-darkSurface shadow-2xl flex flex-col pointer-events-auto translate-x-full border-l border-gray-100 dark:border-white/5 transition-transform duration-500 ease-in-out">
-            
             <div class="px-6 py-6 border-b border-gray-100 dark:border-white/10 flex justify-between items-center bg-white dark:bg-darkBg">
                 <h2 class="font-bold text-sm uppercase tracking-[0.2em] text-darkText dark:text-white">Your Vault</h2>
                 <button onclick="toggleCart()" class="text-gray-400 hover:text-neonCyan bg-gray-50 dark:bg-white/5 rounded-full transition w-8 h-8 flex items-center justify-center hover:shadow-[0_0_10px_rgba(0,240,255,0.3)]"><i class="fas fa-times text-lg"></i></button>
@@ -242,7 +213,6 @@
         </div>
     </div>
 
-    <!-- Store Logic Script -->
     <script>
         const products = [
             { id: 1, name: "Arctic Chrono Watch", category: "electronics", price: 2499, originalPrice: 5999, badge: "Trending", image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80" },
@@ -256,7 +226,6 @@
         let cart = [];
         let currentCategory = 'all';
 
-        // Dark Mode Logic
         function toggleTheme() {
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
@@ -275,13 +244,10 @@
             }
         }
         
-        // Run on load to set correct icon
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // Render Logic
         function renderProducts() {
             const grid = document.getElementById('productGrid');
-            
             const filtered = products.filter(p => currentCategory === 'all' || p.category === currentCategory);
 
             grid.innerHTML = filtered.map(p => `
@@ -309,12 +275,10 @@
 
         function setCategory(cat) {
             currentCategory = cat;
-            
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]";
             });
             event.target.className = "cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_15px_rgba(0,240,255,0.3)]";
-            
             renderProducts();
         }
 
@@ -384,6 +348,7 @@
             }
         }
 
+        // Webhook Integration & Submission Logic
         async function submitOrder() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
@@ -397,9 +362,33 @@
 
             const orderId = "KNG-" + Math.floor(100000 + Math.random() * 900000);
             const btn = event.target.closest('button');
+            const originalText = btn.innerHTML;
             btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ENCRYPTING...`;
-            
-            setTimeout(() => {
+
+            // Prepare Data Payload for n8n
+            const orderPayload = {
+                order_id: orderId,
+                customer_name: name,
+                customer_phone: phone,
+                shipping_address: address,
+                payment_mode: "COD",
+                items: cart,
+                total_amount: cart.reduce((sum, item) => sum + (item.price * item.qty), 0),
+                created_at: new Date().toISOString()
+            };
+
+            // n8n Webhook Connection
+            const N8N_WEBHOOK_URL = "http://localhost:5678/webhook-test/kingly-new-order";
+
+            try {
+                // Firing the payload to n8n
+                await fetch(N8N_WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(orderPayload)
+                });
+                
+                // UI Update on Success
                 cart = [];
                 updateCart();
                 document.getElementById('checkoutForm').innerHTML = `
@@ -410,7 +399,10 @@
                         <h3 class="font-bold text-sm text-darkText dark:text-white uppercase tracking-[0.2em] mb-1">Vault Secured</h3>
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest">Clearance ID: ${orderId}</p>
                     </div>`;
-            }, 1200);
+            } catch (error) {
+                alert("Network Connection Error: Ensure n8n is running and you are testing locally.");
+                btn.innerHTML = originalText;
+            }
         }
 
         renderProducts();
