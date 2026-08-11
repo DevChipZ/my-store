@@ -527,7 +527,7 @@
             }
         }
 
-        // WhatsApp Checkout Handler (Secure & Zero-Server)
+        // WhatsApp Checkout Handler using your Business WhatsApp Number
         function submitOrder() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
@@ -542,8 +542,8 @@
             const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             const itemNames = cart.map(item => `${item.name} (Qty: ${item.qty})`).join(', ');
 
-            // ENTER YOUR WHATSAPP NUMBER HERE (Country code + number without '+' sign, e.g. 919876543210)
-            const myWhatsAppNumber = "919876543210"; 
+            // Your Business WhatsApp Number configured here
+            const myWhatsAppNumber = "9181220225227"; 
             
             const whatsAppText = encodeURIComponent(
                 `🛒 *NEW KINGLY STORE ORDER!*\n\n` +
