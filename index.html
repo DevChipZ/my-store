@@ -299,7 +299,8 @@
                 </div>
                 <div class="md:col-span-3 flex flex-col justify-between">
                     <div>
-                        <h2 id="modalTitle" class="text-xl md:text-2xl font-bold uppercase tracking-wider text-gray-900 dark:text-white mb-2"></h2>
+                        <!-- FIXED: High contrast pure white text with drop-shadow -->
+                        <h2 id="modalTitle" class="text-xl md:text-2xl font-bold uppercase tracking-wider text-white mb-2 drop-shadow-md"></h2>
                         <p id="modalAuthor" class="text-xs font-bold text-neonPurple dark:text-neonCyan tracking-widest uppercase mb-4"></p>
                         <div class="flex items-baseline gap-3 mb-6">
                             <span id="modalPrice" class="text-2xl font-black text-gray-900 dark:text-white"></span>
@@ -495,7 +496,7 @@
 
             grid.innerHTML = filtered.map(p => `
                 <div class="card-physics bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 rounded-3xl flex flex-col relative group overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(0,240,255,0.15)] hover:border-neonCyan transition-all duration-300">
-                    ${p.badge ? `<div class="absolute top-4 left-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white px-3.5 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-md">${p.badge}</div>` : ''}
+                    ${p.badge ? `<div class="absolute top-4 left-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white px-3.5 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-lg">${p.badge}</div>` : ''}
                     <div class="relative overflow-hidden aspect-[4/5] bg-gray-100 dark:bg-black cursor-pointer" onclick="openProductModal('${p.id}')">
                         <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-85 transition-all duration-700 ease-out">
                     </div>
