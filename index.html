@@ -97,12 +97,11 @@
     <header class="glass-header bg-white/80 dark:bg-darkBg/80 border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-4 flex items-center justify-between gap-4">
             <a href="#" class="flex items-center gap-2 md:gap-3 group shrink-0">
-                <img src="logo.png" onerror="this.style.display='none'; document.getElementById('backup-icon').style.display='block';" alt="Kingly Logo" class="h-6 md:h-10 invert dark:invert-0 drop-shadow-md transition-transform duration-500 group-hover:scale-110">
-                <i id="backup-icon" class="fas fa-crown text-xl md:text-3xl text-darkText dark:text-white hidden"></i>
+                <i class="fas fa-crown text-xl md:text-3xl text-darkText dark:text-white group-hover:text-neonCyan transition-colors"></i>
                 <span class="brand-text text-base md:text-2xl font-bold tracking-widest text-darkText dark:text-white group-hover:text-neonCyan transition-colors">KINGLY</span>
             </a>
             
-            <!-- Live Search Bar with Clear 'X' Button -->
+            <!-- Live Search Bar -->
             <div class="flex-1 max-w-md mx-4 hidden md:block">
                 <div class="relative flex items-center">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
@@ -116,7 +115,6 @@
             </div>
 
             <div class="flex items-center gap-3 md:gap-6 shrink-0">
-                <!-- Vault Roulette Interactive Button -->
                 <button onclick="triggerRoulette()" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-neonCyan/10 to-neonPurple/10 border border-neonCyan/40 hover:border-neonCyan text-neonCyan px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition animate-pulse-glow">
                     <i class="fas fa-dice text-xs"></i> Vault Roulette
                 </button>
@@ -133,7 +131,6 @@
                 </button>
             </div>
         </div>
-        <!-- Mobile Search Bar Row -->
         <div class="px-4 pb-3 md:hidden">
             <div class="relative flex items-center">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
@@ -149,15 +146,6 @@
 
     <!-- Hero Section -->
     <section class="relative h-[85vh] flex items-center justify-center overflow-hidden border-b border-gray-200 dark:border-white/10">
-        <div class="absolute inset-0 z-0 slider-mask pointer-events-none opacity-[0.07] dark:opacity-[0.15] mix-blend-luminosity flex items-center">
-            <div class="flex gap-8 w-[200%] animate-slide-infinite">
-                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
-                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
-                <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
-                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
-            </div>
-        </div>
-
         <div class="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-neonCyan/10 dark:bg-neonCyan/20 rounded-full blur-[120px] pointer-events-none"></div>
         <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-neonPurple/10 dark:bg-neonPurple/20 rounded-full blur-[120px] pointer-events-none"></div>
         
@@ -183,29 +171,7 @@
         </div>
     </section>
 
-    <!-- Trust Badges -->
-    <div class="bg-white dark:bg-darkSurface border-b border-gray-100 dark:border-white/5 relative z-10 shadow-sm transition-colors duration-400">
-        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100 dark:divide-white/5">
-            <div class="px-2 group cursor-default">
-                <i class="fas fa-crown text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-3 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200">Premium Tier</h4>
-            </div>
-            <div class="px-2 group cursor-default">
-                <i class="fas fa-bolt text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-3 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200">Instant Delivery</h4>
-            </div>
-            <div class="px-2 group cursor-default">
-                <i class="fas fa-shield-alt text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-3 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200">Verified Sources</h4>
-            </div>
-            <div class="px-2 group cursor-default">
-                <i class="fas fa-infinity text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-3 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200">Lifetime Access</h4>
-            </div>
-        </div>
-    </div>
-
-    <!-- Product Grid Section with Subcategory Filters -->
+    <!-- Product Catalog Section -->
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-20 flex-1 w-full" id="products">
         <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
@@ -217,10 +183,10 @@
             <span id="resultCount" class="text-xs font-mono text-neonCyan uppercase tracking-widest bg-darkSurface px-4 py-2 rounded-full border border-white/10 self-start md:self-auto"></span>
         </div>
         
-        <!-- Clean Interactive Subcategory Filter Bar -->
+        <!-- Category Filters -->
         <div class="flex space-x-3 overflow-x-auto pb-4 mb-12 w-full scrollbar-none">
             <button onclick="setSubcategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg shrink-0">Featured Drop (24)</button>
-            <button onclick="setSubcategory('featured')" class="cat-btn bg-white dark:bg-darkSurface border border-neonCyan/40 text-neonCyan hover:bg-neonCyan hover:text-black px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">⭐️ Premium & Limited</button>
+            <button onclick="setSubcategory('featured')" class="cat-btn bg-white dark:bg-darkSurface border border-neonCyan/40 text-neonCyan hover:bg-neonCyan hover:text-black px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">⭐️ Premium Tier</button>
             <button onclick="setSubcategory('Kids')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Kids</button>
             <button onclick="setSubcategory('Comic')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Comics</button>
             <button onclick="setSubcategory('Manga')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Manga</button>
@@ -235,53 +201,39 @@
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"></div>
     </main>
 
-    <!-- UNIQUE INTERACTIVE FOOTER (FUN & PLAYFUL) -->
+    <!-- Interactive Footer -->
     <footer class="bg-darkSurface border-t border-white/10 text-gray-400 pt-16 pb-12 mt-20 relative overflow-hidden">
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-neonCyan/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-neonPurple/5 rounded-full blur-[100px] pointer-events-none"></div>
-
         <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10 mb-12">
-            <!-- Col 1: Brand & Vibe -->
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
                     <i class="fas fa-crown text-2xl text-neonCyan"></i>
                     <span class="brand-text text-xl font-bold tracking-widest text-white">KINGLY</span>
                 </div>
-                <p class="text-xs leading-relaxed text-gray-400">
-                    The ultimate decentralized hub for high-grade digital reading assets, curated drops, and instant global access.
-                </p>
+                <p class="text-xs leading-relaxed text-gray-400">The ultimate decentralized hub for high-grade digital reading assets and instant global access.</p>
                 <div class="flex items-center gap-3 pt-2">
                     <span class="w-2 h-2 rounded-full bg-green-400 animate-ping"></span>
-                    <span class="text-[10px] font-mono uppercase tracking-widest text-green-400">Systems Online & Synchronized</span>
+                    <span class="text-[10px] font-mono uppercase tracking-widest text-green-400">Systems Online</span>
                 </div>
             </div>
-
-            <!-- Col 2: Quick Navigation -->
             <div>
                 <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-4">Quick Portals</h4>
                 <ul class="space-y-2.5 text-xs font-medium">
                     <li><a href="#products" onclick="setSubcategory('all')" class="hover:text-neonCyan transition">Featured Collection</a></li>
-                    <li><a href="#products" onclick="setSubcategory('featured')" class="hover:text-neonCyan transition">⭐️ Premium & Limited</a></li>
-                    <li><a href="#products" onclick="setSubcategory('Manga')" class="hover:text-neonCyan transition">Manga & Manhwa Vault</a></li>
+                    <li><a href="#products" onclick="setSubcategory('Manga')" class="hover:text-neonCyan transition">Manga Vault</a></li>
                     <li><a href="#products" onclick="setSubcategory('Law')" class="hover:text-neonCyan transition">Law & Manuscripts</a></li>
                 </ul>
             </div>
-
-            <!-- Col 3: Interactive Terminal Widget -->
             <div>
                 <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-4">Terminal Console</h4>
                 <div class="bg-black/60 border border-white/10 rounded-xl p-3 text-[11px] font-mono space-y-2 shadow-inner">
-                    <div class="text-neonCyan">&gt; kingly_cli v2.4 initialized</div>
+                    <div class="text-neonCyan">&gt; kingly_cli v2.5 online</div>
                     <div id="terminalOutput" class="text-gray-300">Type a command or click a button below:</div>
                     <div class="flex gap-2 pt-1">
                         <button onclick="runCliCommand('discount')" class="bg-white/5 hover:bg-neonCyan hover:text-black px-2 py-1 rounded text-[9px] uppercase transition border border-white/10">/discount</button>
                         <button onclick="runCliCommand('secret')" class="bg-white/5 hover:bg-neonPurple hover:text-white px-2 py-1 rounded text-[9px] uppercase transition border border-white/10">/secret</button>
-                        <button onclick="runCliCommand('clear')" class="bg-white/5 hover:bg-red-500 hover:text-white px-2 py-1 rounded text-[9px] uppercase transition border border-white/10">/clear</button>
                     </div>
                 </div>
             </div>
-
-            <!-- Col 4: Interactive Easter Egg -->
             <div>
                 <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-4">Security Protocol</h4>
                 <p class="text-xs text-gray-400 mb-4">Test system integrity by triggering our emergency neon pulse.</p>
@@ -290,80 +242,61 @@
                 </button>
             </div>
         </div>
-
         <div class="max-w-7xl mx-auto px-4 md:px-8 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-500">
-            <p>&copy; 2026 KINGLY Assets. All rights reserved. Built for absolute speed.</p>
-            <p class="mt-4 md:mt-0 text-neonCyan">Encrypted Connection • Local Node Active</p>
+            <p>&copy; 2026 KINGLY Assets. All rights reserved.</p>
+            <p class="mt-4 md:mt-0 text-neonCyan">Encrypted Connection • Direct Node Active</p>
         </div>
     </footer>
 
-    <!-- BOOK DETAILS / QUICK VIEW MODAL -->
+    <!-- Book Details Modal -->
     <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="backdrop-blur-md absolute inset-0 bg-black/70" onclick="closeProductModal()"></div>
-        
         <div class="relative bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto z-10 p-6 md:p-8 shadow-2xl transition-all">
-            <button onclick="closeProductModal()" class="absolute top-6 right-6 text-gray-400 hover:text-neonCyan bg-gray-100 dark:bg-white/5 rounded-full w-9 h-9 flex items-center justify-center transition">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-
+            <button onclick="closeProductModal()" class="absolute top-6 right-6 text-gray-400 hover:text-neonCyan bg-gray-100 dark:bg-white/5 rounded-full w-9 h-9 flex items-center justify-center transition"><i class="fas fa-times text-lg"></i></button>
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
                 <div class="md:col-span-2 flex flex-col items-center">
                     <img id="modalImg" src="" alt="" class="w-full h-auto max-h-80 object-cover rounded-2xl shadow-xl border border-gray-100 dark:border-white/10">
                     <span id="modalBadge" class="mt-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-md"></span>
                 </div>
-
                 <div class="md:col-span-3 flex flex-col justify-between">
                     <div>
                         <h2 id="modalTitle" class="text-xl md:text-2xl font-bold uppercase tracking-wider text-darkText dark:text-white mb-2"></h2>
                         <p id="modalAuthor" class="text-xs font-bold text-neonPurple dark:text-neonCyan tracking-widest uppercase mb-4"></p>
-                        
                         <div class="flex items-baseline gap-3 mb-6">
                             <span id="modalPrice" class="text-2xl font-black text-darkText dark:text-white"></span>
                             <span id="modalOriginalPrice" class="text-xs line-through text-gray-400 font-bold"></span>
                         </div>
-
                         <div class="border-t border-b border-gray-100 dark:border-white/10 py-4 mb-6">
                             <h4 class="text-[10px] font-extrabold uppercase tracking-widest text-gray-400 mb-2">Book Overview</h4>
                             <p id="modalDesc" class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed max-h-40 overflow-y-auto pr-2 font-medium"></p>
                         </div>
                     </div>
-
-                    <div class="space-y-3">
-                        <a id="modalSourceBtn" href="#" target="_blank" rel="noopener noreferrer" class="block w-full text-center border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-neonCyan hover:border-neonCyan text-[10px] font-bold uppercase tracking-widest py-2.5 rounded-lg transition">
-                            <i class="fas fa-external-link-alt mr-2"></i> Verify Source / Preview Book
-                        </a>
-
-                        <div id="modalActionBtns" class="flex gap-3"></div>
-                    </div>
+                    <div id="modalActionBtns" class="flex gap-3"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- CART MODAL DRAWER -->
+    <!-- Cart Drawer Modal -->
     <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none">
         <div class="backdrop-blur-sm absolute inset-0 bg-darkBg/60 pointer-events-auto transition-opacity" onclick="toggleCart()"></div>
-        
         <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-white dark:bg-darkSurface shadow-2xl flex flex-col pointer-events-auto translate-x-full border-l border-gray-100 dark:border-white/5 transition-transform duration-500 ease-in-out">
             <div class="px-6 py-6 border-b border-gray-100 dark:border-white/10 flex justify-between items-center bg-white dark:bg-darkBg">
                 <h2 class="font-bold text-sm uppercase tracking-[0.2em] text-darkText dark:text-white">Your Vault</h2>
-                <button onclick="toggleCart()" class="text-gray-400 hover:text-neonCyan bg-gray-50 dark:bg-white/5 rounded-full transition w-8 h-8 flex items-center justify-center hover:shadow-[0_0_10px_rgba(0,240,255,0.3)]"><i class="fas fa-times text-lg"></i></button>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-neonCyan bg-gray-50 dark:bg-white/5 rounded-full transition w-8 h-8 flex items-center justify-center"><i class="fas fa-times text-lg"></i></button>
             </div>
-
             <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50 dark:bg-darkSurface"></div>
-
-            <div class="p-6 border-t border-gray-100 dark:border-white/10 bg-white dark:bg-darkBg shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+            <div class="p-6 border-t border-gray-100 dark:border-white/10 bg-white dark:bg-darkBg">
                 <div class="flex justify-between font-bold text-lg mb-6 uppercase tracking-widest">
                     <span class="text-gray-500 dark:text-gray-400 text-xs mt-1">Subtotal</span>
-                    <span id="cartTotal" class="text-darkText dark:text-white drop-shadow-[0_0_8px_rgba(0,240,255,0.3)]">₹0</span>
+                    <span id="cartTotal" class="text-darkText dark:text-white">₹0</span>
                 </div>
-
                 <div id="checkoutForm" class="space-y-4">
                     <input type="text" id="custName" placeholder="FULL NAME" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-3 text-xs tracking-widest text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
-                    <input type="tel" id="custPhone" placeholder="WHATSAPP NUMBER (FOR DELIVERY)" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-3 text-xs tracking-widest text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
+                    <input type="tel" id="custPhone" placeholder="WHATSAPP NUMBER" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-3 text-xs tracking-widest text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
                     
-                    <button onclick="submitOrder()" class="neon-btn w-full bg-darkText dark:bg-white text-white dark:text-darkBg font-bold tracking-[0.2em] py-4 text-xs uppercase mt-2 rounded-lg border-none hover:bg-neonCyan dark:hover:bg-neonCyan hover:text-black">
-                        Complete Secure Purchase <i class="fas fa-lock ml-2"></i>
+                    <button onclick="submitOrder()" class="neon-btn w-full bg-darkText dark:bg-white text-white dark:text-darkBg font-bold tracking-[0.2em] py-4 text-xs uppercase mt-2 rounded-lg border-none hover:bg-neonCyan hover:text-black">
+                        Proceed to WhatsApp Checkout <i class="fab fa-whatsapp ml-2 text-base"></i>
                     </button>
                 </div>
             </div>
@@ -397,9 +330,6 @@
                 });
                 products = Array.from(uniqueMap.values());
                 renderProducts();
-            },
-            error: function(error) {
-                console.error("Database sync failed:", error);
             }
         });
 
@@ -412,43 +342,26 @@
 
         function updateThemeIcon(isDark) {
             const icon = document.getElementById('theme-icon');
-            if(isDark) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
+            if(isDark) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+            else { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
         }
-        
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // Playful Footer Terminal Logic
         function runCliCommand(cmd) {
             const out = document.getElementById('terminalOutput');
-            if (cmd === 'discount') {
-                out.innerHTML = `<span class="text-green-400">SUCCESS: Use code REALITY2026 for instant 25% checkout reduction!</span>`;
-            } else if (cmd === 'secret') {
-                out.innerHTML = `<span class="text-neonPurple">EASTER EGG UNLOCKED: You found the developer mainframe frequency!</span>`;
-            } else {
-                out.innerHTML = `Type a command or click a button below:`;
-            }
+            if (cmd === 'discount') out.innerHTML = `<span class="text-green-400">SUCCESS: Use code REALITY2026 for checkout reduction!</span>`;
+            else if (cmd === 'secret') out.innerHTML = `<span class="text-neonPurple">EASTER EGG UNLOCKED: Mainframe frequency active!</span>`;
+            else out.innerHTML = `Type a command or click a button below:`;
         }
 
         function triggerNeonPulse() {
             document.body.classList.toggle('ring-4');
             document.body.classList.toggle('ring-neonCyan');
-            setTimeout(() => {
-                document.body.classList.remove('ring-4', 'ring-neonCyan');
-            }, 1000);
+            setTimeout(() => document.body.classList.remove('ring-4', 'ring-neonCyan'), 1000);
         }
 
-        // Unique Feature: Vault Roulette
         function triggerRoulette() {
-            if (products.length === 0) {
-                alert("Vault is still syncing with Google Sheets. Please wait a second!");
-                return;
-            }
+            if (products.length === 0) { alert("Vault is still syncing with Google Sheets!"); return; }
             const randomBook = products[Math.floor(Math.random() * products.length)];
             openProductModal(randomBook.id);
         }
@@ -457,16 +370,6 @@
             const input = document.getElementById('searchInput');
             searchQuery = input.value.toLowerCase().trim();
             document.getElementById('mobileSearchInput').value = input.value;
-            
-            const clearBtn = document.getElementById('clearSearchBtn');
-            const clearMobileBtn = document.getElementById('clearMobileSearchBtn');
-            if(input.value.length > 0) {
-                clearBtn.classList.remove('hidden');
-                clearMobileBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
-                clearMobileBtn.classList.add('hidden');
-            }
             renderProducts();
         }
 
@@ -474,16 +377,6 @@
             const input = document.getElementById('mobileSearchInput');
             searchQuery = input.value.toLowerCase().trim();
             document.getElementById('searchInput').value = input.value;
-
-            const clearBtn = document.getElementById('clearSearchBtn');
-            const clearMobileBtn = document.getElementById('clearMobileSearchBtn');
-            if(input.value.length > 0) {
-                clearBtn.classList.remove('hidden');
-                clearMobileBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
-                clearMobileBtn.classList.add('hidden');
-            }
             renderProducts();
         }
 
@@ -491,8 +384,6 @@
             document.getElementById('searchInput').value = '';
             document.getElementById('mobileSearchInput').value = '';
             searchQuery = '';
-            document.getElementById('clearSearchBtn').classList.add('hidden');
-            document.getElementById('clearMobileSearchBtn').classList.add('hidden');
             renderProducts();
         }
 
@@ -501,22 +392,13 @@
             const countEl = document.getElementById('resultCount');
             
             let filtered = products.filter(p => {
-                let matchesSubcat = true;
-                if (currentSubcategory === 'all') {
-                    matchesSubcat = true;
-                } else if (currentSubcategory === 'featured') {
-                    matchesSubcat = p.badge && (p.badge.toLowerCase() === 'premium' || p.badge.toLowerCase() === 'limited');
-                } else {
-                    matchesSubcat = p.subcategory && p.subcategory.toLowerCase() === currentSubcategory.toLowerCase();
-                }
-
-                const matchesSearch = !searchQuery || 
-                    (p.name && p.name.toLowerCase().includes(searchQuery)) || 
-                    (p.authors && p.authors.toLowerCase().includes(searchQuery));
+                let matchesSubcat = (currentSubcategory === 'all') || 
+                    (currentSubcategory === 'featured' && p.badge && p.badge.toLowerCase() === 'premium') || 
+                    (p.subcategory && p.subcategory.toLowerCase() === currentSubcategory.toLowerCase());
+                const matchesSearch = !searchQuery || (p.name && p.name.toLowerCase().includes(searchQuery)) || (p.authors && p.authors.toLowerCase().includes(searchQuery));
                 return matchesSubcat && matchesSearch;
             });
 
-            // Cap initial homepage view to 24 items if not searching
             if (currentSubcategory === 'all' && !searchQuery) {
                 filtered = filtered.slice(0, 24);
                 countEl.innerText = `Showing 24 / ${products.length} Loaded Assets`;
@@ -525,39 +407,28 @@
             }
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest text-xs">No books found matching your search. Try typing a keyword above!</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest text-xs">No books found matching your search.</div>`;
                 return;
             }
 
             grid.innerHTML = filtered.map(p => `
                 <div class="hover-physics bg-white dark:bg-darkSurface border border-gray-100 dark:border-white/5 rounded-2xl flex flex-col relative group overflow-hidden shadow-sm hover:shadow-[0_15px_30px_rgba(0,240,255,0.15)] hover:border-neonCyan transition-all duration-300">
                     ${p.badge ? `<div class="absolute top-4 left-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white px-3 py-1.5 rounded text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-lg">${p.badge}</div>` : ''}
-                    
                     <div class="relative overflow-hidden aspect-[4/5] bg-gray-50 dark:bg-black cursor-pointer" onclick="openProductModal('${p.id}')">
                         <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-80 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-[9px] font-bold text-neonCyan uppercase tracking-widest"><i class="fas fa-eye mr-1"></i> Quick View Details</span>
-                        </div>
                     </div>
-
                     <div class="p-5 flex-1 flex flex-col justify-between relative z-10">
                         <div class="mb-4">
                             <h3 class="font-bold text-xs md:text-sm text-darkText dark:text-gray-100 uppercase tracking-widest line-clamp-1 cursor-pointer hover:text-neonCyan transition" onclick="openProductModal('${p.id}')">${p.name}</h3>
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1 line-clamp-1">By ${p.authors || 'Unknown Author'}</p>
-                            
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1 line-clamp-1">By ${p.authors || 'Unknown'}</p>
                             <div class="flex items-baseline gap-2 mt-3">
                                 <span class="font-extrabold text-lg text-darkText dark:text-white">₹${p.price}</span>
                                 <span class="text-[10px] font-semibold line-through text-gray-400">₹${p.originalPrice}</span>
                             </div>
                         </div>
-
                         <div class="flex gap-2">
-                            <button onclick="addToCart('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-darkText dark:text-white rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition-all duration-300 shadow-sm">
-                                Add to Bag
-                            </button>
-                            <button onclick="buyNow('${p.id}')" class="flex-1 bg-darkText dark:bg-white text-white dark:text-darkBg rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition-all duration-300 shadow-sm">
-                                Buy Now
-                            </button>
+                            <button onclick="addToCart('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-darkText dark:text-white rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition shadow-sm">Add to Bag</button>
+                            <button onclick="buyNow('${p.id}')" class="flex-1 bg-darkText dark:bg-white text-white dark:text-darkBg rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm">Buy Now</button>
                         </div>
                     </div>
                 </div>
@@ -569,66 +440,45 @@
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0";
             });
-            event.target.className = "cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_15px_rgba(0,240,255,0.3)] shrink-0";
+            event.target.className = "cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg shrink-0";
             renderProducts();
         }
 
         function openProductModal(id) {
             const p = products.find(prod => String(prod.id) === String(id));
             if (!p) return;
-
             document.getElementById('modalImg').src = p.image || '';
             document.getElementById('modalTitle').innerText = p.name || '';
-            document.getElementById('modalAuthor').innerText = `BY ${p.authors || 'UNKNOWN AUTHOR'}`;
+            document.getElementById('modalAuthor').innerText = `BY ${p.authors || 'UNKNOWN'}`;
             document.getElementById('modalPrice').innerText = `₹${p.price}`;
             document.getElementById('modalOriginalPrice').innerText = `₹${p.originalPrice}`;
             document.getElementById('modalBadge').innerText = p.badge || 'PREMIUM';
-            document.getElementById('modalDesc').innerText = p.description || 'No detailed overview provided for this digital item.';
+            document.getElementById('modalDesc').innerText = p.description || 'No overview provided.';
             
-            const sourceBtn = document.getElementById('modalSourceBtn');
-            if (p.source_url) {
-                sourceBtn.href = p.source_url;
-                sourceBtn.classList.remove('hidden');
-            } else {
-                sourceBtn.classList.add('hidden');
-            }
-
             document.getElementById('modalActionBtns').innerHTML = `
-                <button onclick="addToCart('${p.id}'); closeProductModal();" class="flex-1 bg-gray-100 dark:bg-white/10 text-darkText dark:text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:bg-neonCyan hover:text-black transition">
-                    Add to Bag
-                </button>
-                <button onclick="buyNow('${p.id}'); closeProductModal();" class="flex-1 bg-neonPurple text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:bg-neonCyan hover:text-black transition shadow-lg">
-                    Buy Now
-                </button>
+                <button onclick="addToCart('${p.id}'); closeProductModal();" class="flex-1 bg-gray-100 dark:bg-white/10 text-darkText dark:text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:bg-neonCyan hover:text-black transition">Add to Bag</button>
+                <button onclick="buyNow('${p.id}'); closeProductModal();" class="flex-1 bg-neonPurple text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:bg-neonCyan hover:text-black transition shadow-lg">Buy Now</button>
             `;
-
             document.getElementById('detailModal').classList.remove('hidden');
         }
 
-        function closeProductModal() {
-            document.getElementById('detailModal').classList.add('hidden');
-        }
+        function closeProductModal() { document.getElementById('detailModal').classList.add('hidden'); }
 
         function addToCart(id) {
             const item = products.find(p => String(p.id) === String(id));
             if (!item) return;
             const existing = cart.find(c => String(c.id) === String(id));
-            if (existing) existing.qty++;
-            else cart.push({ ...item, qty: 1 });
+            if (existing) existing.qty++; else cart.push({ ...item, qty: 1 });
             updateCart();
             toggleCart(true);
         }
 
-        function buyNow(id) {
-            addToCart(id);
-            toggleCart(true);
-        }
+        function buyNow(id) { addToCart(id); toggleCart(true); }
 
         function updateCart() {
             const container = document.getElementById('cartItems');
             const totalEl = document.getElementById('cartTotal');
             const countEl = document.getElementById('cartCount');
-
             const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
@@ -636,21 +486,21 @@
             totalEl.innerText = `₹${totalPrice}`;
 
             if(cart.length === 0) {
-                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-gray-400 dark:text-gray-600"><i class="fas fa-box-open text-4xl mb-4 opacity-50"></i><p class="text-[10px] uppercase tracking-[0.2em] font-bold">Vault is empty</p></div>`;
+                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-gray-400"><i class="fas fa-box-open text-4xl mb-4 opacity-50"></i><p class="text-[10px] uppercase tracking-[0.2em] font-bold">Vault is empty</p></div>`;
                 return;
             }
 
             container.innerHTML = cart.map(item => `
                 <div class="flex items-center gap-4 bg-white dark:bg-darkBg p-3 rounded-xl border border-gray-100 dark:border-white/5 shadow-sm">
-                    <img src="${item.image}" class="w-16 h-16 rounded-md object-cover dark:opacity-80">
+                    <img src="${item.image}" class="w-16 h-16 rounded-md object-cover">
                     <div class="flex-1">
                         <h4 class="font-bold text-[10px] text-darkText dark:text-white uppercase tracking-wider line-clamp-1">${item.name}</h4>
                         <p class="text-[10px] font-bold text-gray-500 dark:text-neonCyan mt-1">₹${item.price}</p>
                         <div class="flex items-center gap-3 mt-2">
                             <div class="flex items-center border border-gray-200 dark:border-white/10 rounded bg-gray-50 dark:bg-white/5">
-                                <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan transition-colors"><i class="fas fa-minus text-[8px]"></i></button>
+                                <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-gray-500"><i class="fas fa-minus text-[8px]"></i></button>
                                 <span class="text-[10px] font-bold w-6 text-center text-darkText dark:text-white">${item.qty}</span>
-                                <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan transition-colors"><i class="fas fa-plus text-[8px]"></i></button>
+                                <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 flex items-center justify-center text-gray-500"><i class="fas fa-plus text-[8px]"></i></button>
                             </div>
                         </div>
                     </div>
@@ -661,17 +511,13 @@
 
         function changeQty(id, delta) {
             const item = cart.find(c => String(c.id) === String(id));
-            if(item) {
-                item.qty += delta;
-                if(item.qty <= 0) cart = cart.filter(c => String(c.id) !== String(id));
-            }
+            if(item) { item.qty += delta; if(item.qty <= 0) cart = cart.filter(c => String(c.id) !== String(id)); }
             updateCart();
         }
 
         function toggleCart(forceOpen = false) {
             const modal = document.getElementById('cartModal');
             const drawer = modal.querySelector('.cart-drawer');
-            
             if (forceOpen || modal.classList.contains('hidden')) {
                 modal.classList.remove('hidden');
                 setTimeout(() => drawer.classList.remove('translate-x-full'), 10);
@@ -681,67 +527,55 @@
             }
         }
 
-        async function submitOrder() {
+        // WhatsApp Checkout Handler (Secure & Zero-Server)
+        function submitOrder() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
 
             if(!name || !phone) {
-                alert("ACCESS DENIED: Name and contact details are required for digital delivery.");
+                alert("ACCESS DENIED: Name and WhatsApp number are required.");
                 return;
             }
             if(cart.length === 0) return;
 
             const orderId = "KNG-DIG-" + Math.floor(100000 + Math.random() * 900000);
-            const btn = event.target.closest('button');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> SECURING FILES...`;
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const itemNames = cart.map(item => `${item.name} (Qty: ${item.qty})`).join(', ');
 
-            const downloadLinksHtml = cart.map(item => `
-                <a href="${item.file_url || '#'}" target="_blank" rel="noopener noreferrer" 
-                   class="neon-btn block w-full bg-neonCyan text-black font-extrabold tracking-widest py-3 text-xs uppercase rounded-lg mb-2 text-center shadow-lg">
-                   <i class="fas fa-download mr-2"></i> Download ${item.name}
-                </a>
-            `).join('');
+            // ENTER YOUR WHATSAPP NUMBER HERE (Country code + number without '+' sign, e.g. 919876543210)
+            const myWhatsAppNumber = "919876543210"; 
+            
+            const whatsAppText = encodeURIComponent(
+                `🛒 *NEW KINGLY STORE ORDER!*\n\n` +
+                `🆔 Order ID: ${orderId}\n` +
+                `👤 Customer Name: ${name}\n` +
+                `📱 Customer Phone: ${phone}\n` +
+                `💰 Total Amount: ₹${totalAmount}\n` +
+                `📚 Items Purchased:\n${itemNames}\n\n` +
+                `_Please confirm payment and send digital assets/invoice._`
+            );
+            const whatsAppURL = `https://wa.me/${myWhatsAppNumber}?text=${whatsAppText}`;
 
-            const orderPayload = {
-                order_id: orderId,
-                customer_name: name,
-                customer_phone: phone,
-                payment_mode: "DIGITAL_CHECKOUT",
-                items: cart,
-                total_amount: cart.reduce((sum, item) => sum + (item.price * item.qty), 0),
-                created_at: new Date().toISOString()
-            };
+            cart = [];
+            updateCart();
 
-            const N8N_WEBHOOK_URL = "http://localhost:5678/webhook/kingly-new-order";
+            document.getElementById('checkoutForm').innerHTML = `
+                <div class="text-center py-6">
+                    <div class="w-14 h-14 bg-green-500/10 border border-green-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+                        <i class="fab fa-whatsapp text-green-500 text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-darkText dark:text-white uppercase tracking-[0.2em] mb-1">Order Prepared</h3>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-6">Order ID: ${orderId}</p>
+                    
+                    <a href="${whatsAppURL}" target="_blank" rel="noopener noreferrer" 
+                       class="neon-btn block w-full bg-green-500 text-white font-extrabold tracking-widest py-4 text-xs uppercase rounded-lg text-center shadow-lg mb-3">
+                       <i class="fab fa-whatsapp mr-2 text-base"></i> Send Order to WhatsApp
+                    </a>
 
-            try {
-                await fetch(N8N_WEBHOOK_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(orderPayload)
-                });
-                
-                cart = [];
-                updateCart();
-
-                document.getElementById('checkoutForm').innerHTML = `
-                    <div class="text-center py-6">
-                        <div class="w-14 h-14 bg-green-100 dark:bg-neonCyan/10 border border-green-500 dark:bg-neonCyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(0,240,255,0.2)]">
-                            <i class="fas fa-check text-green-500 dark:text-neonCyan text-2xl"></i>
-                        </div>
-                        <h3 class="font-bold text-sm text-darkText dark:text-white uppercase tracking-[0.2em] mb-1">Access Granted</h3>
-                        <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest mb-6">Order ID: ${orderId}</p>
-                        
-                        <div class="space-y-2 mb-4">
-                            ${downloadLinksHtml}
-                        </div>
-                        <p class="text-[9px] text-gray-400 font-semibold uppercase">Your link has also been logged to your account vault.</p>
-                    </div>`;
-            } catch (error) {
-                alert("Network Connection Error: Ensure n8n is running and you are testing locally.");
-                btn.innerHTML = originalText;
-            }
+                    <button onclick="location.reload()" class="text-[10px] text-gray-400 hover:text-neonCyan uppercase font-bold tracking-widest mt-2">
+                        Return to Store
+                    </button>
+                </div>`;
         }
     </script>
 </body>
