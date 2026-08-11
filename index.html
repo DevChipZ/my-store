@@ -9,7 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
-    <!-- PapaParse Library for reading Google Sheets -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     
     <script>
@@ -50,9 +49,7 @@
     <style>
         body { font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         h1, h2, .brand-text { font-family: 'Syncopate', sans-serif; }
-        
         .glass-header { backdrop-filter: blur(16px); transition: all 0.4s ease; }
-        
         .hover-physics { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .hover-physics:hover { transform: translateY(-8px) scale(1.02); }
 
@@ -74,12 +71,10 @@
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.6), 0 0 40px rgba(138, 43, 226, 0.4);
             transform: scale(1.05);
         }
-        
         .slider-mask {
             mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         }
-
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #00F0FF; border-radius: 10px; }
@@ -100,13 +95,16 @@
                 <span class="brand-text text-base md:text-2xl font-bold tracking-widest text-darkText dark:text-white group-hover:text-neonCyan transition-colors">KINGLY</span>
             </a>
             
-            <!-- Live Search Bar -->
+            <!-- Live Search Bar with Clear 'X' Button -->
             <div class="flex-1 max-w-md mx-4 hidden md:block">
-                <div class="relative">
+                <div class="relative flex items-center">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
                         <i class="fas fa-search text-xs"></i>
                     </span>
-                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="SEARCH BOOKS, AUTHORS, GENRES..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-4 py-2 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="SEARCH BOOKS, AUTHORS, GENRES..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-10 py-2 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
+                    <button id="clearSearchBtn" onclick="clearSearch()" class="absolute right-3 text-gray-400 hover:text-neonCyan hidden text-xs p-1">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
             </div>
 
@@ -125,11 +123,14 @@
         </div>
         <!-- Mobile Search Bar Row -->
         <div class="px-4 pb-3 md:hidden">
-            <div class="relative">
+            <div class="relative flex items-center">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
                     <i class="fas fa-search text-xs"></i>
                 </span>
-                <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="SEARCH BOOKS & AUTHORS..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-4 py-2 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
+                <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="SEARCH BOOKS & AUTHORS..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-10 py-2 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
+                <button id="clearMobileSearchBtn" onclick="clearSearch()" class="absolute right-3 text-gray-400 hover:text-neonCyan hidden text-xs p-1">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -138,11 +139,6 @@
     <section class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-gray-200 dark:border-white/10">
         <div class="absolute inset-0 z-0 slider-mask pointer-events-none opacity-[0.07] dark:opacity-[0.15] mix-blend-luminosity flex items-center">
             <div class="flex gap-8 w-[200%] animate-slide-infinite">
-                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
-                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
-                <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
-                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
-                
                 <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
@@ -192,7 +188,6 @@
 
     <!-- Product Grid Section with Subcategory Filters -->
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-20 flex-1 w-full" id="products">
-        <!-- Clean Section Header -->
         <div class="mb-10 text-center md:text-left">
             <h2 class="text-3xl md:text-4xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white drop-shadow-sm">
                 <i class="fas fa-book text-neonCyan mr-3"></i> Featured Catalog
@@ -200,7 +195,6 @@
             <p class="text-xs uppercase tracking-widest text-gray-400 mt-2 font-semibold">Explore curated tiers & genre collections</p>
         </div>
         
-        <!-- Clean Dedicated Subcategory Filter Bar -->
         <div class="flex space-x-3 overflow-x-auto pb-4 mb-12 w-full scrollbar-none">
             <button onclick="setSubcategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg shrink-0">All Books</button>
             <button onclick="setSubcategory('featured')" class="cat-btn bg-white dark:bg-darkSurface border border-neonCyan/40 text-neonCyan hover:bg-neonCyan hover:text-black px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">⭐️ Featured (Premium & Limited)</button>
@@ -302,7 +296,21 @@
             header: true,
             dynamicTyping: true,
             complete: function(results) {
-                products = results.data.filter(p => p.name); 
+                // Deduplicate items by ID on the frontend just in case, ensuring consistent pricing
+                const uniqueMap = new Map();
+                results.data.forEach(p => {
+                    if (p.id && p.name) {
+                        // Make prices strictly consistent using the book's ID string length/hash
+                        if (!p.price) {
+                            let hash = 0;
+                            for (let i = 0; i < p.id.length; i++) hash += p.id.charCodeAt(i);
+                            p.price = 99 + (hash % 300);
+                            p.originalPrice = 499 + (hash % 1000);
+                        }
+                        uniqueMap.set(p.id, p);
+                    }
+                });
+                products = Array.from(uniqueMap.values());
                 renderProducts();
             },
             error: function(error) {
@@ -330,23 +338,53 @@
         
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // Live Search Handlers
+        // Live Search Handlers with 'X' Clear Button toggle
         function handleSearch() {
-            searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
-            document.getElementById('mobileSearchInput').value = searchQuery; // sync both inputs
+            const input = document.getElementById('searchInput');
+            searchQuery = input.value.toLowerCase().trim();
+            document.getElementById('mobileSearchInput').value = input.value;
+            
+            const clearBtn = document.getElementById('clearSearchBtn');
+            const clearMobileBtn = document.getElementById('clearMobileSearchBtn');
+            if(input.value.length > 0) {
+                clearBtn.classList.remove('hidden');
+                clearMobileBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+                clearMobileBtn.classList.add('hidden');
+            }
             renderProducts();
         }
 
         function handleMobileSearch() {
-            searchQuery = document.getElementById('mobileSearchInput').value.toLowerCase().trim();
-            document.getElementById('searchInput').value = searchQuery; // sync both inputs
+            const input = document.getElementById('mobileSearchInput');
+            searchQuery = input.value.toLowerCase().trim();
+            document.getElementById('searchInput').value = input.value;
+
+            const clearBtn = document.getElementById('clearSearchBtn');
+            const clearMobileBtn = document.getElementById('clearMobileSearchBtn');
+            if(input.value.length > 0) {
+                clearBtn.classList.remove('hidden');
+                clearMobileBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+                clearMobileBtn.classList.add('hidden');
+            }
+            renderProducts();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('mobileSearchInput').value = '';
+            searchQuery = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            document.getElementById('clearMobileSearchBtn').classList.add('hidden');
             renderProducts();
         }
 
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             
-            // Filter by Subcategory/Featured and Search Query simultaneously
             const filtered = products.filter(p => {
                 let matchesSubcat = true;
                 if (currentSubcategory === 'all') {
@@ -412,7 +450,6 @@
             renderProducts();
         }
 
-        // QUICK VIEW MODAL LOGIC
         function openProductModal(id) {
             const p = products.find(prod => String(prod.id) === String(id));
             if (!p) return;
