@@ -91,7 +91,7 @@
         Premium Digital Assets • Instant Access Worldwide
     </div>
 
-    <!-- Header with Auto-Inverting Logo & Mobile Optimization -->
+    <!-- Header -->
     <header class="glass-header bg-white/80 dark:bg-darkBg/80 border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-4 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 md:gap-3 group">
@@ -115,9 +115,9 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-gray-200 dark:border-white/10">
         <div class="absolute inset-0 z-0 slider-mask pointer-events-none opacity-[0.07] dark:opacity-[0.15] mix-blend-luminosity flex items-center">
-            <!-- UPDATED SLIDER IMAGES -->
             <div class="flex gap-8 w-[200%] animate-slide-infinite">
                 <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
@@ -135,13 +135,13 @@
         <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-neonPurple/10 dark:bg-neonPurple/20 rounded-full blur-[100px] pointer-events-none"></div>
         
         <div class="relative z-10 text-center px-4">
-            <span class="inline-block py-1.5 px-5 border border-neonPurple/30 text-neonPurple dark:text-neonCyan text-[10px] font-bold tracking-[0.3em] uppercase mb-8 bg-purple-50/50 dark:bg-white/5 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(138,43,226,0.2)]">The New Standard</span>
+            <span class="inline-block py-1.5 px-5 border border-neonPurple/30 text-neonPurple dark:text-neonCyan text-[10px] font-bold tracking-[0.3em] uppercase mb-8 bg-purple-50/50 dark:bg-white/5 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(138,43,226,0.2)]">The Digital Library</span>
             <h1 class="text-5xl md:text-7xl font-black tracking-widest leading-tight mb-6 uppercase text-darkText dark:text-white drop-shadow-lg">
                 Rule Your <br/>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan to-neonPurple">Reality.</span>
             </h1>
             <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base mb-10 max-w-lg mx-auto font-medium tracking-wide">
-                The apex of modern aesthetics. Premium digital assets engineered for the elite. 
+                Verified digital titles, public domain drops, and curated ebooks.
             </p>
             <button onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})" class="neon-btn bg-white dark:bg-darkBg text-darkText dark:text-white border-2 border-neonCyan font-bold px-12 py-4 uppercase text-xs tracking-widest rounded-full cursor-pointer">
                 Enter The Collection
@@ -149,7 +149,7 @@
         </div>
     </section>
 
-    <!-- Updated Trust Badges for Digital Products -->
+    <!-- Trust Badges -->
     <div class="bg-white dark:bg-darkSurface border-b border-gray-100 dark:border-white/5 relative z-10 shadow-sm transition-colors duration-400">
         <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100 dark:divide-white/5">
             <div class="px-2 group cursor-default">
@@ -161,8 +161,8 @@
                 <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Instant Delivery</h4>
             </div>
             <div class="px-2 group cursor-default">
-                <i class="fas fa-fingerprint text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Secure Checkout</h4>
+                <i class="fas fa-shield-alt text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Verified Sources</h4>
             </div>
             <div class="px-2 group cursor-default">
                 <i class="fas fa-infinity text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
@@ -171,24 +171,68 @@
         </div>
     </div>
 
+    <!-- Product Grid Section -->
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-24 flex-1 w-full" id="products">
         <div class="flex flex-col md:flex-row items-center justify-between mb-16">
             <h2 class="text-2xl md:text-3xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white mb-6 md:mb-0 drop-shadow-sm">
-                <i class="fas fa-bolt text-neonCyan mr-3"></i> Featured Drops
+                <i class="fas fa-book text-neonCyan mr-3"></i> Featured Catalog
             </h2>
             
             <div class="flex space-x-3 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
                 <button onclick="setCategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg">All</button>
-                <button onclick="setCategory('software')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Software</button>
                 <button onclick="setCategory('ebooks')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">eBooks</button>
+                <button onclick="setCategory('software')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Software</button>
                 <button onclick="setCategory('presets')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Presets</button>
             </div>
         </div>
 
-        <!-- Dynamic Product Grid -->
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"></div>
     </main>
 
+    <!-- NEW: BOOK DETAILS / QUICK VIEW MODAL -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="backdrop-blur-md absolute inset-0 bg-black/70" onclick="closeProductModal()"></div>
+        
+        <div class="relative bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto z-10 p-6 md:p-8 shadow-2xl transition-all">
+            <button onclick="closeProductModal()" class="absolute top-6 right-6 text-gray-400 hover:text-neonCyan bg-gray-100 dark:bg-white/5 rounded-full w-9 h-9 flex items-center justify-center transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
+                <div class="md:col-span-2 flex flex-col items-center">
+                    <img id="modalImg" src="" alt="" class="w-full h-auto max-h-80 object-cover rounded-2xl shadow-xl border border-gray-100 dark:border-white/10">
+                    <span id="modalBadge" class="mt-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-md"></span>
+                </div>
+
+                <div class="md:col-span-3 flex flex-col justify-between">
+                    <div>
+                        <h2 id="modalTitle" class="text-xl md:text-2xl font-bold uppercase tracking-wider text-darkText dark:text-white mb-2"></h2>
+                        <p id="modalAuthor" class="text-xs font-bold text-neonPurple dark:text-neonCyan tracking-widest uppercase mb-4"></p>
+                        
+                        <div class="flex items-baseline gap-3 mb-6">
+                            <span id="modalPrice" class="text-2xl font-black text-darkText dark:text-white"></span>
+                            <span id="modalOriginalPrice" class="text-xs line-through text-gray-400 font-bold"></span>
+                        </div>
+
+                        <div class="border-t border-b border-gray-100 dark:border-white/10 py-4 mb-6">
+                            <h4 class="text-[10px] font-extrabold uppercase tracking-widest text-gray-400 mb-2">Book Overview</h4>
+                            <p id="modalDesc" class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed max-h-40 overflow-y-auto pr-2 font-medium"></p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <a id="modalSourceBtn" href="#" target="_blank" rel="noopener noreferrer" class="block w-full text-center border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-neonCyan hover:border-neonCyan text-[10px] font-bold uppercase tracking-widest py-2.5 rounded-lg transition">
+                            <i class="fas fa-external-link-alt mr-2"></i> Verify Source / Preview Book
+                        </a>
+
+                        <div id="modalActionBtns" class="flex gap-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART MODAL DRAWER -->
     <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none">
         <div class="backdrop-blur-sm absolute inset-0 bg-darkBg/60 pointer-events-auto transition-opacity" onclick="toggleCart()"></div>
         
@@ -206,7 +250,6 @@
                     <span id="cartTotal" class="text-darkText dark:text-white drop-shadow-[0_0_8px_rgba(0,240,255,0.3)]">₹0</span>
                 </div>
 
-                <!-- Updated Digital Checkout Form -->
                 <div id="checkoutForm" class="space-y-4">
                     <input type="text" id="custName" placeholder="FULL NAME" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-3 text-xs tracking-widest text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
                     <input type="tel" id="custPhone" placeholder="WHATSAPP NUMBER (FOR DELIVERY)" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-3 text-xs tracking-widest text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
@@ -224,7 +267,6 @@
         let cart = [];
         let currentCategory = 'all';
 
-        // LIVE INVENTORY DB: Pulls data from your published Google Sheet
         const INVENTORY_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vROK0zqCUUDJluKB8BsGeWO5lACQWi-_UKCmlUk4nO_S6cfxKGaJXvHN4otjG-Qc_oZLcPUD0EPV-7k/pub?output=csv";
 
         Papa.parse(INVENTORY_SHEET_URL, {
@@ -232,7 +274,6 @@
             header: true,
             dynamicTyping: true,
             complete: function(results) {
-                // Ignore blank rows from Google Sheets
                 products = results.data.filter(p => p.name); 
                 renderProducts();
             },
@@ -241,7 +282,6 @@
             }
         });
 
-        // Theme Toggle Logic
         function toggleTheme() {
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
@@ -262,7 +302,6 @@
         
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // Render Dynamic Products with "Buy Now" Option
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const filtered = products.filter(p => currentCategory === 'all' || p.category === currentCategory);
@@ -270,18 +309,25 @@
             grid.innerHTML = filtered.map(p => `
                 <div class="hover-physics bg-white dark:bg-darkSurface border border-gray-100 dark:border-white/5 rounded-2xl flex flex-col relative group overflow-hidden shadow-sm hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,240,255,0.1)] hover:border-neonCyan transition-all duration-300">
                     ${p.badge ? `<div class="absolute top-4 left-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white px-3 py-1.5 rounded text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-lg">${p.badge}</div>` : ''}
-                    <div class="relative overflow-hidden aspect-[4/5] bg-gray-50 dark:bg-black">
+                    
+                    <div class="relative overflow-hidden aspect-[4/5] bg-gray-50 dark:bg-black cursor-pointer" onclick="openProductModal('${p.id}')">
                         <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-80 transition-all duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-[9px] font-bold text-neonCyan uppercase tracking-widest"><i class="fas fa-eye mr-1"></i> Quick View Details</span>
+                        </div>
                     </div>
+
                     <div class="p-5 flex-1 flex flex-col justify-between relative z-10">
                         <div class="mb-4">
-                            <h3 class="font-bold text-xs md:text-sm text-darkText dark:text-gray-100 uppercase tracking-widest line-clamp-2">${p.name}</h3>
-                            <div class="flex items-baseline gap-2 mt-2">
+                            <h3 class="font-bold text-xs md:text-sm text-darkText dark:text-gray-100 uppercase tracking-widest line-clamp-1 cursor-pointer hover:text-neonCyan transition" onclick="openProductModal('${p.id}')">${p.name}</h3>
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1 line-clamp-1">By ${p.authors || 'Unknown Author'}</p>
+                            
+                            <div class="flex items-baseline gap-2 mt-3">
                                 <span class="font-extrabold text-lg text-darkText dark:text-white">₹${p.price}</span>
                                 <span class="text-[10px] font-semibold line-through text-gray-400">₹${p.originalPrice}</span>
                             </div>
                         </div>
+
                         <div class="flex gap-2">
                             <button onclick="addToCart('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-darkText dark:text-white rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition-all duration-300 shadow-sm">
                                 Add to Bag
@@ -295,6 +341,43 @@
             `).join('');
         }
 
+        // QUICK VIEW MODAL LOGIC
+        function openProductModal(id) {
+            const p = products.find(prod => String(prod.id) === String(id));
+            if (!p) return;
+
+            document.getElementById('modalImg').src = p.image || '';
+            document.getElementById('modalTitle').innerText = p.name || '';
+            document.getElementById('modalAuthor').innerText = `BY ${p.authors || 'UNKNOWN AUTHOR'}`;
+            document.getElementById('modalPrice').innerText = `₹${p.price}`;
+            document.getElementById('modalOriginalPrice').innerText = `₹${p.originalPrice}`;
+            document.getElementById('modalBadge').innerText = p.badge || 'PREMIUM';
+            document.getElementById('modalDesc').innerText = p.description || 'No detailed overview provided for this digital item.';
+            
+            const sourceBtn = document.getElementById('modalSourceBtn');
+            if (p.source_url) {
+                sourceBtn.href = p.source_url;
+                sourceBtn.classList.remove('hidden');
+            } else {
+                sourceBtn.classList.add('hidden');
+            }
+
+            document.getElementById('modalActionBtns').innerHTML = `
+                <button onclick="addToCart('${p.id}'); closeProductModal();" class="flex-1 bg-gray-100 dark:bg-white/10 text-darkText dark:text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:bg-neonCyan hover:text-black transition">
+                    Add to Bag
+                </button>
+                <button onclick="buyNow('${p.id}'); closeProductModal();" class="flex-1 bg-neonPurple text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:bg-neonCyan hover:text-black transition shadow-lg">
+                    Buy Now
+                </button>
+            `;
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
         function setCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
@@ -304,10 +387,10 @@
             renderProducts();
         }
 
-        // Cart Logic
         function addToCart(id) {
-            const item = products.find(p => p.id === id);
-            const existing = cart.find(c => c.id === id);
+            const item = products.find(p => String(p.id) === String(id));
+            if (!item) return;
+            const existing = cart.find(c => String(c.id) === String(id));
             if (existing) existing.qty++;
             else cart.push({ ...item, qty: 1 });
             updateCart();
@@ -355,10 +438,10 @@
         }
 
         function changeQty(id, delta) {
-            const item = cart.find(c => c.id === id);
+            const item = cart.find(c => String(c.id) === String(id));
             if(item) {
                 item.qty += delta;
-                if(item.qty <= 0) cart = cart.filter(c => c.id !== id);
+                if(item.qty <= 0) cart = cart.filter(c => String(c.id) !== String(id));
             }
             updateCart();
         }
@@ -376,7 +459,6 @@
             }
         }
 
-        // Final Updated Digital Webhook Submission Logic (with instant download)
         async function submitOrder() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
@@ -392,7 +474,6 @@
             const originalText = btn.innerHTML;
             btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> SECURING FILES...`;
 
-            // Extract all download links from cart items
             const downloadLinksHtml = cart.map(item => `
                 <a href="${item.file_url || '#'}" target="_blank" rel="noopener noreferrer" 
                    class="neon-btn block w-full bg-neonCyan text-black font-extrabold tracking-widest py-3 text-xs uppercase rounded-lg mb-2 text-center shadow-lg">
@@ -422,7 +503,6 @@
                 cart = [];
                 updateCart();
 
-                // Render Instant Download Buttons
                 document.getElementById('checkoutForm').innerHTML = `
                     <div class="text-center py-6">
                         <div class="w-14 h-14 bg-green-100 dark:bg-neonCyan/10 border border-green-500 dark:border-neonCyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(0,240,255,0.2)]">
