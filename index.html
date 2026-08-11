@@ -171,25 +171,30 @@
         </div>
     </div>
 
-    <!-- Product Grid Section -->
+    <!-- Product Grid Section with Subcategory Filters -->
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-24 flex-1 w-full" id="products">
         <div class="flex flex-col md:flex-row items-center justify-between mb-16">
             <h2 class="text-2xl md:text-3xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white mb-6 md:mb-0 drop-shadow-sm">
                 <i class="fas fa-book text-neonCyan mr-3"></i> Featured Catalog
             </h2>
             
+            <!-- Dynamic Subcategory Navigation Bar -->
             <div class="flex space-x-3 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
-                <button onclick="setCategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg">All</button>
-                <button onclick="setCategory('ebooks')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">eBooks</button>
-                <button onclick="setCategory('software')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Software</button>
-                <button onclick="setCategory('presets')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]">Presets</button>
+                <button onclick="setSubcategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg">All</button>
+                <button onclick="setSubcategory('Kids')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Kids</button>
+                <button onclick="setSubcategory('Comic')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Comics</button>
+                <button onclick="setSubcategory('Manga')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Manga</button>
+                <button onclick="setSubcategory('Manhwa')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Manhwa</button>
+                <button onclick="setSubcategory('Psychology')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Psychology</button>
+                <button onclick="setSubcategory('Novels')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Novels</button>
+                <button onclick="setSubcategory('Real Life')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Real Life</button>
             </div>
         </div>
 
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"></div>
     </main>
 
-    <!-- NEW: BOOK DETAILS / QUICK VIEW MODAL -->
+    <!-- BOOK DETAILS / QUICK VIEW MODAL -->
     <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="backdrop-blur-md absolute inset-0 bg-black/70" onclick="closeProductModal()"></div>
         
@@ -265,7 +270,7 @@
     <script>
         let products = [];
         let cart = [];
-        let currentCategory = 'all';
+        let currentSubcategory = 'all';
 
         const INVENTORY_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vROK0zqCUUDJluKB8BsGeWO5lACQWi-_UKCmlUk4nO_S6cfxKGaJXvHN4otjG-Qc_oZLcPUD0EPV-7k/pub?output=csv";
 
@@ -304,7 +309,7 @@
 
         function renderProducts() {
             const grid = document.getElementById('productGrid');
-            const filtered = products.filter(p => currentCategory === 'all' || p.category === currentCategory);
+            const filtered = products.filter(p => currentSubcategory === 'all' || p.subcategory === currentSubcategory);
 
             grid.innerHTML = filtered.map(p => `
                 <div class="hover-physics bg-white dark:bg-darkSurface border border-gray-100 dark:border-white/5 rounded-2xl flex flex-col relative group overflow-hidden shadow-sm hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,240,255,0.1)] hover:border-neonCyan transition-all duration-300">
@@ -339,6 +344,15 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        function setSubcategory(subcat) {
+            currentSubcategory = subcat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition";
+            });
+            event.target.className = "cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_15px_rgba(0,240,255,0.3)]";
+            renderProducts();
         }
 
         // QUICK VIEW MODAL LOGIC
@@ -376,15 +390,6 @@
 
         function closeProductModal() {
             document.getElementById('detailModal').classList.add('hidden');
-        }
-
-        function setCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]";
-            });
-            event.target.className = "cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_15px_rgba(0,240,255,0.3)]";
-            renderProducts();
         }
 
         function addToCart(id) {
