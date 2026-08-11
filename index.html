@@ -91,16 +91,26 @@
         Premium Digital Assets • Instant Access Worldwide
     </div>
 
-    <!-- Header -->
+    <!-- Header with Search Bar -->
     <header class="glass-header bg-white/80 dark:bg-darkBg/80 border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-4 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2 md:gap-3 group">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-4 flex items-center justify-between gap-4">
+            <a href="#" class="flex items-center gap-2 md:gap-3 group shrink-0">
                 <img src="logo.png" onerror="this.style.display='none'; document.getElementById('backup-icon').style.display='block';" alt="Kingly Logo" class="h-6 md:h-10 invert dark:invert-0 drop-shadow-md transition-transform duration-500 group-hover:scale-110">
                 <i id="backup-icon" class="fas fa-crown text-xl md:text-3xl text-darkText dark:text-white hidden"></i>
                 <span class="brand-text text-base md:text-2xl font-bold tracking-widest text-darkText dark:text-white group-hover:text-neonCyan transition-colors">KINGLY</span>
             </a>
             
-            <div class="flex items-center gap-3 md:gap-6">
+            <!-- Live Search Bar -->
+            <div class="flex-1 max-w-md mx-4 hidden md:block">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
+                        <i class="fas fa-search text-xs"></i>
+                    </span>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="SEARCH BOOKS, AUTHORS, GENRES..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-4 py-2 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 md:gap-6 shrink-0">
                 <button onclick="toggleTheme()" class="text-gray-500 hover:text-neonCyan dark:text-gray-400 dark:hover:text-neonCyan transition-colors text-base md:text-lg p-1">
                     <i id="theme-icon" class="fas fa-moon"></i>
                 </button>
@@ -111,6 +121,15 @@
                     </div>
                     <span id="cartCount" class="absolute -top-1 -right-1 bg-neonPurple text-white text-[9px] md:text-[10px] font-bold w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center shadow-sm">0</span>
                 </button>
+            </div>
+        </div>
+        <!-- Mobile Search Bar Row -->
+        <div class="px-4 pb-3 md:hidden">
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
+                    <i class="fas fa-search text-xs"></i>
+                </span>
+                <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="SEARCH BOOKS & AUTHORS..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-4 py-2 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
             </div>
         </div>
     </header>
@@ -173,21 +192,21 @@
 
     <!-- Product Grid Section with Subcategory Filters -->
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-24 flex-1 w-full" id="products">
-        <div class="flex flex-col md:flex-row items-center justify-between mb-16">
-            <h2 class="text-2xl md:text-3xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white mb-6 md:mb-0 drop-shadow-sm">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-16 gap-6">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white drop-shadow-sm">
                 <i class="fas fa-book text-neonCyan mr-3"></i> Featured Catalog
             </h2>
             
             <!-- Dynamic Subcategory Navigation Bar -->
             <div class="flex space-x-3 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
-                <button onclick="setSubcategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg">All</button>
-                <button onclick="setSubcategory('Kids')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Kids</button>
-                <button onclick="setSubcategory('Comic')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Comics</button>
-                <button onclick="setSubcategory('Manga')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Manga</button>
-                <button onclick="setSubcategory('Manhwa')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Manhwa</button>
-                <button onclick="setSubcategory('Psychology')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Psychology</button>
-                <button onclick="setSubcategory('Novels')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Novels</button>
-                <button onclick="setSubcategory('Real Life')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition">Real Life</button>
+                <button onclick="setSubcategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg shrink-0">All</button>
+                <button onclick="setSubcategory('Kids')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Kids</button>
+                <button onclick="setSubcategory('Comic')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Comics</button>
+                <button onclick="setSubcategory('Manga')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Manga</button>
+                <button onclick="setSubcategory('Manhwa')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Manhwa</button>
+                <button onclick="setSubcategory('Psychology')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Psychology</button>
+                <button onclick="setSubcategory('Novels')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Novels</button>
+                <button onclick="setSubcategory('Real Life')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Real Life</button>
             </div>
         </div>
 
@@ -271,6 +290,7 @@
         let products = [];
         let cart = [];
         let currentSubcategory = 'all';
+        let searchQuery = '';
 
         const INVENTORY_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vROK0zqCUUDJluKB8BsGeWO5lACQWi-_UKCmlUk4nO_S6cfxKGaJXvHN4otjG-Qc_oZLcPUD0EPV-7k/pub?output=csv";
 
@@ -307,9 +327,35 @@
         
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
+        // Live Search Handlers
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+            document.getElementById('mobileSearchInput').value = searchQuery; // sync both inputs
+            renderProducts();
+        }
+
+        function handleMobileSearch() {
+            searchQuery = document.getElementById('mobileSearchInput').value.toLowerCase().trim();
+            document.getElementById('searchInput').value = searchQuery; // sync both inputs
+            renderProducts();
+        }
+
         function renderProducts() {
             const grid = document.getElementById('productGrid');
-            const filtered = products.filter(p => currentSubcategory === 'all' || p.subcategory === currentSubcategory);
+            
+            // Filter by Subcategory and Search Query simultaneously
+            const filtered = products.filter(p => {
+                const matchesSubcat = currentSubcategory === 'all' || (p.subcategory && p.subcategory.toLowerCase() === currentSubcategory.toLowerCase());
+                const matchesSearch = !searchQuery || 
+                    (p.name && p.name.toLowerCase().includes(searchQuery)) || 
+                    (p.authors && p.authors.toLowerCase().includes(searchQuery));
+                return matchesSubcat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest text-xs">No books found matching your search.</div>`;
+                return;
+            }
 
             grid.innerHTML = filtered.map(p => `
                 <div class="hover-physics bg-white dark:bg-darkSurface border border-gray-100 dark:border-white/5 rounded-2xl flex flex-col relative group overflow-hidden shadow-sm hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,240,255,0.1)] hover:border-neonCyan transition-all duration-300">
@@ -349,9 +395,9 @@
         function setSubcategory(subcat) {
             currentSubcategory = subcat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition";
+                btn.className = "cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0";
             });
-            event.target.className = "cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_15px_rgba(0,240,255,0.3)]";
+            event.target.className = "cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-[0_4px_15px_rgba(0,240,255,0.3)] shrink-0";
             renderProducts();
         }
 
@@ -510,7 +556,7 @@
 
                 document.getElementById('checkoutForm').innerHTML = `
                     <div class="text-center py-6">
-                        <div class="w-14 h-14 bg-green-100 dark:bg-neonCyan/10 border border-green-500 dark:border-neonCyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(0,240,255,0.2)]">
+                        <div class="w-14 h-14 bg-green-100 dark:bg-neonCyan/10 border border-green-500 dark:bg-neonCyan rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(0,240,255,0.2)]">
                             <i class="fas fa-check text-green-500 dark:text-neonCyan text-2xl"></i>
                         </div>
                         <h3 class="font-bold text-sm text-darkText dark:text-white uppercase tracking-[0.2em] mb-1">Access Granted</h3>
