@@ -320,13 +320,15 @@
                 results.data.forEach(p => {
                     if (p.id && p.name) {
                         if (p.price === undefined || p.price === null || p.price === "") {
-    let hash = 0;
-    for (let i = 0; i < p.id.length; i++) hash += p.id.charCodeAt(i);
-    p.price = 99 + (hash % 300);
-    p.originalPrice = 499 + (hash % 1000);
-} else {
-    p.price = Number(p.price);
-}
+                            let hash = 0;
+                            for (let i = 0; i < p.id.length; i++) hash += p.id.charCodeAt(i);
+                            p.price = 99 + (hash % 300);
+                            p.originalPrice = 499 + (hash % 1000);
+                        } else {
+                            p.price = Number(p.price);
+                        }
+                        uniqueMap.set(p.id, p);
+                    }
                 });
                 products = Array.from(uniqueMap.values());
                 renderProducts();
