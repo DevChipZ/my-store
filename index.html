@@ -262,7 +262,7 @@
         
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // Render Dynamic Products
+        // Render Dynamic Products with "Buy Now" Option
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const filtered = products.filter(p => currentCategory === 'all' || p.category === currentCategory);
@@ -282,9 +282,14 @@
                                 <span class="text-[10px] font-semibold line-through text-gray-400">₹${p.originalPrice}</span>
                             </div>
                         </div>
-                        <button onclick="addToCart(${p.id})" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-darkText dark:text-white rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition-all duration-300 shadow-sm">
-                            Add to Bag
-                        </button>
+                        <div class="flex gap-2">
+                            <button onclick="addToCart('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-darkText dark:text-white rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition-all duration-300 shadow-sm">
+                                Add to Bag
+                            </button>
+                            <button onclick="buyNow('${p.id}')" class="flex-1 bg-darkText dark:bg-white text-white dark:text-darkBg rounded-lg text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition-all duration-300 shadow-sm">
+                                Buy Now
+                            </button>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -306,6 +311,11 @@
             if (existing) existing.qty++;
             else cart.push({ ...item, qty: 1 });
             updateCart();
+            toggleCart(true);
+        }
+
+        function buyNow(id) {
+            addToCart(id);
             toggleCart(true);
         }
 
@@ -333,9 +343,9 @@
                         <p class="text-[10px] font-bold text-gray-500 dark:text-neonCyan mt-1">₹${item.price}</p>
                         <div class="flex items-center gap-3 mt-2">
                             <div class="flex items-center border border-gray-200 dark:border-white/10 rounded bg-gray-50 dark:bg-white/5">
-                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan transition-colors"><i class="fas fa-minus text-[8px]"></i></button>
+                                <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan transition-colors"><i class="fas fa-minus text-[8px]"></i></button>
                                 <span class="text-[10px] font-bold w-6 text-center text-darkText dark:text-white">${item.qty}</span>
-                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan transition-colors"><i class="fas fa-plus text-[8px]"></i></button>
+                                <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-neonCyan transition-colors"><i class="fas fa-plus text-[8px]"></i></button>
                             </div>
                         </div>
                     </div>
