@@ -29,11 +29,16 @@
                     },
                     animation: {
                         'slide-infinite': 'slide 40s linear infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite alternate',
                     },
                     keyframes: {
                         slide: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' }
+                        },
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(0,240,255,0.2)' },
+                            '100%': { boxShadow: '0 0 35px rgba(138,43,226,0.6)' }
                         }
                     }
                 }
@@ -50,27 +55,29 @@
         body { font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         h1, h2, .brand-text { font-family: 'Syncopate', sans-serif; }
         .glass-header { backdrop-filter: blur(16px); transition: all 0.4s ease; }
+        
         .hover-physics { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .hover-physics:hover { transform: translateY(-8px) scale(1.02); }
+        .hover-physics:hover { transform: translateY(-10px) scale(1.03) rotate(0.5deg); }
 
         .neon-btn {
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 240, 255, 0.25);
         }
         .neon-btn::before {
             content: '';
             position: absolute;
             top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: all 0.5s ease;
         }
         .neon-btn:hover::before { left: 100%; }
         .neon-btn:hover {
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6), 0 0 40px rgba(138, 43, 226, 0.4);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.7), 0 0 50px rgba(138, 43, 226, 0.5);
             transform: scale(1.05);
         }
+        
         .slider-mask {
             mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -83,7 +90,7 @@
 <body class="bg-gray-50 dark:bg-darkBg text-darkText dark:text-gray-100 min-h-screen flex flex-col selection:bg-neonCyan selection:text-black overflow-x-hidden">
 
     <div class="bg-gradient-to-r from-neonCyan to-neonPurple text-white text-[10px] uppercase tracking-[0.3em] py-2.5 text-center font-extrabold shadow-md z-50 relative">
-        Premium Digital Assets • Instant Access Worldwide
+        ⚡ Premium Digital Assets • Instant Access Worldwide • Use Code: REALITY2026
     </div>
 
     <!-- Header with Search Bar -->
@@ -101,7 +108,7 @@
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
                         <i class="fas fa-search text-xs"></i>
                     </span>
-                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="SEARCH BOOKS, AUTHORS, GENRES..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-10 py-2 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="SEARCH 1000+ DIGITAL BOOKS..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-10 py-2.5 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition shadow-inner">
                     <button id="clearSearchBtn" onclick="clearSearch()" class="absolute right-3 text-gray-400 hover:text-neonCyan hidden text-xs p-1">
                         <i class="fas fa-times"></i>
                     </button>
@@ -109,6 +116,11 @@
             </div>
 
             <div class="flex items-center gap-3 md:gap-6 shrink-0">
+                <!-- Vault Roulette Interactive Button -->
+                <button onclick="triggerRoulette()" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-neonCyan/10 to-neonPurple/10 border border-neonCyan/40 hover:border-neonCyan text-neonCyan px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition animate-pulse-glow">
+                    <i class="fas fa-dice text-xs"></i> Vault Roulette
+                </button>
+
                 <button onclick="toggleTheme()" class="text-gray-500 hover:text-neonCyan dark:text-gray-400 dark:hover:text-neonCyan transition-colors text-base md:text-lg p-1">
                     <i id="theme-icon" class="fas fa-moon"></i>
                 </button>
@@ -127,7 +139,7 @@
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-gray-400">
                     <i class="fas fa-search text-xs"></i>
                 </span>
-                <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="SEARCH BOOKS & AUTHORS..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-10 py-2 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
+                <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="SEARCH BOOKS & AUTHORS..." class="w-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full pl-10 pr-10 py-2.5 text-xs font-semibold tracking-wider text-darkText dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
                 <button id="clearMobileSearchBtn" onclick="clearSearch()" class="absolute right-3 text-gray-400 hover:text-neonCyan hidden text-xs p-1">
                     <i class="fas fa-times"></i>
                 </button>
@@ -136,7 +148,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-gray-200 dark:border-white/10">
+    <section class="relative h-[85vh] flex items-center justify-center overflow-hidden border-b border-gray-200 dark:border-white/10">
         <div class="absolute inset-0 z-0 slider-mask pointer-events-none opacity-[0.07] dark:opacity-[0.15] mix-blend-luminosity flex items-center">
             <div class="flex gap-8 w-[200%] animate-slide-infinite">
                 <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" class="h-64 object-contain rounded-3xl">
@@ -146,55 +158,66 @@
             </div>
         </div>
 
-        <div class="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-neonCyan/10 dark:bg-neonCyan/20 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-neonPurple/10 dark:bg-neonPurple/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-neonCyan/10 dark:bg-neonCyan/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-neonPurple/10 dark:bg-neonPurple/20 rounded-full blur-[120px] pointer-events-none"></div>
         
-        <div class="relative z-10 text-center px-4">
-            <span class="inline-block py-1.5 px-5 border border-neonPurple/30 text-neonPurple dark:text-neonCyan text-[10px] font-bold tracking-[0.3em] uppercase mb-8 bg-purple-50/50 dark:bg-white/5 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(138,43,226,0.2)]">The Digital Library</span>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <span class="inline-block py-1.5 px-6 border border-neonPurple/40 text-neonPurple dark:text-neonCyan text-[10px] font-bold tracking-[0.3em] uppercase mb-8 bg-purple-50/50 dark:bg-white/5 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(138,43,226,0.3)]">
+                ✨ Next-Gen Interactive Digital Library
+            </span>
             <h1 class="text-5xl md:text-7xl font-black tracking-widest leading-tight mb-6 uppercase text-darkText dark:text-white drop-shadow-lg">
                 Rule Your <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan to-neonPurple">Reality.</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan via-neonPurple to-pink-500 animate-pulse">Reality.</span>
             </h1>
             <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base mb-10 max-w-lg mx-auto font-medium tracking-wide">
-                Verified digital titles, public domain drops, and curated ebooks.
+                Instantly search through thousands of verified ebooks, manga, law, and religious manuscripts.
             </p>
-            <button onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})" class="neon-btn bg-white dark:bg-darkBg text-darkText dark:text-white border-2 border-neonCyan font-bold px-12 py-4 uppercase text-xs tracking-widest rounded-full cursor-pointer">
-                Enter The Collection
-            </button>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})" class="neon-btn bg-white dark:bg-darkBg text-darkText dark:text-white border-2 border-neonCyan font-bold px-10 py-4 uppercase text-xs tracking-widest rounded-full cursor-pointer">
+                    Explore Catalog
+                </button>
+                <button onclick="triggerRoulette()" class="neon-btn bg-neonPurple text-white font-bold px-10 py-4 uppercase text-xs tracking-widest rounded-full cursor-pointer shadow-lg">
+                    🎲 Random Vault Pick
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- Trust Badges -->
     <div class="bg-white dark:bg-darkSurface border-b border-gray-100 dark:border-white/5 relative z-10 shadow-sm transition-colors duration-400">
-        <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100 dark:divide-white/5">
+        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100 dark:divide-white/5">
             <div class="px-2 group cursor-default">
-                <i class="fas fa-crown text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Premium Tier</h4>
+                <i class="fas fa-crown text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-3 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200">Premium Tier</h4>
             </div>
             <div class="px-2 group cursor-default">
-                <i class="fas fa-bolt text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Instant Delivery</h4>
+                <i class="fas fa-bolt text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-3 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200">Instant Delivery</h4>
             </div>
             <div class="px-2 group cursor-default">
-                <i class="fas fa-shield-alt text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Verified Sources</h4>
+                <i class="fas fa-shield-alt text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonCyan transition-all duration-300 mb-3 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200">Verified Sources</h4>
             </div>
             <div class="px-2 group cursor-default">
-                <i class="fas fa-infinity text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-4 group-hover:-translate-y-2"></i>
-                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200 mb-1">Lifetime Access</h4>
+                <i class="fas fa-infinity text-3xl text-gray-300 dark:text-white/20 group-hover:text-neonPurple transition-all duration-300 mb-3 group-hover:-translate-y-2"></i>
+                <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-darkText dark:text-gray-200">Lifetime Access</h4>
             </div>
         </div>
     </div>
 
     <!-- Product Grid Section with Subcategory Filters -->
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-20 flex-1 w-full" id="products">
-        <div class="mb-10 text-center md:text-left">
-            <h2 class="text-3xl md:text-4xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white drop-shadow-sm">
-                <i class="fas fa-book text-neonCyan mr-3"></i> Featured Catalog
-            </h2>
-            <p class="text-xs uppercase tracking-widest text-gray-400 mt-2 font-semibold">Showing curated selections. Use search above to find specific titles across our entire database.</p>
+        <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white drop-shadow-sm">
+                    <i class="fas fa-book text-neonCyan mr-3"></i> Featured Catalog
+                </h2>
+                <p class="text-xs uppercase tracking-widest text-gray-400 mt-2 font-semibold">Showing curated selections (24 items). Type a title above to search all database records.</p>
+            </div>
+            <span id="resultCount" class="text-xs font-mono text-neonCyan uppercase tracking-widest bg-darkSurface px-4 py-2 rounded-full border border-white/10 self-start md:self-auto"></span>
         </div>
         
+        <!-- Clean Interactive Subcategory Filter Bar -->
         <div class="flex space-x-3 overflow-x-auto pb-4 mb-12 w-full scrollbar-none">
             <button onclick="setSubcategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg shrink-0">Featured Drop (24)</button>
             <button onclick="setSubcategory('featured')" class="cat-btn bg-white dark:bg-darkSurface border border-neonCyan/40 text-neonCyan hover:bg-neonCyan hover:text-black px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">⭐️ Premium & Limited</button>
@@ -211,6 +234,68 @@
 
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"></div>
     </main>
+
+    <!-- UNIQUE INTERACTIVE FOOTER (FUN & PLAYFUL) -->
+    <footer class="bg-darkSurface border-t border-white/10 text-gray-400 pt-16 pb-12 mt-20 relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-neonCyan/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-neonPurple/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10 mb-12">
+            <!-- Col 1: Brand & Vibe -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-crown text-2xl text-neonCyan"></i>
+                    <span class="brand-text text-xl font-bold tracking-widest text-white">KINGLY</span>
+                </div>
+                <p class="text-xs leading-relaxed text-gray-400">
+                    The ultimate decentralized hub for high-grade digital reading assets, curated drops, and instant global access.
+                </p>
+                <div class="flex items-center gap-3 pt-2">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-ping"></span>
+                    <span class="text-[10px] font-mono uppercase tracking-widest text-green-400">Systems Online & Synchronized</span>
+                </div>
+            </div>
+
+            <!-- Col 2: Quick Navigation -->
+            <div>
+                <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-4">Quick Portals</h4>
+                <ul class="space-y-2.5 text-xs font-medium">
+                    <li><a href="#products" onclick="setSubcategory('all')" class="hover:text-neonCyan transition">Featured Collection</a></li>
+                    <li><a href="#products" onclick="setSubcategory('featured')" class="hover:text-neonCyan transition">⭐️ Premium & Limited</a></li>
+                    <li><a href="#products" onclick="setSubcategory('Manga')" class="hover:text-neonCyan transition">Manga & Manhwa Vault</a></li>
+                    <li><a href="#products" onclick="setSubcategory('Law')" class="hover:text-neonCyan transition">Law & Manuscripts</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Interactive Terminal Widget -->
+            <div>
+                <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-4">Terminal Console</h4>
+                <div class="bg-black/60 border border-white/10 rounded-xl p-3 text-[11px] font-mono space-y-2 shadow-inner">
+                    <div class="text-neonCyan">&gt; kingly_cli v2.4 initialized</div>
+                    <div id="terminalOutput" class="text-gray-300">Type a command or click a button below:</div>
+                    <div class="flex gap-2 pt-1">
+                        <button onclick="runCliCommand('discount')" class="bg-white/5 hover:bg-neonCyan hover:text-black px-2 py-1 rounded text-[9px] uppercase transition border border-white/10">/discount</button>
+                        <button onclick="runCliCommand('secret')" class="bg-white/5 hover:bg-neonPurple hover:text-white px-2 py-1 rounded text-[9px] uppercase transition border border-white/10">/secret</button>
+                        <button onclick="runCliCommand('clear')" class="bg-white/5 hover:bg-red-500 hover:text-white px-2 py-1 rounded text-[9px] uppercase transition border border-white/10">/clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Col 4: Interactive Easter Egg -->
+            <div>
+                <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-4">Security Protocol</h4>
+                <p class="text-xs text-gray-400 mb-4">Test system integrity by triggering our emergency neon pulse.</p>
+                <button onclick="triggerNeonPulse()" class="neon-btn w-full bg-white/5 border border-neonCyan/40 text-neonCyan hover:bg-neonCyan hover:text-black font-bold py-3 text-xs uppercase tracking-widest rounded-xl transition">
+                    Pulse Grid <i class="fas fa-bolt ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-8 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-500">
+            <p>&copy; 2026 KINGLY Assets. All rights reserved. Built for absolute speed.</p>
+            <p class="mt-4 md:mt-0 text-neonCyan">Encrypted Connection • Local Node Active</p>
+        </div>
+    </footer>
 
     <!-- BOOK DETAILS / QUICK VIEW MODAL -->
     <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
@@ -338,6 +423,36 @@
         
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
+        // Playful Footer Terminal Logic
+        function runCliCommand(cmd) {
+            const out = document.getElementById('terminalOutput');
+            if (cmd === 'discount') {
+                out.innerHTML = `<span class="text-green-400">SUCCESS: Use code REALITY2026 for instant 25% checkout reduction!</span>`;
+            } else if (cmd === 'secret') {
+                out.innerHTML = `<span class="text-neonPurple">EASTER EGG UNLOCKED: You found the developer mainframe frequency!</span>`;
+            } else {
+                out.innerHTML = `Type a command or click a button below:`;
+            }
+        }
+
+        function triggerNeonPulse() {
+            document.body.classList.toggle('ring-4');
+            document.body.classList.toggle('ring-neonCyan');
+            setTimeout(() => {
+                document.body.classList.remove('ring-4', 'ring-neonCyan');
+            }, 1000);
+        }
+
+        // Unique Feature: Vault Roulette
+        function triggerRoulette() {
+            if (products.length === 0) {
+                alert("Vault is still syncing with Google Sheets. Please wait a second!");
+                return;
+            }
+            const randomBook = products[Math.floor(Math.random() * products.length)];
+            openProductModal(randomBook.id);
+        }
+
         function handleSearch() {
             const input = document.getElementById('searchInput');
             searchQuery = input.value.toLowerCase().trim();
@@ -383,11 +498,12 @@
 
         function renderProducts() {
             const grid = document.getElementById('productGrid');
+            const countEl = document.getElementById('resultCount');
             
             let filtered = products.filter(p => {
                 let matchesSubcat = true;
                 if (currentSubcategory === 'all') {
-                    matchesSubcat = true; // Will be capped to 24 items below for clean homepage view
+                    matchesSubcat = true;
                 } else if (currentSubcategory === 'featured') {
                     matchesSubcat = p.badge && (p.badge.toLowerCase() === 'premium' || p.badge.toLowerCase() === 'limited');
                 } else {
@@ -400,9 +516,12 @@
                 return matchesSubcat && matchesSearch;
             });
 
-            // If user is on 'all' and NOT actively searching, limit display to 24 books for a clean homepage
+            // Cap initial homepage view to 24 items if not searching
             if (currentSubcategory === 'all' && !searchQuery) {
                 filtered = filtered.slice(0, 24);
+                countEl.innerText = `Showing 24 / ${products.length} Loaded Assets`;
+            } else {
+                countEl.innerText = `${filtered.length} Matching Results`;
             }
 
             if (filtered.length === 0) {
@@ -411,7 +530,7 @@
             }
 
             grid.innerHTML = filtered.map(p => `
-                <div class="hover-physics bg-white dark:bg-darkSurface border border-gray-100 dark:border-white/5 rounded-2xl flex flex-col relative group overflow-hidden shadow-sm hover:shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_15px_30px_rgba(0,240,255,0.1)] hover:border-neonCyan transition-all duration-300">
+                <div class="hover-physics bg-white dark:bg-darkSurface border border-gray-100 dark:border-white/5 rounded-2xl flex flex-col relative group overflow-hidden shadow-sm hover:shadow-[0_15px_30px_rgba(0,240,255,0.15)] hover:border-neonCyan transition-all duration-300">
                     ${p.badge ? `<div class="absolute top-4 left-4 bg-gradient-to-r from-neonCyan to-neonPurple text-white px-3 py-1.5 rounded text-[9px] font-black uppercase tracking-[0.2em] z-10 shadow-lg">${p.badge}</div>` : ''}
                     
                     <div class="relative overflow-hidden aspect-[4/5] bg-gray-50 dark:bg-black cursor-pointer" onclick="openProductModal('${p.id}')">
