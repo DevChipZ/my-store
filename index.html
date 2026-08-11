@@ -192,12 +192,12 @@
             <h2 class="text-3xl md:text-4xl font-bold tracking-[0.2em] uppercase text-darkText dark:text-white drop-shadow-sm">
                 <i class="fas fa-book text-neonCyan mr-3"></i> Featured Catalog
             </h2>
-            <p class="text-xs uppercase tracking-widest text-gray-400 mt-2 font-semibold">Explore curated tiers & genre collections</p>
+            <p class="text-xs uppercase tracking-widest text-gray-400 mt-2 font-semibold">Showing curated selections. Use search above to find specific titles across our entire database.</p>
         </div>
         
         <div class="flex space-x-3 overflow-x-auto pb-4 mb-12 w-full scrollbar-none">
-            <button onclick="setSubcategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg shrink-0">All Books</button>
-            <button onclick="setSubcategory('featured')" class="cat-btn bg-white dark:bg-darkSurface border border-neonCyan/40 text-neonCyan hover:bg-neonCyan hover:text-black px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">⭐️ Featured (Premium & Limited)</button>
+            <button onclick="setSubcategory('all')" class="cat-btn bg-darkText dark:bg-white text-white dark:text-darkBg px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shadow-lg shrink-0">Featured Drop (24)</button>
+            <button onclick="setSubcategory('featured')" class="cat-btn bg-white dark:bg-darkSurface border border-neonCyan/40 text-neonCyan hover:bg-neonCyan hover:text-black px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">⭐️ Premium & Limited</button>
             <button onclick="setSubcategory('Kids')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Kids</button>
             <button onclick="setSubcategory('Comic')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Comics</button>
             <button onclick="setSubcategory('Manga')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Manga</button>
@@ -205,6 +205,8 @@
             <button onclick="setSubcategory('Psychology')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Psychology</button>
             <button onclick="setSubcategory('Novels')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Novels</button>
             <button onclick="setSubcategory('Real Life')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Real Life</button>
+            <button onclick="setSubcategory('Law')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Law</button>
+            <button onclick="setSubcategory('Religion')" class="cat-btn bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-neonCyan hover:text-neonCyan px-5 py-3 text-xs font-bold uppercase tracking-widest rounded-full transition shrink-0">Religious</button>
         </div>
 
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"></div>
@@ -296,11 +298,9 @@
             header: true,
             dynamicTyping: true,
             complete: function(results) {
-                // Deduplicate items by ID on the frontend just in case, ensuring consistent pricing
                 const uniqueMap = new Map();
                 results.data.forEach(p => {
                     if (p.id && p.name) {
-                        // Make prices strictly consistent using the book's ID string length/hash
                         if (!p.price) {
                             let hash = 0;
                             for (let i = 0; i < p.id.length; i++) hash += p.id.charCodeAt(i);
@@ -338,7 +338,6 @@
         
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // Live Search Handlers with 'X' Clear Button toggle
         function handleSearch() {
             const input = document.getElementById('searchInput');
             searchQuery = input.value.toLowerCase().trim();
@@ -385,10 +384,10 @@
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             
-            const filtered = products.filter(p => {
+            let filtered = products.filter(p => {
                 let matchesSubcat = true;
                 if (currentSubcategory === 'all') {
-                    matchesSubcat = true;
+                    matchesSubcat = true; // Will be capped to 24 items below for clean homepage view
                 } else if (currentSubcategory === 'featured') {
                     matchesSubcat = p.badge && (p.badge.toLowerCase() === 'premium' || p.badge.toLowerCase() === 'limited');
                 } else {
@@ -401,8 +400,13 @@
                 return matchesSubcat && matchesSearch;
             });
 
+            // If user is on 'all' and NOT actively searching, limit display to 24 books for a clean homepage
+            if (currentSubcategory === 'all' && !searchQuery) {
+                filtered = filtered.slice(0, 24);
+            }
+
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest text-xs">No books found matching your search.</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest text-xs">No books found matching your search. Try typing a keyword above!</div>`;
                 return;
             }
 
