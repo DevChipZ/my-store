@@ -55,7 +55,9 @@
         body { font-family: 'Space Grotesk', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         h1, h2, .brand-text { font-family: 'Syncopate', sans-serif; }
         .glass-panel { background: rgba(13, 13, 18, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-        .glass-header { background: rgba(3, 3, 5, 0.85); backdrop-filter: blur(20px); }
+        
+        /* Fixed Header Transparency */
+        .glass-header { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: background-color 0.4s ease; }
         
         .card-physics { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .card-physics:hover { transform: translateY(-8px) scale(1.02); }
@@ -79,7 +81,7 @@
         }
         
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #030305; }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #00F0FF; border-radius: 10px; }
     </style>
 </head>
@@ -91,7 +93,7 @@
     </div>
 
     <!-- Header Navigation -->
-    <header class="glass-header border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
+    <header class="glass-header bg-white/90 dark:bg-[#030305]/85 border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-4">
             <a href="#" class="flex items-center gap-3 group shrink-0">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-neonCyan to-neonPurple flex items-center justify-center shadow-lg group-hover:scale-105 transition">
@@ -114,7 +116,7 @@
             </div>
 
             <div class="flex items-center gap-3 md:gap-5 shrink-0">
-                <button onclick="openContactModal()" class="hidden sm:flex items-center gap-2 bg-white/5 border border-white/15 hover:border-neonCyan text-gray-300 hover:text-neonCyan px-4 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition">
+                <button onclick="openContactModal()" class="hidden sm:flex items-center gap-2 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/15 hover:border-neonCyan text-gray-700 dark:text-gray-300 hover:text-neonCyan px-4 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition">
                     <i class="fas fa-headset text-xs"></i> Support
                 </button>
 
@@ -122,15 +124,8 @@
                     <i class="fas fa-dice text-xs"></i> Vault Roulette
                 </button>
 
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/15 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-neonCyan transition">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-2xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/15 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-neonCyan transition">
                     <i id="theme-icon" class="fas fa-moon text-sm"></i>
-                </button>
-
-                <button onclick="toggleCart()" class="relative flex items-center group">
-                    <div class="w-10 h-10 rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/15 flex items-center justify-center text-gray-700 dark:text-gray-300 group-hover:text-neonCyan group-hover:border-neonCyan transition">
-                        <i class="fas fa-shopping-bag text-sm"></i>
-                    </div>
-                    <span id="cartCount" class="absolute -top-1 -right-1 bg-neonPurple text-white text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center shadow-md">0</span>
                 </button>
             </div>
         </div>
@@ -181,7 +176,6 @@
                 <p class="text-[11px] uppercase tracking-widest text-gray-500 mt-2 font-semibold">Select a category or query the database directly.</p>
             </div>
             
-            <!-- Cyber Matrix Interactive Badge -->
             <button onclick="scrambleMatrixText()" id="matrixWidget" class="group flex items-center gap-3 bg-white dark:bg-darkSurface border border-gray-200 dark:border-white/10 hover:border-neonCyan px-4 py-2.5 rounded-2xl text-[10px] font-mono uppercase tracking-widest text-neonCyan transition shadow-sm self-start md:self-auto cursor-pointer">
                 <i class="fas fa-terminal text-neonPurple group-hover:rotate-180 transition-transform duration-500"></i>
                 <span id="matrixText">SYS_READY // CLICK TO HACK</span>
@@ -248,7 +242,7 @@
         </div>
         <div class="max-w-7xl mx-auto px-4 md:px-8 pt-8 border-t border-gray-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-500">
             <p>&copy; 2026 KINGLY Assets. All rights reserved.</p>
-            <p class="mt-4 md:mt-0 text-neonCyan">Encrypted Connection • WhatsApp Gateway Active</p>
+            <p class="mt-4 md:mt-0 text-neonCyan">Encrypted Connection • Gumroad Gateway Active</p>
         </div>
     </footer>
 
@@ -302,7 +296,6 @@
                         <h2 id="modalTitle" class="text-xl md:text-2xl font-bold uppercase tracking-wider text-white mb-2 drop-shadow-md"></h2>
                         <p id="modalAuthor" class="text-xs font-bold text-neonPurple dark:text-neonCyan tracking-widest uppercase mb-4"></p>
                         <div class="flex items-baseline gap-3 mb-6">
-                            <!-- High contrast pure white text for price -->
                             <span id="modalPrice" class="text-2xl font-black text-white drop-shadow-sm"></span>
                             <span id="modalOriginalPrice" class="text-xs line-through text-gray-400 font-bold"></span>
                         </div>
@@ -317,35 +310,8 @@
         </div>
     </div>
 
-    <!-- Cart Drawer Modal -->
-    <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none">
-        <div class="backdrop-blur-sm absolute inset-0 bg-black/60 pointer-events-auto transition-opacity" onclick="toggleCart()"></div>
-        <div class="cart-drawer absolute right-0 top-0 bottom-0 w-full max-w-md bg-white dark:bg-darkSurface shadow-2xl flex flex-col pointer-events-auto translate-x-full border-l border-gray-200 dark:border-white/10 transition-transform duration-500 ease-in-out">
-            <div class="px-6 py-6 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
-                <h2 class="font-bold text-sm uppercase tracking-[0.2em] text-gray-900 dark:text-white">Your Vault Bag</h2>
-                <button onclick="toggleCart()" class="text-gray-400 hover:text-neonCyan bg-gray-100 dark:bg-white/5 rounded-full transition w-8 h-8 flex items-center justify-center"><i class="fas fa-times text-lg"></i></button>
-            </div>
-            <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
-            <div class="p-6 border-t border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-darkBg">
-                <div class="flex justify-between font-bold text-lg mb-6 uppercase tracking-widest">
-                    <span class="text-gray-500 text-xs mt-1">Subtotal</span>
-                    <span id="cartTotal" class="text-gray-900 dark:text-white">₹0</span>
-                </div>
-                <div id="checkoutForm" class="space-y-4">
-                    <input type="text" id="custName" placeholder="FULL NAME" class="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-3.5 text-xs tracking-widest text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
-                    <input type="tel" id="custPhone" placeholder="WHATSAPP NUMBER" class="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-3.5 text-xs tracking-widest text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition uppercase">
-                    
-                    <button onclick="submitOrder()" class="cyber-btn w-full bg-gray-900 dark:bg-white text-white dark:text-black font-bold tracking-[0.2em] py-4 text-xs uppercase mt-2 rounded-2xl border-none hover:bg-neonCyan hover:text-black">
-                        Proceed to WhatsApp Checkout <i class="fab fa-whatsapp ml-2 text-base"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         let products = [];
-        let cart = [];
         let currentSubcategory = 'all';
         let searchQuery = '';
 
@@ -375,7 +341,6 @@
             }
         });
 
-        // Contact Support Modal Controllers
         function openContactModal() {
             document.getElementById('contactModal').classList.remove('hidden');
         }
@@ -474,6 +439,14 @@
             renderProducts();
         }
 
+        function buyNow(link) {
+            if (!link || link === 'undefined' || link === 'null' || link.trim() === '') {
+                alert("Gumroad link not yet configured for this asset! Please add it to your Google Sheet.");
+                return;
+            }
+            window.open(link, '_blank');
+        }
+
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             
@@ -510,8 +483,8 @@
                             </div>
                         </div>
                         <div class="flex gap-2.5">
-                            <button onclick="addToCart('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 group-hover:bg-neonCyan group-hover:border-neonCyan group-hover:text-black transition shadow-sm">Add</button>
-                            <button onclick="buyNow('${p.id}')" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm">Buy Now</button>
+                            <button onclick="openProductModal('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:border-neonCyan transition shadow-sm">Details</button>
+                            <button onclick="buyNow('${p.gumroad_link}')" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm">Buy Now</button>
                         </div>
                     </div>
                 </div>
@@ -539,125 +512,15 @@
             document.getElementById('modalDesc').innerText = p.description || 'No overview provided.';
             
             document.getElementById('modalActionBtns').innerHTML = `
-                <button onclick="addToCart('${p.id}'); closeProductModal();" class="flex-1 bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:bg-neonCyan hover:text-black transition">Add to Bag</button>
-                <button onclick="buyNow('${p.id}'); closeProductModal();" class="flex-1 bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl hover:opacity-90 transition shadow-lg">Buy Now</button>
+                <button onclick="buyNow('${p.gumroad_link}')" class="w-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2">
+                    Secure Checkout <i class="fas fa-lock"></i>
+                </button>
             `;
             document.getElementById('detailModal').classList.remove('hidden');
         }
 
         function closeProductModal() { document.getElementById('detailModal').classList.add('hidden'); }
 
-        function addToCart(id) {
-            const item = products.find(p => String(p.id) === String(id));
-            if (!item) return;
-            const existing = cart.find(c => String(c.id) === String(id));
-            if (existing) existing.qty++; else cart.push({ ...item, qty: 1 });
-            updateCart();
-            toggleCart(true);
-        }
-
-        function buyNow(id) { addToCart(id); toggleCart(true); }
-
-        function updateCart() {
-            const container = document.getElementById('cartItems');
-            const totalEl = document.getElementById('cartTotal');
-            const countEl = document.getElementById('cartCount');
-            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-            countEl.innerText = totalCount;
-            totalEl.innerText = `₹${totalPrice}`;
-
-            if(cart.length === 0) {
-                container.innerHTML = `<div class="flex flex-col items-center justify-center h-40 text-gray-400"><i class="fas fa-box-open text-4xl mb-4 opacity-50"></i><p class="text-[10px] uppercase tracking-[0.2em] font-bold">Vault bag is empty</p></div>`;
-                return;
-            }
-
-            container.innerHTML = cart.map(item => `
-                <div class="flex items-center gap-4 bg-gray-50 dark:bg-darkBg p-3 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm">
-                    <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover">
-                    <div class="flex-1">
-                        <h4 class="font-bold text-[10px] text-gray-900 dark:text-white uppercase tracking-wider line-clamp-1">${item.name}</h4>
-                        <p class="text-[10px] font-bold text-neonCyan mt-1">₹${item.price}</p>
-                        <div class="flex items-center gap-3 mt-2">
-                            <div class="flex items-center border border-gray-200 dark:border-white/10 rounded-xl bg-white dark:bg-white/5">
-                                <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-gray-500"><i class="fas fa-minus text-[8px]"></i></button>
-                                <span class="text-[10px] font-bold w-6 text-center text-gray-900 dark:text-white">${item.qty}</span>
-                                <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 flex items-center justify-center text-gray-500"><i class="fas fa-plus text-[8px]"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="font-extrabold text-xs text-gray-900 dark:text-white">₹${item.price * item.qty}</div>
-                </div>
-            `).join('');
-        }
-
-        function changeQty(id, delta) {
-            const item = cart.find(c => String(c.id) === String(id));
-            if(item) { item.qty += delta; if(item.qty <= 0) cart = cart.filter(c => String(c.id) !== String(id)); }
-            updateCart();
-        }
-
-        function toggleCart(forceOpen = false) {
-            const modal = document.getElementById('cartModal');
-            const drawer = modal.querySelector('.cart-drawer');
-            if (forceOpen || modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                setTimeout(() => drawer.classList.remove('translate-x-full'), 10);
-            } else {
-                drawer.classList.add('translate-x-full');
-                setTimeout(() => modal.classList.add('hidden'), 400);
-            }
-        }
-
-        function submitOrder() {
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-
-            if(!name || !phone) {
-                alert("ACCESS DENIED: Name and WhatsApp number are required.");
-                return;
-            }
-            if(cart.length === 0) return;
-
-            const orderId = "KNG-DIG-" + Math.floor(100000 + Math.random() * 900000);
-            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const itemNames = cart.map(item => `${item.name} (Qty: ${item.qty})`).join(', ');
-
-            const myWhatsAppNumber = "918122025227"; 
-            
-            const whatsAppText = encodeURIComponent(
-                `🛒 *NEW KINGLY STORE ORDER!*\n\n` +
-                `🆔 Order ID: ${orderId}\n` +
-                `👤 Customer Name: ${name}\n` +
-                `📱 Customer Phone: ${phone}\n` +
-                `💰 Total Amount: ₹${totalAmount}\n` +
-                `📚 Items Purchased:\n${itemNames}\n\n` +
-                `_Please confirm payment and send digital assets/invoice._`
-            );
-            const whatsAppURL = `https://wa.me/${myWhatsAppNumber}?text=${whatsAppText}`;
-
-            cart = [];
-            updateCart();
-
-            document.getElementById('checkoutForm').innerHTML = `
-                <div class="text-center py-6">
-                    <div class="w-14 h-14 bg-emerald-500/10 border border-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(34,197,94,0.3)]">
-                        <i class="fab fa-whatsapp text-emerald-500 text-3xl"></i>
-                    </div>
-                    <h3 class="font-bold text-sm text-gray-900 dark:text-white uppercase tracking-[0.2em] mb-1">Order Prepared</h3>
-                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-6">Order ID: ${orderId}</p>
-                    
-                    <a href="${whatsAppURL}" target="_blank" rel="noopener noreferrer" 
-                       class="cyber-btn block w-full bg-emerald-500 text-white font-extrabold tracking-widest py-4 text-xs uppercase rounded-2xl text-center shadow-lg mb-3">
-                       <i class="fab fa-whatsapp mr-2 text-base"></i> Dispatch to WhatsApp
-                    </a>
-
-                    <button onclick="location.reload()" class="text-[10px] text-gray-400 hover:text-neonCyan uppercase font-bold tracking-widest mt-2">
-                        Return to Store
-                    </button>
-                </div>`;
-        }
     </script>
 </body>
 </html>
