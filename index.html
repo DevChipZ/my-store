@@ -82,6 +82,8 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #00F0FF; border-radius: 10px; }
     </style>
+    <!-- GUMROAD OVERLAY SCRIPT ADDED HERE -->
+    <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body class="bg-gray-50 dark:bg-darkBg text-gray-900 dark:text-gray-100 min-h-screen flex flex-col selection:bg-neonCyan selection:text-black overflow-x-hidden">
 
@@ -111,7 +113,6 @@
             </div>
 
             <div class="flex items-center gap-3 md:gap-5 shrink-0">
-                <!-- REDEEM PORTAL BUTTON -->
                 <button onclick="openRedeemModal()" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/40 hover:border-emerald-400 text-emerald-500 px-4 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition">
                     <i class="fas fa-key text-xs"></i> Redeem
                 </button>
@@ -519,6 +520,7 @@
             renderProducts();
         }
 
+        // Keep this as a backup if you ever need it, but it's no longer attached to the main buttons
         function buyNow(link, price) {
             if (!link || link === 'undefined' || link === 'null' || link.trim() === '') {
                 alert("Gumroad link not yet configured for this asset! Please add it to your Google Sheet.");
@@ -565,7 +567,8 @@
                         </div>
                         <div class="flex gap-2.5">
                             <button onclick="openProductModal('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:border-neonCyan transition shadow-sm">Details</button>
-                            <button onclick="buyNow('${p.gumroad_link}', ${p.price})" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm">Buy Now</button>
+                            <!-- UPDATED TO GUMROAD OVERLAY -->
+                            <a href="${p.gumroad_link}" data-gumroad-overlay-checkout="true" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm text-center flex items-center justify-center">Buy Now</a>
                         </div>
                     </div>
                 </div>
@@ -593,9 +596,10 @@
             document.getElementById('modalDesc').innerText = p.description || 'No overview provided.';
             
             document.getElementById('modalActionBtns').innerHTML = `
-                <button onclick="buyNow('${p.gumroad_link}', ${p.price})" class="w-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2">
+                <!-- UPDATED TO GUMROAD OVERLAY -->
+                <a href="${p.gumroad_link}" data-gumroad-overlay-checkout="true" class="w-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2">
                     Secure Checkout <i class="fas fa-lock"></i>
-                </button>
+                </a>
             `;
             document.getElementById('detailModal').classList.remove('hidden');
         }
