@@ -111,12 +111,13 @@
             </div>
 
             <div class="flex items-center gap-3 md:gap-5 shrink-0">
-                <button onclick="openContactModal()" class="hidden sm:flex items-center gap-2 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/15 hover:border-neonCyan text-gray-700 dark:text-gray-300 hover:text-neonCyan px-4 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition">
-                    <i class="fas fa-headset text-xs"></i> Support
+                <!-- REDEEM PORTAL BUTTON -->
+                <button onclick="openRedeemModal()" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/40 hover:border-emerald-400 text-emerald-500 px-4 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition">
+                    <i class="fas fa-key text-xs"></i> Redeem
                 </button>
 
-                <button onclick="triggerRoulette()" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-neonCyan/10 to-neonPurple/10 border border-neonCyan/40 hover:border-neonCyan text-neonCyan px-4 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition animate-pulse-glow">
-                    <i class="fas fa-dice text-xs"></i> Vault Roulette
+                <button onclick="openContactModal()" class="hidden sm:flex items-center gap-2 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/15 hover:border-neonCyan text-gray-700 dark:text-gray-300 hover:text-neonCyan px-4 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition">
+                    <i class="fas fa-headset text-xs"></i> Support
                 </button>
 
                 <button onclick="toggleTheme()" class="w-10 h-10 rounded-2xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/15 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-neonCyan transition">
@@ -124,13 +125,16 @@
                 </button>
             </div>
         </div>
-        <div class="px-4 pb-3 md:hidden">
-            <div class="relative flex items-center">
+        <div class="px-4 pb-3 md:hidden flex gap-2">
+            <div class="relative flex-1">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
                     <i class="fas fa-search text-xs"></i>
                 </span>
                 <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="SEARCH VAULT DATABASE..." class="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl pl-11 pr-10 py-3 text-xs font-semibold tracking-wider text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition">
             </div>
+            <button onclick="openRedeemModal()" class="flex items-center justify-center bg-emerald-500/10 border border-emerald-500/40 text-emerald-500 px-4 rounded-2xl transition">
+                <i class="fas fa-key"></i>
+            </button>
         </div>
     </header>
 
@@ -153,8 +157,8 @@
                 <button onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})" class="cyber-btn bg-gray-900 dark:bg-white text-white dark:text-black font-bold px-9 py-4 uppercase text-xs tracking-widest rounded-2xl cursor-pointer">
                     Explore Catalog
                 </button>
-                <button onclick="triggerRoulette()" class="cyber-btn bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold px-9 py-4 uppercase text-xs tracking-widest rounded-2xl cursor-pointer shadow-xl">
-                    🎲 Random Pick
+                <button onclick="openRedeemModal()" class="cyber-btn bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold px-9 py-4 uppercase text-xs tracking-widest rounded-2xl cursor-pointer shadow-xl">
+                    <i class="fas fa-key mr-2"></i> Redeem Code
                 </button>
             </div>
         </div>
@@ -210,9 +214,9 @@
             <div>
                 <h4 class="text-gray-900 dark:text-white font-bold text-xs uppercase tracking-[0.2em] mb-4">Quick Portals</h4>
                 <ul class="space-y-2.5 text-xs font-medium">
+                    <li><button onclick="openRedeemModal()" class="hover:text-neonCyan transition">Redeem Asset Code</button></li>
                     <li><a href="#products" onclick="setSubcategory('all')" class="hover:text-neonCyan transition">Featured Collection</a></li>
                     <li><a href="#products" onclick="setSubcategory('Manga')" class="hover:text-neonCyan transition">Manga Vault</a></li>
-                    <li><a href="#products" onclick="setSubcategory('Law')" class="hover:text-neonCyan transition">Law Records</a></li>
                 </ul>
             </div>
             <div>
@@ -236,6 +240,38 @@
             <p class="mt-4 md:mt-0 text-neonCyan">Encrypted Connection • Gumroad Gateway Active</p>
         </div>
     </footer>
+
+    <!-- REDEMPTION MODAL -->
+    <div id="redeemModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="backdrop-blur-md absolute inset-0 bg-black/80" onclick="closeRedeemModal()"></div>
+        <div class="relative glass-panel border border-emerald-500/30 rounded-3xl max-w-lg w-full z-10 p-6 md:p-8 shadow-[0_0_50px_rgba(16,185,129,0.15)]">
+            <button onclick="closeRedeemModal()" class="absolute top-6 right-6 text-gray-400 hover:text-emerald-400 bg-gray-100 dark:bg-white/5 rounded-full w-9 h-9 flex items-center justify-center transition"><i class="fas fa-times text-lg"></i></button>
+            
+            <div class="mb-6 text-center">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-400 to-teal-600 flex items-center justify-center mx-auto mb-3 shadow-lg">
+                    <i class="fas fa-unlock-keyhole text-white text-lg"></i>
+                </div>
+                <h2 class="text-xl font-bold uppercase tracking-wider text-gray-900 dark:text-white">Asset Redemption</h2>
+                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest font-bold">Paste your 1-time Gumroad key below</p>
+            </div>
+
+            <div id="redeemFormContainer" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-emerald-500/80 mb-1">Gumroad License Key</label>
+                    <input type="text" id="redeemKey" placeholder="e.g. 6F0E4C97-B72A4E69-..." class="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-3.5 text-xs font-mono tracking-widest text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 transition uppercase">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">WhatsApp Number (For Delivery)</label>
+                    <input type="tel" id="redeemPhone" placeholder="ENTER PHONE NUMBER" class="w-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-3.5 text-xs tracking-widest text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 transition uppercase">
+                </div>
+                
+                <button onclick="submitRedemption()" id="redeemBtn" class="cyber-btn w-full bg-gray-900 dark:bg-white text-white dark:text-black font-bold tracking-[0.2em] py-4 text-xs uppercase mt-4 rounded-2xl border-none shadow-lg hover:bg-emerald-400 hover:text-black transition flex items-center justify-center gap-2">
+                    Verify & Send Asset <i class="fas fa-paper-plane"></i>
+                </button>
+                <div id="redeemStatus" class="text-[10px] font-bold text-center uppercase tracking-widest hidden mt-4"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Contact Us Modal -->
     <div id="contactModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
@@ -301,10 +337,10 @@
         </div>
     </div>
 
-    <!-- Cart Drawer Modal (Kept empty/hidden in case you ever want to revert) -->
-    <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none"></div>
-
     <script>
+        // CONFIGURATION: Replace this with your actual n8n Webhook URL once created.
+        const N8N_WEBHOOK_URL = "https://your-n8n-domain.com/webhook/redeem-code";
+
         let products = [];
         let currentSubcategory = 'all';
         let searchQuery = '';
@@ -319,15 +355,10 @@
                 const uniqueMap = new Map();
                 results.data.forEach(p => {
                     if (p.id && p.name) {
-                        
-                        // PRICE ENGINE: OVERRIDES GOOGLE SHEET! Forces 149 or 199 based on ID hash.
                         let hash = 0;
                         for (let i = 0; i < p.id.length; i++) hash += p.id.charCodeAt(i);
 
-                        // Strictly apply 149 or 199 no matter what is in the sheet
                         p.price = (hash % 2 === 0) ? 149 : 199;
-
-                        // Generates fake markdown original price to look like a deal
                         p.originalPrice = p.price + 200 + (hash % 150); 
 
                         uniqueMap.set(p.id, p);
@@ -337,6 +368,58 @@
                 renderProducts();
             }
         });
+
+        // --- REDEMPTION MODAL LOGIC ---
+        function openRedeemModal() {
+            document.getElementById('redeemModal').classList.remove('hidden');
+        }
+        function closeRedeemModal() {
+            document.getElementById('redeemModal').classList.add('hidden');
+            document.getElementById('redeemStatus').classList.add('hidden');
+            document.getElementById('redeemKey').value = '';
+        }
+
+        async function submitRedemption() {
+            const key = document.getElementById('redeemKey').value.trim();
+            const phone = document.getElementById('redeemPhone').value.trim();
+            const statusEl = document.getElementById('redeemStatus');
+            const btn = document.getElementById('redeemBtn');
+
+            if (!key || !phone) {
+                alert("ACCESS DENIED: License Key and WhatsApp Number are required.");
+                return;
+            }
+
+            // Update UI to show processing
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Contacting Server...`;
+            btn.disabled = true;
+            statusEl.innerText = "Transmitting to n8n secure node...";
+            statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-neonCyan block";
+
+            try {
+                // Send data to your n8n Webhook
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ licenseKey: key, phone: phone })
+                });
+
+                if (response.ok) {
+                    statusEl.innerText = "VERIFIED! Check your WhatsApp for the asset.";
+                    statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-emerald-400 block";
+                } else {
+                    statusEl.innerText = "ERROR: Invalid or used license key.";
+                    statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-red-500 block";
+                }
+            } catch (error) {
+                // If n8n isn't set up yet, it will fail and show this message
+                statusEl.innerText = "SYSTEM ERROR: Webhook offline. Verify via WhatsApp manual support.";
+                statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-red-500 block";
+            } finally {
+                btn.innerHTML = `Verify & Send Asset <i class="fas fa-paper-plane"></i>`;
+                btn.disabled = false;
+            }
+        }
 
         function openContactModal() {
             document.getElementById('contactModal').classList.remove('hidden');
@@ -436,17 +519,11 @@
             renderProducts();
         }
 
-        function toggleCart() {
-            alert("The multi-item Vault Bag is temporarily disabled. Please use Secure Checkout on individual assets.");
-        }
-
-        // GUMROAD INJECTION LINK
         function buyNow(link, price) {
             if (!link || link === 'undefined' || link === 'null' || link.trim() === '') {
                 alert("Gumroad link not yet configured for this asset! Please add it to your Google Sheet.");
                 return;
             }
-            // Injects the price dynamically into the Gumroad link
             const finalLink = link.includes('?') ? `${link}&price=${price}` : `${link}?price=${price}`;
             window.open(finalLink, '_blank');
         }
