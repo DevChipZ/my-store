@@ -301,6 +301,9 @@
         </div>
     </div>
 
+    <!-- Cart Drawer Modal (Kept empty/hidden in case you ever want to revert) -->
+    <div id="cartModal" class="fixed inset-0 z-50 hidden pointer-events-none"></div>
+
     <script>
         let products = [];
         let currentSubcategory = 'all';
@@ -317,20 +320,15 @@
                 results.data.forEach(p => {
                     if (p.id && p.name) {
                         
-                        // PRICE ENGINE: Auto-assigns 149 or 199 based on ID hash if left blank.
+                        // PRICE ENGINE: OVERRIDES GOOGLE SHEET! Forces 149 or 199 based on ID hash.
                         let hash = 0;
                         for (let i = 0; i < p.id.length; i++) hash += p.id.charCodeAt(i);
 
-                        if (p.price === undefined || p.price === null || p.price === "") {
-                            p.price = (hash % 2 === 0) ? 149 : 199;
-                        } else {
-                            p.price = Number(p.price);
-                        }
+                        // Strictly apply 149 or 199 no matter what is in the sheet
+                        p.price = (hash % 2 === 0) ? 149 : 199;
 
                         // Generates fake markdown original price to look like a deal
-                        if (p.originalPrice === undefined || p.originalPrice === null || p.originalPrice === "") {
-                            p.originalPrice = p.price + 200 + (hash % 150); 
-                        }
+                        p.originalPrice = p.price + 200 + (hash % 150); 
 
                         uniqueMap.set(p.id, p);
                     }
@@ -438,13 +436,17 @@
             renderProducts();
         }
 
+        function toggleCart() {
+            alert("The multi-item Vault Bag is temporarily disabled. Please use Secure Checkout on individual assets.");
+        }
+
         // GUMROAD INJECTION LINK
         function buyNow(link, price) {
             if (!link || link === 'undefined' || link === 'null' || link.trim() === '') {
                 alert("Gumroad link not yet configured for this asset! Please add it to your Google Sheet.");
                 return;
             }
-            // Injects the price dynamically into the Gumroad link so the customer pays exactly what is on the site
+            // Injects the price dynamically into the Gumroad link
             const finalLink = link.includes('?') ? `${link}&price=${price}` : `${link}?price=${price}`;
             window.open(finalLink, '_blank');
         }
