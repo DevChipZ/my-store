@@ -339,7 +339,6 @@
     </div>
 
     <script>
-        // CONFIGURATION: Replace this with your actual n8n Webhook URL once created.
         const N8N_WEBHOOK_URL = "https://your-n8n-domain.com/webhook/redeem-code";
 
         let products = [];
@@ -370,7 +369,6 @@
             }
         });
 
-        // --- REDEMPTION MODAL LOGIC ---
         function openRedeemModal() {
             document.getElementById('redeemModal').classList.remove('hidden');
         }
@@ -391,14 +389,12 @@
                 return;
             }
 
-            // Update UI to show processing
             btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Contacting Server...`;
             btn.disabled = true;
             statusEl.innerText = "Transmitting to n8n secure node...";
             statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-neonCyan block";
 
             try {
-                // Send data to your n8n Webhook
                 const response = await fetch(N8N_WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -413,7 +409,6 @@
                     statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-red-500 block";
                 }
             } catch (error) {
-                // If n8n isn't set up yet, it will fail and show this message
                 statusEl.innerText = "SYSTEM ERROR: Webhook offline. Verify via WhatsApp manual support.";
                 statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-red-500 block";
             } finally {
@@ -520,13 +515,9 @@
             renderProducts();
         }
 
-        // Keep this as a backup if you ever need it, but it's no longer attached to the main buttons
         function buyNow(link, price) {
-            if (!link || link === 'undefined' || link === 'null' || link.trim() === '') {
-                alert("Gumroad link not yet configured for this asset! Please add it to your Google Sheet.");
-                return;
-            }
-            const finalLink = link.includes('?') ? `${link}&price=${price}` : `${link}?price=${price}`;
+            const universalLink = "https://devchipz.gumroad.com/l/qvwfds";
+            const finalLink = universalLink.includes('?') ? `${universalLink}&price=${price}` : `${universalLink}?price=${price}`;
             window.open(finalLink, '_blank');
         }
 
@@ -567,8 +558,8 @@
                         </div>
                         <div class="flex gap-2.5">
                             <button onclick="openProductModal('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:border-neonCyan transition shadow-sm">Details</button>
-                            <!-- UPDATED TO GUMROAD OVERLAY -->
-                            <a href="${p.gumroad_link}" data-gumroad-overlay-checkout="true" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm text-center flex items-center justify-center">Buy Now</a>
+                            <!-- UPDATED TO UNIVERSAL GUMROAD OVERLAY LINK -->
+                            <a href="https://devchipz.gumroad.com/l/qvwfds" data-gumroad-overlay-checkout="true" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm text-center flex items-center justify-center">Buy Now</a>
                         </div>
                     </div>
                 </div>
@@ -596,8 +587,8 @@
             document.getElementById('modalDesc').innerText = p.description || 'No overview provided.';
             
             document.getElementById('modalActionBtns').innerHTML = `
-                <!-- UPDATED TO GUMROAD OVERLAY -->
-                <a href="${p.gumroad_link}" data-gumroad-overlay-checkout="true" class="w-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2">
+                <!-- UPDATED TO UNIVERSAL GUMROAD OVERLAY LINK -->
+                <a href="https://devchipz.gumroad.com/l/qvwfds" data-gumroad-overlay-checkout="true" class="w-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2">
                     Secure Checkout <i class="fas fa-lock"></i>
                 </a>
             `;
