@@ -82,7 +82,7 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #00F0FF; border-radius: 10px; }
     </style>
-    <!-- GUMROAD OVERLAY SCRIPT ADDED HERE -->
+    <!-- GUMROAD OVERLAY SCRIPT -->
     <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body class="bg-gray-50 dark:bg-darkBg text-gray-900 dark:text-gray-100 min-h-screen flex flex-col selection:bg-neonCyan selection:text-black overflow-x-hidden">
@@ -339,8 +339,6 @@
     </div>
 
     <script>
-        const N8N_WEBHOOK_URL = "https://your-n8n-domain.com/webhook/redeem-code";
-
         let products = [];
         let currentSubcategory = 'all';
         let searchQuery = '';
@@ -378,43 +376,26 @@
             document.getElementById('redeemKey').value = '';
         }
 
-        async function submitRedemption() {
+        function submitRedemption() {
             const key = document.getElementById('redeemKey').value.trim();
             const phone = document.getElementById('redeemPhone').value.trim();
-            const statusEl = document.getElementById('redeemStatus');
-            const btn = document.getElementById('redeemBtn');
 
             if (!key || !phone) {
                 alert("ACCESS DENIED: License Key and WhatsApp Number are required.");
                 return;
             }
 
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Contacting Server...`;
-            btn.disabled = true;
-            statusEl.innerText = "Transmitting to n8n secure node...";
-            statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-neonCyan block";
+            const myWhatsAppNumber = "918122025227";
+            const whatsAppText = encodeURIComponent(
+                `🔑 *ASSET REDEMPTION REQUEST*\n\n` +
+                `👤 Customer Phone: ${phone}\n` +
+                `🎫 License Key: ${key}\n\n` +
+                `_Please verify this key and dispatch the digital asset._`
+            );
+            const whatsAppURL = `https://wa.me/${myWhatsAppNumber}?text=${whatsAppText}`;
 
-            try {
-                const response = await fetch(N8N_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ licenseKey: key, phone: phone })
-                });
-
-                if (response.ok) {
-                    statusEl.innerText = "VERIFIED! Check your WhatsApp for the asset.";
-                    statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-emerald-400 block";
-                } else {
-                    statusEl.innerText = "ERROR: Invalid or used license key.";
-                    statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-red-500 block";
-                }
-            } catch (error) {
-                statusEl.innerText = "SYSTEM ERROR: Webhook offline. Verify via WhatsApp manual support.";
-                statusEl.className = "text-[10px] font-bold text-center uppercase tracking-widest mt-4 text-red-500 block";
-            } finally {
-                btn.innerHTML = `Verify & Send Asset <i class="fas fa-paper-plane"></i>`;
-                btn.disabled = false;
-            }
+            window.open(whatsAppURL, '_blank');
+            closeRedeemModal();
         }
 
         function openContactModal() {
@@ -558,7 +539,6 @@
                         </div>
                         <div class="flex gap-2.5">
                             <button onclick="openProductModal('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:border-neonCyan transition shadow-sm">Details</button>
-                            <!-- UPDATED TO UNIVERSAL GUMROAD OVERLAY LINK -->
                             <a href="https://devchipz.gumroad.com/l/qvwfds" data-gumroad-overlay-checkout="true" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm text-center flex items-center justify-center">Buy Now</a>
                         </div>
                     </div>
@@ -587,7 +567,6 @@
             document.getElementById('modalDesc').innerText = p.description || 'No overview provided.';
             
             document.getElementById('modalActionBtns').innerHTML = `
-                <!-- UPDATED TO UNIVERSAL GUMROAD OVERLAY LINK -->
                 <a href="https://devchipz.gumroad.com/l/qvwfds" data-gumroad-overlay-checkout="true" class="w-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2">
                     Secure Checkout <i class="fas fa-lock"></i>
                 </a>
