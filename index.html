@@ -55,8 +55,6 @@
         body { font-family: 'Space Grotesk', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         h1, h2, .brand-text { font-family: 'Syncopate', sans-serif; }
         .glass-panel { background: rgba(13, 13, 18, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-        
-        /* Fixed Header Transparency */
         .glass-header { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: background-color 0.4s ease; }
         
         .card-physics { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -87,12 +85,10 @@
 </head>
 <body class="bg-gray-50 dark:bg-darkBg text-gray-900 dark:text-gray-100 min-h-screen flex flex-col selection:bg-neonCyan selection:text-black overflow-x-hidden">
 
-    <!-- Top Announcement Banner -->
     <div class="bg-gradient-to-r from-neonCyan via-neonPurple to-neonPink text-white text-[10px] uppercase tracking-[0.3em] py-2.5 text-center font-extrabold shadow-lg z-50 relative">
         ⚡ Elite Cyber Vault • Instant Global Dispatch • Protocol Code: REALITY2026
     </div>
 
-    <!-- Header Navigation -->
     <header class="glass-header bg-white/90 dark:bg-[#030305]/85 border-b border-gray-200 dark:border-white/10 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-4">
             <a href="#" class="flex items-center gap-3 group shrink-0">
@@ -102,7 +98,6 @@
                 <span class="brand-text text-lg md:text-xl font-bold tracking-widest text-gray-900 dark:text-white group-hover:text-neonCyan transition-colors">KINGLY</span>
             </a>
             
-            <!-- Search Interface -->
             <div class="flex-1 max-w-lg mx-4 hidden md:block">
                 <div class="relative flex items-center">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
@@ -139,7 +134,6 @@
         </div>
     </header>
 
-    <!-- Cyber Hero Section -->
     <section class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-gray-200 dark:border-white/10">
         <div class="absolute top-1/4 right-1/4 w-[450px] h-[450px] bg-neonCyan/10 rounded-full blur-[140px] pointer-events-none animate-float"></div>
         <div class="absolute bottom-1/4 left-1/4 w-[450px] h-[450px] bg-neonPurple/10 rounded-full blur-[140px] pointer-events-none animate-float" style="animation-delay: 3s;"></div>
@@ -166,7 +160,6 @@
         </div>
     </section>
 
-    <!-- Product Catalog Section -->
     <main class="max-w-7xl mx-auto px-4 md:px-8 py-16 flex-1 w-full" id="products">
         <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
@@ -182,7 +175,6 @@
             </button>
         </div>
         
-        <!-- Category Filters -->
         <div class="flex space-x-3 overflow-x-auto pb-4 mb-12 w-full scrollbar-none">
             <button onclick="setSubcategory('all')" class="cat-btn bg-gray-900 dark:bg-white text-white dark:text-black px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-2xl transition shadow-lg shrink-0">Featured Drop</button>
             <button onclick="setSubcategory('featured')" class="cat-btn bg-white dark:bg-darkSurface border border-neonCyan/40 text-neonCyan hover:bg-neonCyan hover:text-black px-6 py-3 text-xs font-bold uppercase tracking-widest rounded-2xl transition shrink-0">⭐️ Premium Tier</button>
@@ -200,7 +192,6 @@
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"></div>
     </main>
 
-    <!-- Interactive Footer with Contact Us -->
     <footer class="glass-panel border-t border-gray-200 dark:border-white/10 text-gray-400 pt-16 pb-12 mt-20 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10 mb-12">
             <div class="space-y-4">
@@ -246,7 +237,7 @@
         </div>
     </footer>
 
-    <!-- Contact Us / Query Modal Page -->
+    <!-- Contact Us Modal -->
     <div id="contactModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="backdrop-blur-md absolute inset-0 bg-black/80" onclick="closeContactModal()"></div>
         <div class="relative glass-panel border border-gray-200 dark:border-white/15 rounded-3xl max-w-lg w-full z-10 p-6 md:p-8 shadow-2xl">
@@ -325,14 +316,22 @@
                 const uniqueMap = new Map();
                 results.data.forEach(p => {
                     if (p.id && p.name) {
+                        
+                        // PRICE ENGINE: Auto-assigns 149 or 199 based on ID hash if left blank.
+                        let hash = 0;
+                        for (let i = 0; i < p.id.length; i++) hash += p.id.charCodeAt(i);
+
                         if (p.price === undefined || p.price === null || p.price === "") {
-                            let hash = 0;
-                            for (let i = 0; i < p.id.length; i++) hash += p.id.charCodeAt(i);
-                            p.price = 99 + (hash % 300);
-                            p.originalPrice = 499 + (hash % 1000);
+                            p.price = (hash % 2 === 0) ? 149 : 199;
                         } else {
                             p.price = Number(p.price);
                         }
+
+                        // Generates fake markdown original price to look like a deal
+                        if (p.originalPrice === undefined || p.originalPrice === null || p.originalPrice === "") {
+                            p.originalPrice = p.price + 200 + (hash % 150); 
+                        }
+
                         uniqueMap.set(p.id, p);
                     }
                 });
@@ -439,12 +438,15 @@
             renderProducts();
         }
 
-        function buyNow(link) {
+        // GUMROAD INJECTION LINK
+        function buyNow(link, price) {
             if (!link || link === 'undefined' || link === 'null' || link.trim() === '') {
                 alert("Gumroad link not yet configured for this asset! Please add it to your Google Sheet.");
                 return;
             }
-            window.open(link, '_blank');
+            // Injects the price dynamically into the Gumroad link so the customer pays exactly what is on the site
+            const finalLink = link.includes('?') ? `${link}&price=${price}` : `${link}?price=${price}`;
+            window.open(finalLink, '_blank');
         }
 
         function renderProducts() {
@@ -484,7 +486,7 @@
                         </div>
                         <div class="flex gap-2.5">
                             <button onclick="openProductModal('${p.id}')" class="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:border-neonCyan transition shadow-sm">Details</button>
-                            <button onclick="buyNow('${p.gumroad_link}')" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm">Buy Now</button>
+                            <button onclick="buyNow('${p.gumroad_link}', ${p.price})" class="flex-1 bg-gray-900 dark:bg-white text-white dark:text-black rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold py-3 hover:bg-neonPurple hover:text-white transition shadow-sm">Buy Now</button>
                         </div>
                     </div>
                 </div>
@@ -512,7 +514,7 @@
             document.getElementById('modalDesc').innerText = p.description || 'No overview provided.';
             
             document.getElementById('modalActionBtns').innerHTML = `
-                <button onclick="buyNow('${p.gumroad_link}')" class="w-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2">
+                <button onclick="buyNow('${p.gumroad_link}', ${p.price})" class="w-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2">
                     Secure Checkout <i class="fas fa-lock"></i>
                 </button>
             `;
@@ -524,4 +526,3 @@
     </script>
 </body>
 </html>
-<!-- forcing update -->
